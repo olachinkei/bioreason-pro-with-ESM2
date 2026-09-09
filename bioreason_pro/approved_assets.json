@@ -1,0 +1,447 @@
+{
+  "schema_version": 2,
+  "policy": {
+    "name": "commercially-permissive-assets-only",
+    "allowed_spdx_licenses": [
+      "Apache-2.0",
+      "MIT",
+      "CC-BY-4.0"
+    ],
+    "unknown_assets": "deny"
+  },
+  "models": {
+    "text": {
+      "Qwen/Qwen3-4B-Thinking-2507": {
+        "license": "Apache-2.0",
+        "source": "https://huggingface.co/Qwen/Qwen3-4B-Thinking-2507",
+        "revision": "768f209d9ea81521153ed38c47d515654e938aea",
+        "provenance": "Official Qwen Hugging Face repository; LICENSE and model-card metadata reviewed.",
+        "local_cache_policy": "Cache only by pinned revision; do not commit weights.",
+        "approved_uses": [
+          "training",
+          "evaluation"
+        ]
+      },
+      "Qwen/Qwen3-0.6B": {
+        "license": "Apache-2.0",
+        "source": "https://huggingface.co/Qwen/Qwen3-0.6B",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "provenance": "Official Qwen Hugging Face repository; model-card license metadata reviewed.",
+        "local_cache_policy": "Cache only by pinned revision; do not commit weights.",
+        "approved_uses": [
+          "smoke-training",
+          "smoke-evaluation"
+        ]
+      }
+    },
+    "protein": {
+      "facebook/esm2_t33_650M_UR50D": {
+        "license": "MIT",
+        "source": "https://huggingface.co/facebook/esm2_t33_650M_UR50D",
+        "revision": "08e4846e537177426273712802403f7ba8261b6c",
+        "provenance": "Official Meta Hugging Face repository; model-card license metadata reviewed.",
+        "local_cache_policy": "Cache only by pinned revision; do not commit weights or embeddings.",
+        "approved_uses": [
+          "training",
+          "evaluation"
+        ]
+      },
+      "facebook/esm2_t36_3B_UR50D": {
+        "license": "MIT",
+        "source": "https://huggingface.co/facebook/esm2_t36_3B_UR50D",
+        "revision": "476b639933c8baad5ad09a60ac1a87f987b656fc",
+        "provenance": "Official Meta Hugging Face repository; gated=false confirmed via the HF REST API. NOT this project's own fusion encoder (that stays facebook/esm2_t33_650M_UR50D) — this is GO-GPT's own frozen encoder, a separate, larger checkpoint the wanglab/gogpt weights were trained against (plan.md Phase 5 GO-GPT baseline). scripts/run_gogpt_baseline.py checks this NAME is approved before loading (fails closed if a future gogpt config.yaml ever points at a different, unapproved encoder) — but the vendored, unmodified GOGPT/GOGPTPredictor code calls AutoModel/AutoTokenizer.from_pretrained on it with no revision argument at all, so the revision below is recorded provenance, not an enforced pin, for this one entry specifically.",
+        "local_cache_policy": "Name-checked before loading; revision recorded for provenance but not enforced (see provenance note) — do not commit weights or embeddings.",
+        "approved_uses": [
+          "baseline-evaluation"
+        ]
+      }
+    },
+    "go_decoder": {
+      "wanglab/gogpt": {
+        "license": "Apache-2.0",
+        "source": "https://huggingface.co/wanglab/gogpt",
+        "revision": "56dc8801f62c0bbd8092c9c0718afd129d2be6bc",
+        "provenance": "plan.md Phase 5 / ADR-028: GO-GPT is the paper's own fully open-sourced GO-term-prediction model (frozen ESM2-3B encoder + 12-layer autoregressive GO decoder, per-organism conditioning). gated=false confirmed via the HF REST API. Model code vendored from bowang-lab/BioReason-Pro (MIT) at third_party/gogpt/ — see third_party/gogpt/NOTICE.md for the full provenance record. OWNER RULING (2026-08-23): baseline measurement only, GO-GPT's own predictions not yet adopted as a prompt field. SUPERSEDED (ADR-037, this session): GO-GPT's `go_pred` column is now adopted as a BioReason-Pro prompt field — see `column_provenance.go_pred` below.",
+        "local_cache_policy": "Cache only by pinned revision; do not commit weights.",
+        "approved_uses": [
+          "baseline-evaluation"
+        ]
+      }
+    }
+  },
+  "datasets": {
+    "wanglab/bioreason-pro-test-data": {
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/datasets/wanglab/bioreason-pro-test-data",
+      "revision": "90e2fcbf2ad5c2e3da1753de140a627419f90fdb",
+      "provenance": "Official WangLab dataset repository; dataset-card license reviewed. go_pred is adopted as prompt context for reasoned target variants (ADR-037; see column_provenance.go_pred).",
+      "local_cache_policy": "Cache only by pinned revision; sealed holdout only.",
+      "approved": true,
+      "approved_uses": [
+        "holdout-evaluation"
+      ],
+      "approved_prompt_fields": [
+        "protein_id",
+        "sequence"
+      ],
+      "approved_label_fields": [
+        "go_mf",
+        "go_bp",
+        "go_cc"
+      ],
+      "hf_split": "test",
+      "parquet_files": [
+        {
+          "path": "data/test-00000-of-00001.parquet",
+          "size": 15433673,
+          "sha256": "64ca8602d0afa77773ffffba3361a469cc2971ab17992f632eb5f110827d4df8"
+        }
+      ]
+    },
+    "wanglab/bioreason-pro-sft-reasoning-data": {
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
+      "revision": "2cab301d674487c4d8536aff4353f2df3c5f8235",
+      "provenance": "Official WangLab dataset repository. The default schema uses only UniProt identifiers/sequences and GO labels; additional context columns are excluded except where explicitly adopted for reasoned target variants (see column_provenance entries for organism, final_answer, protein_function, go_pred, and CONTEXT_COLUMNS).",
+      "local_cache_policy": "Cache only the pinned revision. Do not persist unapproved columns into run artifacts.",
+      "approved": true,
+      "approved_uses": [
+        "sft-training",
+        "baseline-evaluation"
+      ],
+      "approved_prompt_fields": [
+        "sequence"
+      ],
+      "approved_label_fields": [
+        "go_mf",
+        "go_bp",
+        "go_cc"
+      ],
+      "baseline_evaluation_fields": {
+        "note": "plan.md Phase 2: the interpro2go lookup and label-prior baselines are computed directly from raw corpus rows (not through adapt_approved_training_row's model-prompt contract), so this use reads interpro_formatted in addition to the approved label fields. Never enters a model prompt or a training run under this use.",
+        "fields": ["interpro_formatted"]
+      },
+      "hf_split": "train",
+      "parquet_files": [
+        {
+          "path": "data/train-00000-of-00003.parquet",
+          "size": 199309795,
+          "sha256": "fb55248a032a8f746af76c0feabc42337f4afb26dc2101fbdf17683b4b2c1ea6"
+        },
+        {
+          "path": "data/train-00001-of-00003.parquet",
+          "size": 197636225,
+          "sha256": "034ca01494475677aab5b5fe753e99509c3d46a3995fcb62b3d4865cb7f9903c"
+        },
+        {
+          "path": "data/train-00002-of-00003.parquet",
+          "size": 198441488,
+          "sha256": "aa3b55483485113581c980d26952759dc6ad39bf7874d12e34185c855a22968e"
+        }
+      ],
+      "excluded_fields": [
+        "protein_names",
+        "protein_function",
+        "organism",
+        "length",
+        "subcellular_location",
+        "go_ids",
+        "structure_path",
+        "string_id",
+        "interaction_partners",
+        "interpro_ids",
+        "interpro_location",
+        "ppi_formatted",
+        "interpro_formatted",
+        "go_bp_leaf",
+        "go_mf_leaf",
+        "go_cc_leaf",
+        "reasoning",
+        "final_answer",
+        "go_pred_leaf"
+      ]
+    },
+    "wanglab/bioreason-pro-rl-reasoning-data": {
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/datasets/wanglab/bioreason-pro-rl-reasoning-data",
+      "revision": "4afefce8a57f1c4af696bd3c02f8a7cf911d6626",
+      "provenance": "wanglab HF org (linked from bowang-lab/BioReason-Pro's own README as its release org), Apache-2.0 as distributed at the pinned revision. NOT independently confirmed: this specific repo name is absent from upstream's own published dataset table (2026-08-21 audit), and its schema has no `reasoning` column at all. OWNER RULING (2026-08-21, plan.md ADR-026): approved for RL-training use on that basis, with the schema gap known rather than discovered later \u2014 the reasoned target variant does not require a reasoning column at RL time regardless (ADR-017).",
+      "local_cache_policy": "Cache only the pinned revision. Do not persist unapproved columns into run artifacts.",
+      "approved": true,
+      "approved_uses": [
+        "rl-training"
+      ],
+      "approved_prompt_fields": [
+        "sequence"
+      ],
+      "approved_label_fields": [
+        "go_mf",
+        "go_bp",
+        "go_cc"
+      ],
+      "hf_split": "train",
+      "parquet_files": [
+        {
+          "path": "data/train-00000-of-00001.parquet",
+          "size": 16780824,
+          "sha256": "8cfe8ec4ee3bb611eb45c3d2eb8c492487fd93fe3f1d52c5e4105ac3cc953e00"
+        }
+      ],
+      "excluded_fields": [
+        "protein_names",
+        "protein_function",
+        "organism",
+        "length",
+        "subcellular_location",
+        "go_ids",
+        "structure_path",
+        "string_id",
+        "interaction_partners",
+        "interpro_ids",
+        "interpro_location",
+        "ppi_formatted",
+        "interpro_formatted"
+      ]
+    }
+  },
+  "column_provenance": {
+    "protein_id": {
+      "source": "UniProtKB",
+      "license": "CC-BY-4.0",
+      "evidence": "https://www.uniprot.org/help/license"
+    },
+    "sequence": {
+      "source": "UniProtKB and underlying INSDC/PDB submissions",
+      "license": "CC-BY-4.0",
+      "evidence": "https://www.uniprot.org/help/license"
+    },
+    "go_mf": {
+      "source": "UniProtKB experimental annotations using Gene Ontology terms",
+      "license": "CC-BY-4.0",
+      "evidence": "https://geneontology.github.io/docs/go-citation-policy/"
+    },
+    "go_bp": {
+      "source": "UniProtKB experimental annotations using Gene Ontology terms",
+      "license": "CC-BY-4.0",
+      "evidence": "https://geneontology.github.io/docs/go-citation-policy/"
+    },
+    "go_cc": {
+      "source": "UniProtKB experimental annotations using Gene Ontology terms",
+      "license": "CC-BY-4.0",
+      "evidence": "https://geneontology.github.io/docs/go-citation-policy/"
+    },
+    "reasoning": {
+      "source": "Synthetic reasoning trace distributed in wanglab/bioreason-pro-*-reasoning-data; the dataset card attributes generation to a large language model (stated as GPT-5), not to a human curator or to an experimental source",
+      "license": "Apache-2.0 as distributed by WangLab at the pinned revision",
+      "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
+      "approved_use": "SFT <think> supervision under SENPAI_TARGET_VARIANT=leaf_only_reasoned only, and only together with the context columns it cites",
+      "caveat": "Model-generated rationale, NOT experimentally verified science. Inspectable is not the same as correct; any reader-facing surface must say so."
+    },
+    "interpro_formatted": {
+      "source": "InterPro (EMBL-EBI) domain annotations, pre-formatted by WangLab",
+      "license": "Apache-2.0 as distributed by WangLab at the pinned revision. OWNER RULING (ADR-017): this redistributor grant is the operative licence for what this project consumes. Upstream InterPro (EMBL-EBI) has no resource-specific grant located in review; EMBL-EBI publishes a policy of Terms-of-Use or CC0, which is a policy and not a grant.",
+      "evidence": "https://www.ebi.ac.uk/licencing/",
+      "approved_use": "Prompt context for reasoned target variants only; and, read raw (not injected into any prompt), the plan.md Phase 2 zero-parameter interpro2go baseline"
+    },
+    "ppi_formatted": {
+      "source": "STRING interaction partners, pre-formatted by WangLab",
+      "license": "Apache-2.0 as distributed by WangLab at the pinned revision. OWNER RULING (ADR-017): redistributor grant is the operative licence. Upstream STRING licence not verified in review.",
+      "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
+      "approved_use": "Prompt context for reasoned target variants only"
+    },
+    "subcellular_location": {
+      "source": "UniProtKB subcellular location annotation",
+      "license": "CC-BY-4.0",
+      "evidence": "https://www.uniprot.org/help/license",
+      "approved_use": "Prompt context for reasoned target variants only"
+    },
+    "organism": {
+      "source": "UniProtKB organism_name field (verbatim; the corpus's own values match a direct UniProt REST query byte-for-byte)",
+      "license": "CC-BY-4.0",
+      "evidence": "https://www.uniprot.org/help/license",
+      "approved_use": "plan.md Phase 5 (no gate needed — factual UniProt metadata, not a model-generated field): prompt context for reasoned target variants only, rendered via bioreason_pro.data_contract.ORGANISM_COLUMN. Not coupled to the SFT reasoning-evidence requirement (CONTEXT_COLUMNS) — a 60-trace spot check found no reasoning trace names its own protein's organism, so this is a supplementary prediction input, not evidence a trace could fabricate."
+    },
+    "final_answer": {
+      "source": "Synthetic prose summary distributed in the same datasets",
+      "license": "Apache-2.0 as distributed at the pinned revision",
+      "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
+      "approved_use": "OWNER RULING (plan.md Phase 4 gate R3, 2026-08-23): adopted for paper parity. Spliced ahead of the GO-term answer for the leaf_only_reasoned target variant only (bioreason_pro.data_contract.compose_functional_summary), mirroring upstream's own _add_uniprot_summary. Adopted WITHOUT a scoring metric this phase \u2014 emitted and inspectable, not yet judged."
+    },
+    "protein_function": {
+      "source": "UniProtKB Function annotation (CC line), redistributed verbatim as this column by WangLab",
+      "license": "CC-BY-4.0 at the UniProtKB source; Apache-2.0 as redistributed by WangLab at the pinned revision",
+      "evidence": "https://www.uniprot.org/help/license",
+      "approved_use": "OWNER RULING (plan.md Phase 4, 2026-08-23): adopted alongside final_answer, matching upstream's exact _add_uniprot_summary mechanism \u2014 spliced verbatim into the functional-summary line for the leaf_only_reasoned target variant only (bioreason_pro.data_contract.compose_functional_summary). Also gates functional_summary_instruction's conditional instruction text (reads literally \"Not known\" for a large share of rows; asking for a summary there would train a contradiction)."
+    },
+    "go_pred": {
+      "source": "GO-GPT's own greedy predictions (models.go_decoder.wanglab/gogpt), full ancestor closure, per-aspect text, precomputed and redistributed as this column by WangLab",
+      "license": "Apache-2.0 as redistributed by WangLab at the pinned revision; the underlying go_decoder (wanglab/gogpt) is itself Apache-2.0, gated=false, confirmed via the HF REST API this session",
+      "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
+      "approved_use": "OWNER RULING (ADR-037, this session): adopted as a BioReason-Pro prompt field, superseding the 2026-08-23 baseline-only ruling now that (a) the GO-GPT baseline number exists (ADR-033: 0.50059) and (b) a licence check found no blocker (code MIT, weights and encoder Apache-2.0/MIT, none gated). Rendered via bioreason_pro.data_contract.CONTEXT_COLUMNS (not ORGANISM_COLUMN's ungated pattern) \u2014 a 60-trace spot check found 56/60 reasoning traces cite a GO id verbatim from this column, so its absence also gates SFT supervision closed (MissingReasoningEvidence), unlike organism. Present and non-empty in 500-row samples of the SFT, RL, and sealed-test datasets alike (go_pred_leaf, by contrast, is SFT-only and stays excluded)."
+    }
+  },
+  "data_contract": {
+    "id": "sequence-go-labels-v1",
+    "schema_version": 2,
+    "approved_source_fields": [
+      "protein_id",
+      "sequence",
+      "go_mf",
+      "go_bp",
+      "go_cc"
+    ],
+    "approved_prompt_fields": [
+      "sequence"
+    ],
+    "approved_label_fields": [
+      "go_mf",
+      "go_bp",
+      "go_cc"
+    ],
+    "excluded_source_fields": [
+      "reasoning",
+      "final_answer",
+      "go_pred_leaf",
+      "ppi_formatted",
+      "interpro_formatted",
+      "interaction_partners",
+      "protein_function",
+      "protein_names",
+      "organism",
+      "subcellular_location",
+      "structure_path"
+    ],
+    "public_holdout_ids": {
+      "path": "data/public_holdout_ids.txt",
+      "count": 8630,
+      "sha256": "36ddd4e69eb66dbf92a58265917fb4edae33472ba316c25af66179d7dca3d7ed",
+      "source_dataset": "wanglab/bioreason-pro-test-data",
+      "source_revision": "90e2fcbf2ad5c2e3da1753de140a627419f90fdb"
+    },
+    "cafa_no_knowledge_ids": {
+      "path": "data/cafa_no_knowledge_ids.txt",
+      "count": 1496,
+      "sha256": "9d1d14ee97d438022147953dbbd4088dc7839f3eab72d3da05d10fcf34d41760",
+      "source": "CAFA5 evaluation bundle (Zenodo 20186533), eval_terms_no_knowledge_2025_03.tsv: 1,717 unique EntryIDs, minus 213 present in data/public_holdout_ids.txt, minus 8 present in the training corpus despite being CAFA-no-knowledge at t0 (owner-confirmed 2026-08-21; see bioreason_pro.dev_set.KNOWN_TRAINING_CORPUS_OVERLAP_IDS)",
+      "derivation": "plan.md Phase 1 (ADR-024): the paper's temporal development set, since the corpus's own val/test hash partitions are ~99.7% pre-annotated and the sealed set cannot be used for steering",
+      "disjoint_from": [
+        "data/public_holdout_ids.txt",
+        "wanglab/bioreason-pro-sft-reasoning-data (train split, all rows)",
+        "wanglab/bioreason-pro-rl-reasoning-data (train split, all rows)"
+      ]
+    }
+  },
+  "reference_data": {
+    "cafa5_evaluation_bundle": {
+      "source": "https://doi.org/10.5281/zenodo.20186533",
+      "record_id": 20186533,
+      "publication_date": "2026-05-14",
+      "license": "CC-BY-4.0",
+      "attribution": "CAFA 5 Evaluation Data, De Paolis Kaluza et al., Zenodo record 20186533",
+      "archive_url": "https://zenodo.org/api/records/20186533/files/full_evaluation.tar.gz/content",
+      "archive_size": 24480633,
+      "archive_md5": "9c205cb107c638a1188203fef4026bd4",
+      "archive_sha256": "b3ef78a05ea724232e5c03cfab57d7db33518e646c4ae464d386a7699d317394",
+      "approved_uses": [
+        "reward",
+        "evaluation"
+      ],
+      "files": {
+        "data/go-basic.obo": {
+          "archive_path": "full_evaluation/go-basic.obo",
+          "size": 30992530,
+          "sha256": "0c0062efbb1b199a6a54e62c0c48ff0038d39173aecc7edfab66a20090d5ec2d",
+          "data_version": "releases/2023-01-01"
+        },
+        "data/IA.txt": {
+          "archive_path": "full_evaluation/IA_t0.tsv",
+          "size": 1052720,
+          "sha256": "cbaa9327766151c7ff6d2fe8b0c2d5d0715a35d0ac1f419b2735fbab2b43c191"
+        },
+        "data/eval_terms_no_knowledge_2025_03.tsv": {
+          "archive_path": "full_evaluation/eval_terms_no_knowledge_2025_03.tsv",
+          "size": 923458,
+          "sha256": "0b21cd0d9aebdd6fcc51c73af1ddcfa32360be66d53501e7e3e0273d5b0ddc32"
+        },
+        "data/known_t0.tsv": {
+          "archive_path": "full_evaluation/known_t0.tsv",
+          "size": 115817178,
+          "sha256": "fc65e4573c04437fa5cc0a589d6f4c2d2b441891779929ade98089203f5eb063"
+        }
+      }
+    },
+    "interpro2go_mapping": {
+      "source": "http://purl.obolibrary.org/obo/go/external2go/interpro2go",
+      "version_date": "2026/07/06 18:13:03",
+      "license": "CC-BY-4.0",
+      "attribution": "Gene Ontology Consortium, interpro2go mapping (Mitchell et al. 2015, Nucl. Acids Res. 43:D213-D221); https://geneontology.org/docs/go-citation-policy/ confirms GOC data products are CC-BY-4.0",
+      "approved_uses": [
+        "evaluation"
+      ],
+      "file": {
+        "path": "data/interpro2go.txt",
+        "size": 3077134,
+        "sha256": "197d15cfe09d0831af4dbd19a69a191ee15aecbe1152144148a0ff62771a90ad"
+      }
+    }
+  },
+  "local_eval_targets": {
+    "cafa_no_knowledge": {
+      "approved": true,
+      "approved_uses": ["dev-evaluation"],
+      "description": "plan.md Phase 1: a temporal development set disjoint from both the training corpus and the sealed holdout, built from CAFA's no-knowledge targets minus the pinned public holdout ids.",
+      "id_list": "data_contract.public_holdout_ids-style manifest entry at data_contract.cafa_no_knowledge_ids",
+      "materialized_file": {
+        "path": "data/cafa_no_knowledge_dev_set.jsonl",
+        "sha256": "79dbb320bca1990d2c7bc2ad7d9051115dacf0447402e2676446c24af316d719",
+        "built_by": "scripts/build_cafa_no_knowledge_dev_set.py"
+      },
+      "sources": {
+        "go_labels": {
+          "source": "CAFA5 evaluation bundle (Zenodo 20186533), eval_terms_no_knowledge_2025_03.tsv",
+          "license": "CC-BY-4.0",
+          "evidence": "https://doi.org/10.5281/zenodo.20186533"
+        },
+        "sequence": {
+          "source": "UniProtKB REST API (rest.uniprot.org), fetched by accession",
+          "license": "CC-BY-4.0",
+          "evidence": "https://www.uniprot.org/help/license",
+          "retrieval_date": "2026-08-22"
+        },
+        "interpro_formatted": {
+          "source": "EBI InterProScan REST API (www.ebi.ac.uk/Tools/services/rest/iprscan5), run directly by this project (not via a WangLab redistribution)",
+          "license": "no resource-specific restriction found in EBI's public API terms as reviewed (ADR-028); EMBL-EBI publishes a Terms-of-Use/CC0 policy rather than a per-resource grant",
+          "evidence": "https://www.ebi.ac.uk/licencing/",
+          "status": "complete (2026-08-22): 1,496/1,496 proteins scanned, 1,464 with at least one InterPro domain found, 32 with none; 0 job failures. See scripts/fetch_interpro_annotations.py."
+        }
+      }
+    }
+  },
+  "local_artifacts": {
+    "precomputed_go_embeddings": {
+      "approved": false,
+      "reason": "No repository artifact has completed source-model and column-level provenance review."
+    },
+    "cached_go_embeddings": {
+      "approved": false,
+      "reason": "Cached embeddings are denied until an asset-specific manifest records their source model."
+    },
+    "released_bioreason_pro_checkpoints": {
+      "approved": false,
+      "reason": "The released checkpoint layout may contain or derive from an incompatible protein model."
+    }
+  },
+  "vendored_code": {
+    "gogpt": {
+      "path": "third_party/gogpt/",
+      "source": "https://github.com/bowang-lab/BioReason-Pro (gogpt/src/gogpt/ subdirectory)",
+      "revision": "a93ac2a96387103c100c4d6a6674d6fe1dfaf9e8",
+      "license": "MIT (root LICENSE of the source repo; gogpt/ is an ordinary tracked subdirectory, not a submodule, and carries no separate license of its own)",
+      "provenance": "plan.md Phase 5 / ADR-028. Vendored verbatim rather than reimplemented: GO-GPT's architecture (dual protein/GO attention streams, per-aspect tokens, gated attention, beam search tied to a specific trained checkpoint) is custom model code, not a REST client — a from-scratch reimplementation risks a subtle, silent divergence from the real model. See third_party/gogpt/NOTICE.md for the full record, including which files were vendored and why.",
+      "approved_uses": [
+        "baseline-evaluation"
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "dev_set_size": 1496,
+  "corpus_datasets_checked": [
+    {
+      "repo_id": "wanglab/bioreason-pro-sft-reasoning-data",
+      "revision": "2cab301d674487c4d8536aff4353f2df3c5f8235",
+      "protein_count": 117002
+    },
+    {
+      "repo_id": "wanglab/bioreason-pro-rl-reasoning-data",
+      "revision": "4afefce8a57f1c4af696bd3c02f8a7cf911d6626",
+      "protein_count": 9154
+    }
+  ],
+  "corpus_total_unique_ids": 125609,
+  "overlap_count": 0,
+  "checked_on": "2026-08-21",
+  "note": "Computed by streaming both corpora directly (same pinned revisions scripts/verify_cafa_no_knowledge_disjoint_from_corpus.py uses) after that script's own run repeatedly stalled on a flaky third parquet shard download; rerun the script directly for a from-scratch reproduction."
+}

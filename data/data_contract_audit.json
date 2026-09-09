@@ -1,0 +1,44 @@
+{
+  "audited_on": "2026-07-30",
+  "contract_id": "sequence-go-labels-v1",
+  "operational_splits_after_holdout_exclusion": {
+    "pairwise_overlap": 0,
+    "public_holdout": 8630,
+    "reserved_internal_test": 12570,
+    "rl_train": 100237,
+    "validation": 12280
+  },
+  "raw_overlaps": {
+    "combined_training_sources_and_public_holdout": 522,
+    "rl_train_and_public_holdout": 52,
+    "sft_train_and_public_holdout": 471,
+    "sft_train_and_rl_train": 547
+  },
+  "schema_version": 1,
+  "sources": {
+    "public_holdout": {
+      "duplicate_rows": 0,
+      "repo_id": "wanglab/bioreason-pro-test-data",
+      "revision": "90e2fcbf2ad5c2e3da1753de140a627419f90fdb",
+      "rows": 8630,
+      "sorted_id_sha256": "36ddd4e69eb66dbf92a58265917fb4edae33472ba316c25af66179d7dca3d7ed",
+      "unique_protein_ids": 8630
+    },
+    "rl_train": {
+      "duplicate_rows": 43,
+      "repo_id": "wanglab/bioreason-pro-rl-reasoning-data",
+      "revision": "4afefce8a57f1c4af696bd3c02f8a7cf911d6626",
+      "rows": 9197,
+      "sorted_id_sha256": "027dfb85e0b4524b30046e615008508fd36576f6107c8929df6fe972865d742c",
+      "unique_protein_ids": 9154
+    },
+    "sft_train": {
+      "duplicate_rows": 0,
+      "repo_id": "wanglab/bioreason-pro-sft-reasoning-data",
+      "revision": "2cab301d674487c4d8536aff4353f2df3c5f8235",
+      "rows": 117002,
+      "sorted_id_sha256": "abdecb06b080172e076b6204a9b37a33b7f1097ea448085ae8920a2bd79c41c5",
+      "unique_protein_ids": 117002
+    }
+  }
+}

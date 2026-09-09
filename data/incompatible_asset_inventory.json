@@ -1,0 +1,3820 @@
+{
+  "audited_on": "2026-08-10",
+  "filesystem_roots_scanned": [
+    "/Users/keisuke/.cache/huggingface/hub",
+    "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb"
+  ],
+  "git_branches": [
+    {
+      "files": 11,
+      "matches": 96,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 9,
+      "matches": 88,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 8,
+      "matches": 87,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 83,
+      "merged_into_main": false,
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 83,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 8,
+      "matches": 83,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3",
+        "esmc"
+      ]
+    },
+    {
+      "files": 7,
+      "matches": 80,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 78,
+      "merged_into_main": false,
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 78,
+      "merged_into_main": false,
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 78,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 78,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 4,
+      "matches": 77,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/agent/issue-62-full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 70,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 70,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 68,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 66,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 66,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 66,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 65,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 65,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 64,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3",
+        "esmc"
+      ]
+    },
+    {
+      "files": 5,
+      "matches": 64,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/stage3-reward-scored-set",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 57,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3",
+        "esmc"
+      ]
+    },
+    {
+      "files": 6,
+      "matches": 57,
+      "merged_into_main": false,
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3",
+        "esmc"
+      ]
+    }
+  ],
+  "requiring_quarantine": [
+    {
+      "classification": "asset_reference",
+      "evidence": "path name",
+      "path": ".locks/datasets--wanglab--cafa5",
+      "root": "/Users/keisuke/.cache/huggingface/hub",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "path name",
+      "path": "datasets--wanglab--cafa5",
+      "root": "/Users/keisuke/.cache/huggingface/hub",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_121354-958hk3vf/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_121402-ui2r9eey/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_121445-hozty99x/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_121453-nwllrzys/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_124013-1e5wtgva/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "released_paper_checkpoint"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_125304-ntpda9tu/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "released_paper_checkpoint"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_131115-p4czos2o/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_131123-l7n3ydok/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_131140-onpk3dn2/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_131147-3vc10j2t/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "gated_dataset_cache"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_131216-dycyajsk/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "released_paper_checkpoint"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run metadata names an incompatible asset",
+      "path": "run-20260407_131859-04vl44hy/files/config.yaml",
+      "root": "/Users/keisuke/Project/internal_projects/drug_discovery/BioReason-Pro/wandb",
+      "rules": [
+        "released_paper_checkpoint"
+      ],
+      "source": "filesystem"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "Qwen3-4B-Thinking-2507: 36 layers, hidden_size=2560. ESM3 esm3_sm_open_v1: 48 layers,",
+      "first_lines": [
+        9,
+        16,
+        17,
+        29,
+        30
+      ],
+      "matches": 9,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "Qwen3-4B-Thinking-2507: 36 layers, hidden_size=2560. ESM3 esm3_sm_open_v1: 48 layers,",
+      "first_lines": [
+        9,
+        16,
+        17,
+        29,
+        30
+      ],
+      "matches": 9,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "Qwen3-4B-Thinking-2507: 36 layers, hidden_size=2560. ESM3 esm3_sm_open_v1: 48 layers,",
+      "first_lines": [
+        9,
+        16,
+        17,
+        29,
+        30
+      ],
+      "matches": 9,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "Qwen3-4B-Thinking-2507: 36 layers, hidden_size=2560. ESM3 esm3_sm_open_v1: 48 layers,",
+      "first_lines": [
+        9,
+        16,
+        17,
+        29,
+        30
+      ],
+      "matches": 9,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Build fused input embeddings for a left-padded prompt batch: embed the text ids, ESM3-encode +",
+      "first_lines": [
+        120,
+        131,
+        212,
+        247,
+        566
+      ],
+      "matches": 17,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/agent/issue-62-full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/stage3-reward-scored-set",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Hard gate: ESM3 is Cambrian NON-COMMERCIAL. Require an explicit non-commercial acknowledgement.\"\"\"",
+      "first_lines": [
+        239,
+        240,
+        244
+      ],
+      "matches": 3,
+      "path": "slurm/launch_slurm_helpers.py",
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM2 / ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        3,
+        8,
+        9,
+        12
+      ],
+      "matches": 46,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM2 / ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        3,
+        8,
+        9,
+        12
+      ],
+      "matches": 46,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM2 / ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        3,
+        8,
+        9,
+        12
+      ],
+      "matches": 46,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM2 / ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        3,
+        8,
+        9,
+        12
+      ],
+      "matches": 46,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM2 / ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        8,
+        11,
+        23
+      ],
+      "matches": 36,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/agent/issue-62-full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/stage3-reward-scored-set",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"Protein encoder (ESM3 / ESM-C) \u2014 PROTECTED, vendored from bioreason2 (MIT).",
+      "first_lines": [
+        1,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matches": 38,
+      "path": "bioreason_pro/protein_encoder.py",
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3",
+        "esmc"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        21,
+        22
+      ],
+      "matches": 8,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        21,
+        22
+      ],
+      "matches": 8,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 15,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 15,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/stage3-reward-scored-set",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "\"\"\"ProteinLLMModel \u2014 Qwen3-4B-Thinking + ESM3 + GO-GAT multimodal fusion (PROTECTED).",
+      "first_lines": [
+        1,
+        5,
+        9,
+        22,
+        23
+      ],
+      "matches": 17,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: esm3_sm_open_v1   # frozen encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\")",
+      "first_lines": [
+        3,
+        23,
+        25
+      ],
+      "matches": 3,
+      "path": "configs/candrecall_ceiling.yaml",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: esm3_sm_open_v1   # frozen encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\")",
+      "first_lines": [
+        3,
+        23,
+        25
+      ],
+      "matches": 3,
+      "path": "configs/candrecall_ceiling.yaml",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: esm3_sm_open_v1   # frozen encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\")",
+      "first_lines": [
+        3,
+        23,
+        25
+      ],
+      "matches": 3,
+      "path": "configs/candrecall_ceiling.yaml",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: esm3_sm_open_v1   # frozen encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\"; index only)",
+      "first_lines": [
+        2,
+        31
+      ],
+      "matches": 2,
+      "path": "configs/knn_reranker.yaml",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: esm3_sm_open_v1   # frozen encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\"; index only)",
+      "first_lines": [
+        2,
+        31
+      ],
+      "matches": 2,
+      "path": "configs/knn_reranker.yaml",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: esm3_sm_open_v1   # frozen encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\"; index only)",
+      "first_lines": [
+        42
+      ],
+      "matches": 1,
+      "path": "configs/test_faithful_reranker.yaml",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: str = \"esm3_sm_open_v1\"        # frozen protein encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\")",
+      "first_lines": [
+        124,
+        131,
+        132,
+        133,
+        134
+      ],
+      "matches": 15,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: str = \"esm3_sm_open_v1\"        # frozen protein encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\")",
+      "first_lines": [
+        124,
+        131,
+        132,
+        133,
+        134
+      ],
+      "matches": 20,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model: str = \"esm3_sm_open_v1\"        # frozen protein encoder (Cambrian NON-COMMERCIAL \u2014 \"Built with ESM\")",
+      "first_lines": [
+        124,
+        131,
+        132,
+        133,
+        134
+      ],
+      "matches": 20,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/stage3-reward-scored-set",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        1,
+        2,
+        7
+      ],
+      "matches": 3,
+      "path": "configs/stage2_fusion.yaml",
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/candidate-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/knn-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/frieren/test-faithful-reranker",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: esm3_sm_open_v1",
+      "first_lines": [
+        7
+      ],
+      "matches": 1,
+      "path": "configs/stage3_rl.yaml",
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: str = \"esm3_sm_open_v1\"",
+      "first_lines": [
+        50,
+        52,
+        55,
+        266,
+        268
+      ],
+      "matches": 16,
+      "path": "train.py",
+      "ref": "refs/heads/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "esm_model_name: str = \"esm3_sm_open_v1\"",
+      "first_lines": [
+        50,
+        52,
+        55,
+        266,
+        268
+      ],
+      "matches": 16,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/fix/program-metric-label",
+      "rules": [
+        "esm3",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "freeze_lm: true                # Phase A: ONLY protein_projection trainable (LM+LoRA frozen, ESM3 frozen)",
+      "first_lines": [
+        4,
+        10,
+        19
+      ],
+      "matches": 3,
+      "path": "configs/stage2_warmup.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "freeze_lm: true                # Phase A: ONLY protein_projection trainable (LM+LoRA frozen, ESM3 frozen)",
+      "first_lines": [
+        4,
+        10,
+        19
+      ],
+      "matches": 3,
+      "path": "configs/stage2_warmup.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: artifacts/bioreason-pro-rl/go_embedding.pt   # (200, 2560) reduced GO tokens",
+      "first_lines": [
+        1,
+        12,
+        21,
+        23
+      ],
+      "matches": 4,
+      "path": "configs/stage2_go_fusion.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: artifacts/bioreason-pro-rl/go_embedding.pt   # (200, 2560) reduced GO tokens",
+      "first_lines": [
+        4,
+        9
+      ],
+      "matches": 2,
+      "path": "configs/stage2_go_smoke.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: artifacts/bioreason-pro-rl/go_embedding.pt   # must match the Step-6 build (fixed buffer)",
+      "first_lines": [
+        19
+      ],
+      "matches": 1,
+      "path": "configs/stage2_go_ablation_eval.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: str = \"\"",
+      "first_lines": [
+        120,
+        128,
+        133,
+        150,
+        234
+      ],
+      "matches": 21,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: str = \"\"",
+      "first_lines": [
+        51,
+        52,
+        58,
+        269,
+        271
+      ],
+      "matches": 16,
+      "path": "train.py",
+      "ref": "refs/heads/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: str = \"\"",
+      "first_lines": [
+        51,
+        52,
+        58,
+        269,
+        271
+      ],
+      "matches": 16,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/feat/esm2-encoder",
+      "rules": [
+        "esm3",
+        "esmc",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: str = \"\"",
+      "first_lines": [
+        51,
+        52,
+        58,
+        269,
+        271
+      ],
+      "matches": 21,
+      "path": "train.py",
+      "ref": "refs/heads/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: str = \"\"",
+      "first_lines": [
+        51,
+        52,
+        58,
+        269,
+        271
+      ],
+      "matches": 21,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/feat/full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "go_cached_embedding_path: str = \"\"",
+      "first_lines": [
+        51,
+        55,
+        266,
+        268,
+        434
+      ],
+      "matches": 25,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/agent/issue-62-full-model-eval",
+      "rules": [
+        "esm3",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "on tiny CPU tensors. The full model ASSEMBLY (ESM3 encoder, GO-GAT, projections, LLM) needs",
+      "first_lines": [
+        5,
+        9,
+        22,
+        23,
+        47
+      ],
+      "matches": 13,
+      "path": "bioreason_pro/model.py",
+      "ref": "refs/remotes/origin/agent/issue-62-full-model-eval",
+      "rules": [
+        "esm3",
+        "esmc",
+        "released_paper_checkpoint",
+        "unapproved_go_embeddings"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "per_device_train_batch_size: 1   # protein pad tokens make sequences long + ESM3 is resident (smoke: 21.6GB peak)",
+      "first_lines": [
+        1,
+        16,
+        18
+      ],
+      "matches": 3,
+      "path": "configs/stage2_proteinonly_sft.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-fusion-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "per_device_train_batch_size: 1   # protein pad tokens make sequences long + ESM3 is resident (smoke: 21.6GB peak)",
+      "first_lines": [
+        1,
+        16,
+        18
+      ],
+      "matches": 3,
+      "path": "configs/stage2_proteinonly_sft.yaml",
+      "ref": "refs/remotes/origin/frieren/stage2-go-fusion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        1018,
+        1909,
+        1910
+      ],
+      "matches": 3,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/hardneg-distractor-faithful-rft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        119,
+        137,
+        855,
+        1137,
+        1145
+      ],
+      "matches": 8,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/ltr-gfm-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        119,
+        137,
+        888,
+        1170,
+        1178
+      ],
+      "matches": 8,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/orthogonal-term-evidence",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        119,
+        823,
+        1105,
+        1113,
+        1114
+      ],
+      "matches": 6,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/diamond-homology-decode",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        1411,
+        1738,
+        1746,
+        1747
+      ],
+      "matches": 4,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/select-rerank-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        449,
+        912,
+        920,
+        921
+      ],
+      "matches": 4,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/stage1-checkpoint-selection",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        585,
+        803,
+        811,
+        812
+      ],
+      "matches": 4,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/stage1-throughput-undertraining",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        807,
+        1089,
+        1097,
+        1098
+      ],
+      "matches": 4,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/rerank-select-sft",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        894,
+        2777,
+        2785,
+        2786
+      ],
+      "matches": 4,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/schmidhuber",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        900,
+        2876,
+        2884,
+        2885
+      ],
+      "matches": 4,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/i4-bp-recall-expansion",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        955,
+        1746,
+        1750
+      ],
+      "matches": 3,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/e11-grpo-text-honest",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "raise NotImplementedError(\"multimodal SFT needs bioreason_pro.model.build_model (ESM3/GAT vendor)\")",
+      "first_lines": [
+        964,
+        1733,
+        1734
+      ],
+      "matches": 3,
+      "path": "train.py",
+      "ref": "refs/remotes/origin/frieren/stage3-reward-scored-set",
+      "rules": [
+        "esm3"
+      ],
+      "source": "git"
+    },
+    {
+      "artifact": "run-8cgidt69-candrecallceiling_table-NPsO-w:v0",
+      "artifact_type": "run_table",
+      "classification": "asset_reference",
+      "derived_from_run": "8cgidt69",
+      "evidence": "logged by run 8cgidt69, whose config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "source": "wandb"
+    },
+    {
+      "artifact": "run-9cc8o7ic-candrecallceiling_table-y8UwYg:v0",
+      "artifact_type": "run_table",
+      "classification": "asset_reference",
+      "derived_from_run": "9cc8o7ic",
+      "evidence": "logged by run 9cc8o7ic, whose config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "source": "wandb"
+    },
+    {
+      "artifact": "run-izfvt9nn-candrecallceiling_table-n6AZfg:v0",
+      "artifact_type": "run_table",
+      "classification": "asset_reference",
+      "derived_from_run": "izfvt9nn",
+      "evidence": "logged by run izfvt9nn, whose config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "source": "wandb"
+    },
+    {
+      "artifact": "run-phuqefnp-rerankerarms_table-BD4iDw:v0",
+      "artifact_type": "run_table",
+      "classification": "asset_reference",
+      "derived_from_run": "phuqefnp",
+      "evidence": "logged by run phuqefnp, whose config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "source": "wandb"
+    },
+    {
+      "artifact": "run-pj3t5x7y-rerankerarms_table-vljn3A:v0",
+      "artifact_type": "run_table",
+      "classification": "asset_reference",
+      "derived_from_run": "pj3t5x7y",
+      "evidence": "logged by run pj3t5x7y, whose config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "2apejmfs",
+      "run_name": "frieren/stage2-mm-smoke-1gpu",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "2pg2h6tt",
+      "run_name": "kkamata/stage2-real-mm-sft-derisk",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "2u33cx4p",
+      "run_name": "frieren/stage2-go-fusion-s0",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "5q1x4mxg",
+      "run_name": "kkamata/ddp-2gpu-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "62tmjr9f",
+      "run_name": "kkamata/stage3-mm-grpo-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "8cgidt69",
+      "run_name": "frieren/candrecall-debug",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "9cc8o7ic",
+      "run_name": "frieren/candrecall-ceiling-db40k",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "9ogfxbf0",
+      "run_name": "frieren/stage2-proteinonly-sft-s0",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "a135u60z",
+      "run_name": "kkamata/stage1-text-sft-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "c7mak3rt",
+      "run_name": "frieren/stage2-mm-smoke-ddp",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "cniw5yu6",
+      "run_name": "frieren/candrecall-ceiling-db40k",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "dgm7z5vq",
+      "run_name": "frieren/stage2-warmup-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "fck996nm",
+      "run_name": "kkamata/stage05-mm-build-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "hlbn758k",
+      "run_name": "kkamata/stage2-mm-sft-eval-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "hn5cn6km",
+      "run_name": "frieren/stage2-mm-smoke-1gpu",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "hr6roaag",
+      "run_name": "kkamata/stage05-mm-build-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "hy8sub8y",
+      "run_name": "kkamata/stage2-mm-sft-eval-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "i1xx2dyv",
+      "run_name": "frieren/stage2-projwarmup-s0",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "i6l8h4lf",
+      "run_name": "kkamata/stage3-mm-grpo-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "izfvt9nn",
+      "run_name": "frieren/candrecall-ceiling-full",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "ktx73j3b",
+      "run_name": "kkamata/grpo-ddp-2gpu-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "kxujndf5",
+      "run_name": "frieren/stage2-jointft-warmstart-s0",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "phuqefnp",
+      "run_name": "frieren/knn-reranker-db8k",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "pj3t5x7y",
+      "run_name": "frieren/tf-reranker-db8k",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "sf640j1t",
+      "run_name": "kkamata/stage0-text-grpo-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "spmomzuh",
+      "run_name": "frieren/stage2-joint-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "ugj6xtln",
+      "run_name": "frieren/stage2-go-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "vbmdea3n",
+      "run_name": "frieren/stage2-mm-smoke-1gpu",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "wmodwedp",
+      "run_name": "kkamata/stage2-mm-sft-smoke",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "zbgcs69g",
+      "run_name": "frieren/stage2-mm-smoke-verify",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esm3"
+      ],
+      "run": "zzw1v7ly",
+      "run_name": "frieren/stage2-jointft-warmstart-s0",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "0s1rpq39",
+      "run_name": "kkamata/stage3-real-2node-grpo-kl05",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "0wzesclh",
+      "run_name": "kkamata/stage3-real-2node-grpo-t07",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "1xgz6923",
+      "run_name": "kkamata/kl-sanity",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "28qvuver",
+      "run_name": "kkamata/rl-debug-t05",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "2iyd8o5z",
+      "run_name": "kkamata/rl-debug",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "4wsyw3av",
+      "run_name": "kkamata/sft-adapter-eval",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "520vx8nc",
+      "run_name": "kkamata/stage3-real-2node-grpo",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "5v8rj4pk",
+      "run_name": "kkamata/stage3-real-2node-grpo-t07",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "7l73pdp3",
+      "run_name": "kkamata/stage3-real-2node-grpo-full",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "9w4jq2nn",
+      "run_name": "kkamata/sft-adapter-eval",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "abhz7hx9",
+      "run_name": "kkamata/stage3-real-2node-grpo-len1024",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "ae4zk4dj",
+      "run_name": "kkamata/stage3-real-2node-grpo",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "au18rdqd",
+      "run_name": "kkamata/stage3-real-2node-grpo-kl05-clean",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "b4jv7osl",
+      "run_name": "kkamata/gen-debug",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "bpbvshzn",
+      "run_name": "kkamata/stage2-real-2node-sft",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "btl4ihv4",
+      "run_name": "kkamata/stage3-real-2node-grpo-t07",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "c7fg8mzv",
+      "run_name": "kkamata/sft-adapter-eval",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "d3axxow4",
+      "run_name": "kkamata/stage2-real-2node-sft-full",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "dkzgo6z3",
+      "run_name": "kkamata/rl-debug",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "exg2m2it",
+      "run_name": "kkamata/stage3-real-2node-grpo-kl05-2x-g4",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "jg78owg9",
+      "run_name": "kkamata/sft-adapter-eval",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "m0ut91jf",
+      "run_name": "kkamata/gen-debug",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "mnhrdx3u",
+      "run_name": "kkamata/stage3-real-2node-grpo-full",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "n7wgwhy8",
+      "run_name": "kkamata/stage3-real-2node-grpo-full",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "pcu0zun0",
+      "run_name": "kkamata/stage3-real-2node-grpo",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "qijdp61g",
+      "run_name": "kkamata/rl-debug",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "r934fj72",
+      "run_name": "kkamata/stage3-real-2node-grpo-t07",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "tjv5c4eo",
+      "run_name": "kkamata/stage2-real-mm-sft-derisk",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "wxhlja3l",
+      "run_name": "kkamata/rl-debug-t03",
+      "source": "wandb"
+    },
+    {
+      "classification": "asset_reference",
+      "evidence": "run config names an incompatible asset",
+      "project": "wandb-healthcare/bioreasonpro-senpai",
+      "rules": [
+        "esmc"
+      ],
+      "run": "xglbp60c",
+      "run_name": "kkamata/sft-adapter-eval",
+      "source": "wandb"
+    }
+  ],
+  "rules": [
+    "esm3",
+    "esmc",
+    "gated_dataset_cache",
+    "released_paper_checkpoint",
+    "unapproved_go_embeddings"
+  ],
+  "scanners_run": [
+    "filesystem",
+    "git",
+    "wandb"
+  ],
+  "schema_version": 1,
+  "totals": {
+    "by_rule": {
+      "esm3": 189,
+      "esmc": 63,
+      "gated_dataset_cache": 10,
+      "released_paper_checkpoint": 27,
+      "unapproved_go_embeddings": 31
+    },
+    "commentary": 124,
+    "findings": 513,
+    "policy_references": 155,
+    "requiring_quarantine": 234
+  }
+}

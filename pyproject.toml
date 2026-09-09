@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bioreason-pro-with-ESM2"
+version = "0.1.0"
+description = "BioReason-Pro-style SFT->RL protein-function-prediction workflow, ESM2 in place of ESM3"
+# >=3.10 (not >=3.12): the cluster container image ships system Python 3.10, and the sbatch
+# entrypoint runs `uv pip install --system -e .` under `set -e` — a >=3.12 pin would abort that
+# install. The code is 3.10-safe (no PEP 695 / tomllib / except*; X|None unions are native).
+requires-python = ">=3.10"
+
+# Base = light, cross-platform deps: the SLURM launcher, tracking, eval/data helpers. These
+# install on macOS (dev box) and Linux (cluster). The heavy CUDA/serving training stack is the
+# opt-in `train` extra below (installed in the Linux container), because vllm has no macOS wheel.
+dependencies = [
+    "simple-parsing>=0.1",          # launch_slurm.py RunArgs / config
+    "pyyaml>=6",                    # merge senpai.yaml + slurm/senpai_slurm.yaml
+    "wandb>=0.17",                  # W&B Models
+    "weave>=0.51",                  # searchable rollout tracing
+    "datasets>=2.20",               # streaming gated wanglab/* sets
+    "cafaeval>=1.2",                # threshold-swept IA-weighted F_max
+    "obonet>=1.0",                  # parse go-basic.obo for ancestor propagation
+    # weave.Evaluation resolves UTC through zoneinfo, which needs the system tz database. The
+    # container image does not ship /usr/share/zoneinfo, and tzdata only arrives transitively under
+    # a `python_full_version < "3.11"` marker, so on a newer interpreter Weave dies with
+    # ZoneInfoNotFoundError: 'No time zone found with key UTC'. Declare it unconditionally.
+    "tzdata>=2024.1",
+]
+
+[project.optional-dependencies]
+# Text-only training stack for the runnable Stage 0/1 (GRPO on Qwen text, no ESM/GAT/vLLM).
+# Light + reliable on the container's Python 3.10; NONE of the esm/vllm co-resolution pain.
+# The senpai image already ships torch/torch_geometric/wandb/weave, so in-container the student
+# only needs: `uv pip install --system -e '.[texttrain]'`.
+texttrain = [
+    "torch>=2.4",
+    "transformers>=4.56",           # Qwen3-4B-Thinking tokenizer/model
+    "peft>=0.13",                   # RL LoRA r=16
+    "trl>=0.20",                    # GRPO/GSPO trainer
+]
+
+# Heavy multimodal training/serving stack (Stage 2/3) — install in the Linux/CUDA container:
+# `uv pip install --system -e '.[train]'`. ESM2 is loaded by transformers.EsmModel, so the
+# non-commercial EvolutionaryScale `esm` package is intentionally absent. vllm is linux-only.
+train = [
+    "torch>=2.4",
+    "transformers>=4.56",
+    "peft>=0.13",                   # LoRA (SFT r=128 / RL r=16)
+    "trl>=0.20",                    # >=0.20 exposes importance_sampling_level="sequence" (GSPO)
+    "pytorch-lightning>=2.3",       # public SFT loop
+    "torch-geometric>=2.5",         # GO-GAT
+    "vllm>=0.9 ; sys_platform == 'linux'",   # colocate + sleep mode; no macOS wheel
+]
+
+[dependency-groups]
+# Installed by default by `uv sync` (PEP 735). Light — runs on the dev box. torch (CPU wheel on
+# macOS) is here so the fusion scatter-add can be unit-tested locally; model.py is only imported in
+# the train env (which gets torch via the `train` extra) or in these tests.
+dev = ["pytest>=8", "ruff>=0.6", "torch>=2.4", "duckdb>=1.4"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]                  # import top-level train/eval/data + bioreason_pro in tests
+testpaths = ["tests"]
+
+# Explicit package layout — without this, setuptools flat-layout auto-discovery finds multiple
+# top-level dirs (bioreason_pro, configs, data, slurm, instructions, ...) and refuses to build,
+# so the student entrypoint's `uv pip install --system -e .` fails. Package bioreason_pro + eval_targets
+# (the sealed-eval dataset registry) plus the three top-level entrypoint modules; everything else is
+# data/config/infra, not importable code.
+[tool.setuptools]
+py-modules = ["train", "eval", "data"]
+
+[tool.setuptools.packages.find]
+include = ["bioreason_pro*", "eval_targets*"]
+
+[tool.setuptools.package-data]
+bioreason_pro = ["approved_assets.json"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["senpai", "third_party"]   # pinned submodule + vendored deps — not our code to lint
