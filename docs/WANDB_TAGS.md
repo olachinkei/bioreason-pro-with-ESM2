@@ -53,16 +53,8 @@ than write its own tag/note logic.
 
 ## Applying tags
 
-`scripts/apply_run_tags.py` holds judgement/repair tags as a declarative table and applies them
-idempotently. Dry-run by default; pass `--apply` to write.
-
-```bash
-uv run python scripts/apply_run_tags.py            # show the diff
-uv run python scripts/apply_run_tags.py --apply    # write it
-```
-
-A tag added by hand in the W&B UI is allowed but will be overwritten the next time the script runs
-against that run — put it in the table instead.
+Assign judgement and repair tags in the W&B UI after reviewing the run evidence.
+Automatically derived tags and notes are set by `bioreason_pro.wandb_meta` when a run starts.
 
 ## Practical guidance
 

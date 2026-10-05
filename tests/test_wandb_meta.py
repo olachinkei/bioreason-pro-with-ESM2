@@ -1,18 +1,11 @@
 """Contract tests for bioreason_pro.wandb_meta — the shared derived-tags/note logic.
 
-Every `wandb.init()` call site now passes `tags=derived_tags(...)` and `notes=build_note(...)`, and
-`scripts/apply_run_tags.py` imports the same `derived_tags`/`provenance` rather than keeping its own
-copy. These tests pin the one implementation both paths share.
+These tests pin the shared implementation used by W&B initialization call sites.
 """
 
 from __future__ import annotations
 
-from pathlib import Path
-
 from bioreason_pro import wandb_meta as M
-
-ROOT = Path(__file__).resolve().parent.parent
-
 
 def test_provenance_flags_any_incompatible_marker_anywhere_in_config():
     for marker in ("esm3", "ESM3", "esm-c", "ESMC", "esmc_600m"):
@@ -88,11 +81,3 @@ def test_build_note_truncates_absurdly_long_notes():
     note = M.build_note("model-evaluation", config)
     assert len(note) <= M._NOTE_MAX_LEN
     assert note.endswith("…")
-
-
-def test_apply_run_tags_uses_the_shared_module_not_a_private_copy():
-    """Job 691 taught this project to grep for a flag's destination, not its declaration (ADR-008).
-    Same principle here: assert the SHARED implementation is what the script imports."""
-    text = (ROOT / "scripts" / "apply_run_tags.py").read_text(encoding="utf-8")
-    assert "from bioreason_pro.wandb_meta import" in text
-    assert "def _provenance" not in text, "a private duplicate would drift from the shared one"

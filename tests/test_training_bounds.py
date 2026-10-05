@@ -21,7 +21,7 @@ def test_explicit_max_steps_overrides_streaming_epoch_bound():
 
 
 def test_subset_and_senpai_epoch_ceiling_reduce_default_bound(monkeypatch):
-    monkeypatch.setenv("SENPAI_MAX_EPOCHS", "2")
+    monkeypatch.setenv("BIOREASON_PRO_MAX_EPOCHS", "2")
     args = RunArgs(epochs=10, streaming_steps_per_epoch=500, data_subset_frac=0.25)
 
     assert args.resolved_max_steps() == 250
@@ -34,7 +34,7 @@ def test_invalid_step_overrides_are_rejected(max_steps):
 
 
 def test_non_positive_senpai_epoch_ceiling_is_rejected(monkeypatch):
-    monkeypatch.setenv("SENPAI_MAX_EPOCHS", "0")
+    monkeypatch.setenv("BIOREASON_PRO_MAX_EPOCHS", "0")
 
-    with pytest.raises(ValueError, match="SENPAI_MAX_EPOCHS"):
+    with pytest.raises(ValueError, match="BIOREASON_PRO_MAX_EPOCHS"):
         RunArgs().resolved_max_steps()

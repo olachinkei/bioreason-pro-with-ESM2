@@ -64,7 +64,7 @@ export GOGPT_LIMIT="${GOGPT_LIMIT:-}"
 image="docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
-container_mounts="${SENPAI_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
+container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
 
 mkdir -p "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$HF_HOME" "$BIOREASON_JOB_TMP" "$GOGPT_OUTPUT" "$runtime_root/runtime_logs"
 cleanup() {

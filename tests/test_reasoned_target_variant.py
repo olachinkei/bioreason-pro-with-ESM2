@@ -29,7 +29,7 @@ ROW = {
 
 
 def _adapt(row, variant, monkeypatch):
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", variant)
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", variant)
     DC._go_ancestors_for_targets.cache_clear()
     return DC.adapt_synthetic_fixture_row(dict(row))
 
@@ -96,7 +96,7 @@ def test_missing_final_answer_is_refused_for_sft(monkeypatch):
 def test_rl_and_eval_do_not_require_final_answer_either(monkeypatch):
     """Only SFT supervises the spliced summary; RL scores rollouts and eval has no target at all,
     so neither should be blocked by a missing `final_answer` any more than by missing `reasoning`."""
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     no_summary = {k: v for k, v in ROW.items() if k != "final_answer"}
     for use in ("rl-training", "holdout-evaluation"):
@@ -226,7 +226,7 @@ def test_the_coupling_is_declared_as_data(monkeypatch):
 
 
 def test_unknown_variant_still_fails_closed(monkeypatch):
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_reasoned")  # near-miss
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_reasoned")  # near-miss
     with pytest.raises(ValueError):
         DC.active_target_variant()
 
@@ -234,19 +234,19 @@ def test_unknown_variant_still_fails_closed(monkeypatch):
 # --------------------------------------------------------------- require_active_variant_matches
 #
 # plan.md ADR-031: a Phase 3 GPU sweep evaluated leaf_only_reasoned checkpoints with
-# SENPAI_TARGET_VARIANT left unset, which silently defaults to full_closure -- a prompt with NO
+# BIOREASON_PRO_TARGET_VARIANT left unset, which silently defaults to full_closure -- a prompt with NO
 # InterPro/PPI/subcellular-location context at all. The model still reasoned (that behaviour is
 # trained in) but fabricated domain claims instead of leaving them out, since ADR-017's coupling
 # between reasoning supervision and evidence-in-prompt only holds when the evidence is actually
 # there. These tests pin the guard that catches this before it silently produces a meaningless run.
 
 def test_matching_variant_is_a_noop(monkeypatch):
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC.require_active_variant_matches("leaf_only_reasoned")  # must not raise
 
 
 def test_mismatched_variant_fails_closed(monkeypatch):
-    monkeypatch.delenv("SENPAI_TARGET_VARIANT", raising=False)  # defaults to full_closure
+    monkeypatch.delenv("BIOREASON_PRO_TARGET_VARIANT", raising=False)  # defaults to full_closure
     with pytest.raises(ValueError, match="does not match"):
         DC.require_active_variant_matches("leaf_only_reasoned")
 
@@ -254,7 +254,7 @@ def test_mismatched_variant_fails_closed(monkeypatch):
 def test_unrecorded_expected_variant_skips_the_check(monkeypatch):
     """An older checkpoint whose producing run never logged target_variant: don't block on
     missing historical metadata, just don't guarantee anything either."""
-    monkeypatch.delenv("SENPAI_TARGET_VARIANT", raising=False)
+    monkeypatch.delenv("BIOREASON_PRO_TARGET_VARIANT", raising=False)
     DC.require_active_variant_matches(None)  # must not raise
 
 
@@ -273,7 +273,7 @@ def test_every_fixture_row_can_drive_the_reasoned_variant(monkeypatch):
             (root / "tests" / "fixtures" / "approved_training_rows.jsonl").read_text().splitlines()
             if line.strip()]
     assert rows, "fixture must not be empty"
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     for i, row in enumerate(rows):
         out = DC.adapt_synthetic_fixture_row(dict(row))
@@ -288,7 +288,7 @@ def test_rl_and_eval_do_not_require_a_reasoning_column(monkeypatch):
     Only SFT supervises a trace, so only SFT needs one. Requiring it everywhere made the reasoned
     variant unusable for the RL stage and for the sealed evaluation.
     """
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     no_trace = {k: v for k, v in ROW.items() if k != "reasoning"}
     for use in ("rl-training", "holdout-evaluation"):
@@ -300,7 +300,7 @@ def test_rl_and_eval_do_not_require_a_reasoning_column(monkeypatch):
 def test_adapt_row_for_evaluation_matches_the_licensed_path_without_a_repo_id(monkeypatch):
     """eval_targets.cafa_no_knowledge (a source="local" target with no HF repo_id/manifest entry)
     needs this exact prompt shape without going through require_approved_dataset."""
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     licensed = DC.adapt_synthetic_fixture_row(dict(ROW), use="holdout-evaluation")
     unlicensed = DC.adapt_row_for_evaluation(dict(ROW))
@@ -315,7 +315,7 @@ def test_a_missing_context_source_renders_as_not_available(monkeypatch):
     trained to always see partners is the one that invents them when they vanish. A stable
     placeholder makes "absent" a state the model has seen.
     """
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     no_ppi = {k: v for k, v in ROW.items() if k != "ppi_formatted"}
     user = DC.adapt_synthetic_fixture_row(dict(no_ppi), use="holdout-evaluation")["prompt"]["user"]
@@ -331,7 +331,7 @@ def test_unusable_sft_rows_are_skipped_not_fatal(monkeypatch):
     """Job 970 died 12 minutes in on one bad row out of ~124k. Sparsity is not a config error."""
     import data
 
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     bad = {k: v for k, v in ROW.items() if k != "reasoning"}
     out = data._adapt_or_mark_unusable(
@@ -348,7 +348,7 @@ def test_other_adapter_failures_still_propagate(monkeypatch):
     """Only MissingReasoningEvidence is swallowed. A contract violation must still stop the run."""
     import data
 
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     with pytest.raises(ValueError, match="non-empty protein_id and sequence"):
         data._adapt_or_mark_unusable(
@@ -374,7 +374,7 @@ def test_the_real_sft_stream_skips_unsupervisable_rows(monkeypatch):
         {k: v for k, v in ROW.items() if k != "reasoning"} | {"protein_id": "P00002"},
         {**ROW, "protein_id": "P00003"},
     ]
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     monkeypatch.setattr(data, "_load_stream", lambda repo: iter(rows))
     monkeypatch.setattr(data, "in_split", lambda pid, split, seed: True)
@@ -393,7 +393,7 @@ def test_a_wholly_unsupervisable_stream_is_refused(monkeypatch):
 
     bad = {k: v for k, v in ROW.items() if k != "reasoning"}
     rows = [{**bad, "protein_id": f"P{i:05d}"} for i in range(400)]
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     DC._go_ancestors_for_targets.cache_clear()
     monkeypatch.setattr(data, "_load_stream", lambda repo: iter(rows))
     monkeypatch.setattr(data, "in_split", lambda pid, split, seed: True)

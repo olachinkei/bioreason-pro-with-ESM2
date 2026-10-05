@@ -46,7 +46,7 @@ def go_labels(row: dict[str, Any]) -> dict[str, list[str]]:
     }
 
 
-# Supervision-target variants, selected by SENPAI_TARGET_VARIANT.
+# Supervision-target variants, selected by BIOREASON_PRO_TARGET_VARIANT.
 #
 # "full_closure" (default) writes the label columns as they ship. Those columns are ancestor-closed
 # by the True-Path Rule, so on the RL split a target carries a mean of 22.9 GO ids of which only 3.2
@@ -122,23 +122,23 @@ ORGANISM_COLUMN = ("organism", "Organism (UniProtKB)")
 
 
 def active_target_variant() -> str:
-    """Read SENPAI_TARGET_VARIANT, failing closed on an unknown name."""
+    """Read BIOREASON_PRO_TARGET_VARIANT, failing closed on an unknown name."""
     import os
 
-    name = os.environ.get("SENPAI_TARGET_VARIANT", DEFAULT_TARGET_VARIANT).strip()
+    name = os.environ.get("BIOREASON_PRO_TARGET_VARIANT", DEFAULT_TARGET_VARIANT).strip()
     if name not in TARGET_VARIANTS:
         raise ValueError(
-            f"SENPAI_TARGET_VARIANT={name!r} is not a known target variant; "
+            f"BIOREASON_PRO_TARGET_VARIANT={name!r} is not a known target variant; "
             f"expected one of {list(TARGET_VARIANTS)}"
         )
     return name
 
 
 def require_active_variant_matches(expected: str | None, *, checkpoint_label: str = "checkpoint") -> None:
-    """Fail closed if the active SENPAI_TARGET_VARIANT does not match what a checkpoint was trained
+    """Fail closed if the active BIOREASON_PRO_TARGET_VARIANT does not match what a checkpoint was trained
     with (its producing run's own `target_variant` config value, e.g. from `wandb.Api()`).
 
-    An unset SENPAI_TARGET_VARIANT silently defaults to DEFAULT_TARGET_VARIANT ("full_closure"),
+    An unset BIOREASON_PRO_TARGET_VARIANT silently defaults to DEFAULT_TARGET_VARIANT ("full_closure"),
     which renders a prompt with NO InterPro/PPI/subcellular-location context at all -- a checkpoint
     trained on `leaf_only_reasoned` evaluated this way still reasons (that behaviour is trained in)
     but with no evidence to reason FROM, so it fabricates domain claims instead of leaving them out.
@@ -152,8 +152,8 @@ def require_active_variant_matches(expected: str | None, *, checkpoint_label: st
     active = active_target_variant()
     if active != expected:
         raise ValueError(
-            f"{checkpoint_label}: SENPAI_TARGET_VARIANT={active!r} does not match this checkpoint's "
-            f"recorded target_variant={expected!r}. Set SENPAI_TARGET_VARIANT={expected!r} before "
+            f"{checkpoint_label}: BIOREASON_PRO_TARGET_VARIANT={active!r} does not match this checkpoint's "
+            f"recorded target_variant={expected!r}. Set BIOREASON_PRO_TARGET_VARIANT={expected!r} before "
             "evaluating it, or the prompt shape will not match what it was trained on."
         )
 

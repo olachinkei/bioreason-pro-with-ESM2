@@ -18,9 +18,9 @@ the operator explicitly passes `--force`.
 - `known_t0.tsv` — CAFA's annotated-at-t0 proteins; used to verify what "no-knowledge" actually means
   for a given protein, not just trust the label.
 
-`public_holdout_ids.txt` and `data_contract_audit.json` are small, committed audit artifacts. They
-record the public holdout fingerprint, source revisions, raw overlaps, and the zero-overlap
-operational split. Re-audit pinned remote revisions with:
+`public_holdout_ids.txt` is a committed record of public holdout IDs. Re-audit pinned remote
+revisions with the command below; it generates `data_contract_audit.json` locally with the public
+holdout fingerprint, source revisions, raw overlaps, and operational split checks.
 
 ```bash
 uv run python scripts/audit_data_contract.py
@@ -33,7 +33,7 @@ uv run python scripts/audit_data_contract.py
 1,496 protein ids (CAFA's 1,717 no-knowledge targets, minus 213 in the sealed holdout, minus 8 found
 in the training corpus — see ADR-029); the `.jsonl` file carries their sequences, GO ground truth, and
 (once `scripts/fetch_interpro_annotations.py` has run) InterPro context.
-`data/cafa_no_knowledge_corpus_disjointness.json` is the audit receipt from
+`data/cafa_no_knowledge_corpus_disjointness.json` is generated locally (not committed) by
 `scripts/verify_cafa_no_knowledge_disjoint_from_corpus.py`, which re-streams the live training corpus
 rather than trusting the cached exclusion list.
 

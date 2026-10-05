@@ -68,9 +68,9 @@ def test_the_new_variant_is_registered_and_unknown_names_still_fail_closed(monke
     assert "aspect_mean_reasoned" in R.REWARD_VARIANTS
     assert "aspect_mean_reasoned" in R.REASONED_VARIANTS
     assert "aspect_mean_reasoned" in R.ASPECT_AWARE_VARIANTS
-    monkeypatch.setenv("SENPAI_REWARD_VARIANT", "aspect_mean_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_REWARD_VARIANT", "aspect_mean_reasoned")
     assert R.active_reward_variant() == "aspect_mean_reasoned"
-    monkeypatch.setenv("SENPAI_REWARD_VARIANT", "reasoned")  # near-miss name
+    monkeypatch.setenv("BIOREASON_PRO_REWARD_VARIANT", "reasoned")  # near-miss name
     with pytest.raises(ValueError):
         R.active_reward_variant()
 

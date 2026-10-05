@@ -27,9 +27,13 @@ data/go-basic.obo
 data/IA.txt
 data/*.tsv
 data/interpro2go.txt
+data/*audit*.json
+data/incompatible_asset_inventory.json
+data/cafa_no_knowledge_corpus_disjointness.json
 
 # --- Internal working docs (not published) ---
 plan.md
+blog/
 
 # --- OS / editor ---
 .DS_Store

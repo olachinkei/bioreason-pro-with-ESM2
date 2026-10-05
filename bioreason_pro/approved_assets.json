@@ -235,7 +235,7 @@
       "source": "Synthetic reasoning trace distributed in wanglab/bioreason-pro-*-reasoning-data; the dataset card attributes generation to a large language model (stated as GPT-5), not to a human curator or to an experimental source",
       "license": "Apache-2.0 as distributed by WangLab at the pinned revision",
       "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
-      "approved_use": "SFT <think> supervision under SENPAI_TARGET_VARIANT=leaf_only_reasoned only, and only together with the context columns it cites",
+      "approved_use": "SFT <think> supervision under BIOREASON_PRO_TARGET_VARIANT=leaf_only_reasoned only, and only together with the context columns it cites",
       "caveat": "Model-generated rationale, NOT experimentally verified science. Inspectable is not the same as correct; any reader-facing surface must say so."
     },
     "interpro_formatted": {

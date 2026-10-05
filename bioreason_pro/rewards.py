@@ -212,7 +212,7 @@ def ia_weighted_f1(pred: set[str], true: set[str], ia: dict[str, float] | None) 
     return 0.0 if prec + rec == 0 else 2 * prec * rec / (prec + rec)
 
 
-# Reward variants, selected by SENPAI_REWARD_VARIANT.
+# Reward variants, selected by BIOREASON_PRO_REWARD_VARIANT.
 #
 # "union" (default) is the shipped reward: one IA-weighted F1 over the union of go_mf/go_bp/go_cc.
 # It is aspect-blind, while the evaluation metric is the MEAN of per-aspect F_max. That mismatch is
@@ -233,13 +233,13 @@ ASPECT_AWARE_VARIANTS = ("aspect_mean", "aspect_mean_specific", "aspect_mean_rea
 
 
 def active_reward_variant() -> str:
-    """Read SENPAI_REWARD_VARIANT, failing closed on an unknown name."""
+    """Read BIOREASON_PRO_REWARD_VARIANT, failing closed on an unknown name."""
     import os
 
-    name = os.environ.get("SENPAI_REWARD_VARIANT", DEFAULT_REWARD_VARIANT).strip()
+    name = os.environ.get("BIOREASON_PRO_REWARD_VARIANT", DEFAULT_REWARD_VARIANT).strip()
     if name not in REWARD_VARIANTS:
         raise ValueError(
-            f"SENPAI_REWARD_VARIANT={name!r} is not a known reward variant; "
+            f"BIOREASON_PRO_REWARD_VARIANT={name!r} is not a known reward variant; "
             f"expected one of {list(REWARD_VARIANTS)}"
         )
     return name

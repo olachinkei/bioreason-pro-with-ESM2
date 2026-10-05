@@ -223,7 +223,7 @@ def test_cafa_no_knowledge_adapt_row_matches_bioreason_pro_test_prompt_shape(mon
     data_contract prompt template, not eval_targets.base's generic one."""
     from eval_targets.bioreason_pro_test import TARGET as bpt_target
 
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only_reasoned")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only_reasoned")
     row = {"protein_id": "Q1", "sequence": "MDYQRLLFLF", "go_mf": ["GO:0003674"],
            "go_bp": [], "go_cc": [], "interpro_formatted": "- IPR000001: some domain [1-50]"}
     cafa_ex = adapt_row(row, et.get_target("cafa_no_knowledge"))
@@ -239,7 +239,7 @@ def test_cafa_no_knowledge_adapt_row_matches_bioreason_pro_test_prompt_shape(mon
 
 
 def test_cafa_no_knowledge_adapt_row_sequence_only_for_unreasoned_variants(monkeypatch):
-    monkeypatch.setenv("SENPAI_TARGET_VARIANT", "leaf_only")
+    monkeypatch.setenv("BIOREASON_PRO_TARGET_VARIANT", "leaf_only")
     row = {"protein_id": "Q1", "sequence": "MDYQRLLFLF", "go_mf": ["GO:0003674"],
            "go_bp": [], "go_cc": [], "interpro_formatted": "- IPR000001: some domain [1-50]"}
     ex = adapt_row(row, et.get_target("cafa_no_knowledge"))

@@ -28,7 +28,7 @@ ANCESTORS = {
 
 def test_the_variant_is_registered_and_fails_closed(monkeypatch):
     assert "aspect_mean_specific" in R.REWARD_VARIANTS
-    monkeypatch.setenv("SENPAI_REWARD_VARIANT", "aspect_mean_specific")
+    monkeypatch.setenv("BIOREASON_PRO_REWARD_VARIANT", "aspect_mean_specific")
     assert R.active_reward_variant() == "aspect_mean_specific"
 
 

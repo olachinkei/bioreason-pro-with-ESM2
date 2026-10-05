@@ -4,8 +4,8 @@ Wraps the public SFT loop (bioreason2 train_protein_llm.py, PyTorch Lightning) a
 authored RL/GRPO stage. Changes to the training loop belong here; bioreason_pro/, eval.py,
 data.py, data/ are Protected.
 
-SKELETON: RunArgs, SENPAI env ceilings, stage dispatch, GRPO/GSPO config assembly, W&B init,
-timeout-safe checkpoint+eval, and the exact SENPAI-RESULT marker are wired; loop bodies are TODO.
+SKELETON: RunArgs, BIOREASON_PRO env ceilings, stage dispatch, GRPO/GSPO config assembly, W&B init,
+timeout-safe checkpoint+eval, and the exact BIOREASON_PRO-RESULT marker are wired; loop bodies are TODO.
 """
 
 from __future__ import annotations
@@ -57,7 +57,7 @@ class RunArgs:
     wandb_name: str = ""
     wandb_group: str = ""
     agent: str = ""
-    # ceilings are ALSO read from env (SENPAI_*); the min() wins.
+    # ceilings are ALSO read from env (BIOREASON_PRO_*); the min() wins.
     eval_subset_size: int = 256
     # Multimodal assembly is restricted to the allowlisted MIT-licensed ESM2-650M.
     esm_model_name: str = "facebook/esm2_t33_650M_UR50D"
@@ -85,12 +85,12 @@ class RunArgs:
     rl_advantage_normalization: str = "group_mean"
 
     def resolved_epochs(self) -> int:
-        env = os.environ.get("SENPAI_MAX_EPOCHS")
+        env = os.environ.get("BIOREASON_PRO_MAX_EPOCHS")
         if not env:
             return self.epochs
         ceiling = int(env)
         if ceiling <= 0:
-            raise ValueError("SENPAI_MAX_EPOCHS must be a positive integer")
+            raise ValueError("BIOREASON_PRO_MAX_EPOCHS must be a positive integer")
         return min(self.epochs, ceiling)
 
     def resolved_max_steps(self) -> int:
@@ -109,7 +109,7 @@ class RunArgs:
         return self.resolved_epochs() * steps_per_epoch
 
     def timeout_deadline(self) -> float | None:
-        mins = os.environ.get("SENPAI_TIMEOUT_MINUTES")
+        mins = os.environ.get("BIOREASON_PRO_TIMEOUT_MINUTES")
         return (time.monotonic() + float(mins) * 60) if mins else None
 
     def resolved_train_seed(self) -> int:
@@ -474,7 +474,7 @@ def _eval_prompt_records(args: RunArgs, split: str, multimodal: bool) -> list[di
                 break
     from eval_targets.base import prompt_variant_suffix
 
-    # Empty unless SENPAI_EVAL_PROMPT_VARIANT asks for a variant, so the default val prompt stays
+    # Empty unless BIOREASON_PRO_EVAL_PROMPT_VARIANT asks for a variant, so the default val prompt stays
     # byte-identical to the one the model was trained on.
     suffix = prompt_variant_suffix()
 
@@ -639,7 +639,7 @@ def _generation_eval(model, tok, args: RunArgs, multimodal: bool, split: str = "
 
 
 def _log_and_emit_eval(model, tok, args: RunArgs, wandb_run_id: str, multimodal: bool) -> None:
-    """Run the val eval (text or protein-aware multimodal), log val_primary/* to W&B, emit SENPAI-RESULT.
+    """Run the val eval (text or protein-aware multimodal), log val_primary/* to W&B, emit BIOREASON_PRO-RESULT.
     test_primary is reported as the val number (a placeholder — the sealed claim is a separate,
     independent re-run of eval.py --split test on the merged checkpoint; never peek at test in-loop)."""
     metrics = _generation_eval(model, tok, args, multimodal, split="val")
@@ -724,7 +724,7 @@ def run_sft(
     (unlike RL). LoRA on the text backbone (SFT r=128/α=256 via --lora_r/--lora_alpha), ESM2 frozen,
     micro-batch=1 protein with gradient accumulation, timeout-safe, saves the adapter.
 
-    NOTE: in-loop val eval + the SENPAI-RESULT claim marker need model GENERATION (eval.evaluate is a
+    NOTE: in-loop val eval + the BIOREASON_PRO-RESULT claim marker need model GENERATION (eval.evaluate is a
     stub; multimodal decode is the pending protein-aware-vLLM step). Until then this trains + logs
     loss/grad-norm; a separate, independent run of eval.py on the merged checkpoint provides the metric."""
     from pathlib import Path
@@ -858,7 +858,7 @@ def run_sft(
             _save_mm_extras(core, args, out_dir)   # persist trained projections + build args for eval reload
         else:
             _save_data_manifest(args, out_dir)
-        # Real val eval → val_primary/weighted_fmax + SENPAI-RESULT (rank 0 only; single-GPU generate).
+        # Real val eval → val_primary/weighted_fmax + BIOREASON_PRO-RESULT (rank 0 only; single-GPU generate).
         _log_and_emit_eval(core, tok, args, wandb_run_id, multimodal=args.use_multimodal)
         _log_checkpoint_artifact(out_dir, args, wandb_run)
         if args.smoke:
@@ -867,7 +867,7 @@ def run_sft(
 
 
 def _deadline_callback(deadline):
-    """A TrainerCallback that stops training before the SENPAI wall-clock deadline (timeout-safe)."""
+    """A TrainerCallback that stops training before the BIOREASON_PRO wall-clock deadline (timeout-safe)."""
     from transformers import TrainerCallback
 
     class Deadline(TrainerCallback):
@@ -1272,7 +1272,7 @@ def evaluate_checkpoint(checkpoint_dir: str, args: RunArgs):
 
 
 def run_sealed_eval(checkpoint_dir: str, target: str = "bioreason_pro_test", split: str = "test",
-                    subset_size: int | None = None, max_completion_length: int = 1024,
+                    subset_size: int | None = None, max_completion_length: int = 3072,
                     overrides: dict | None = None, *, shard_index: int = 0,
                     num_shards: int = 1) -> list[dict]:
     """Reload `checkpoint_dir`, stream the held-out `target`, protein-aware greedy-decode each row, and
@@ -1280,8 +1280,10 @@ def run_sealed_eval(checkpoint_dir: str, target: str = "bioreason_pro_test", spl
 
     `split` is accepted for CLI parity; the actual row selection is the target's split_mode (the
     `bioreason_pro_test` target = the whole sealed `test` split). HF greedy fused decode only — there
-    is no vLLM path for the fusion. `max_completion_length` must be large enough (~1024+) that the GO
-    answer after </think> isn't truncated (the RunArgs default of 256 truncates it → empty predictions)."""
+    is no vLLM path for the fusion. `max_completion_length` defaults to the 3072 that SFT and RL
+    train/roll out at (ADR-036/037), so eval scores the budget the checkpoints were optimised for;
+    below ~1024 the GO answer after </think> is cut off entirely (the RunArgs default of 256 empties
+    predictions), and at 1024 ~60% of holdout generations never reach the GO-term section."""
     import torch
 
     import data
@@ -1319,9 +1321,9 @@ def run_sealed_eval(checkpoint_dir: str, target: str = "bioreason_pro_test", spl
 
 
 def _multimodal_build_smoke(args: RunArgs, wandb_run_id: str = "") -> int:
-    """SENPAI_MM_BUILD=1 hook: assemble the ESM2/GO fusion policy and run ONE fwd/bwd on a synthetic
+    """BIOREASON_PRO_MM_BUILD=1 hook: assemble the ESM2/GO fusion policy and run ONE fwd/bwd on a synthetic
     single-protein batch — validates build_model + the scatter-add fusion + finite grads on GPU (no RL
-    rollout). Not an experiment: prints a MM-BUILD marker instead of the SENPAI-RESULT claim marker."""
+    rollout). Not an experiment: prints a MM-BUILD marker instead of the BIOREASON_PRO-RESULT claim marker."""
     import torch
 
     import data
@@ -1366,7 +1368,7 @@ def _mm_prompt_text(tok, template: str, user_turn: dict, seq: str) -> str:
 
 
 def _gen_debug(model, tok, prompt_text: str, seq: str) -> None:
-    """SENPAI_GEN_DEBUG: inspect the fused policy's next-token distribution + compare MANUAL greedy vs
+    """BIOREASON_PRO_GEN_DEBUG: inspect the fused policy's next-token distribution + compare MANUAL greedy vs
     tight-sampled (top_k) vs full-sampled decode — to tell an under-trained (base-like) distribution
     from a generate() sampling bug. Uses the same fused prompt forward + KV-cache continuation."""
     import torch
@@ -1497,7 +1499,7 @@ def _run_multimodal_grpo(
     normalized by ONE std pooled across the whole step's batch (ADR-036/037, paper Eq. 4.19-4.20;
     default stays Dr.GRPO's no-std baseline) — and take a policy-gradient step through the fused
     completion log-prob. ESM2 frozen; LoRA (RL r=16/α=32) + projections train. Ends with the
-    multimodal val eval + SENPAI-RESULT."""
+    multimodal val eval + BIOREASON_PRO-RESULT."""
     from pathlib import Path
 
     import torch
@@ -1607,7 +1609,7 @@ def _run_multimodal_grpo(
     it = _prompts()
     for gstep in range(1, max_steps + 1):
         protein_id, prompt_text, seq, gt = next(it)
-        if os.environ.get("SENPAI_GEN_DEBUG") == "1" and (world <= 1 or is_main):
+        if os.environ.get("BIOREASON_PRO_GEN_DEBUG") == "1" and (world <= 1 or is_main):
             _gen_debug(model, tok, prompt_text, seq)
             return 0
 
@@ -1642,7 +1644,7 @@ def _run_multimodal_grpo(
                 )
                 for text in texts
             ]
-            if os.environ.get("SENPAI_RL_DEBUG") == "1" and (world <= 1 or is_main):
+            if os.environ.get("BIOREASON_PRO_RL_DEBUG") == "1" and (world <= 1 or is_main):
                 from bioreason_pro import rewards as _rw
                 _obo, _ia = obo, ia
                 _w = _rw.RewardWeights()
@@ -1657,7 +1659,7 @@ def _run_multimodal_grpo(
                     print(f"[RLDBG]   completion[:500]={t[:500]!r}", flush=True)
             groups.append(dict(protein_id=protein_id, prompt_text=prompt_text, seq=seq,
                                 texts=texts, comp_ids=comp_ids, r=r_b, components=components))
-        if os.environ.get("SENPAI_RL_DEBUG") == "1" and (world <= 1 or is_main) and gstep >= 2:
+        if os.environ.get("BIOREASON_PRO_RL_DEBUG") == "1" and (world <= 1 or is_main) and gstep >= 2:
             print("[RLDBG] done", flush=True)
             return 0
 
@@ -1842,9 +1844,9 @@ def run_rl(
 
     if args.use_multimodal:
         # Assembly is wired (build_multimodal_policy → build_model). Opt-in GPU smoke of the assembly
-        # + one fwd/bwd through the scatter-add fusion: SENPAI_MM_BUILD=1.
+        # + one fwd/bwd through the scatter-add fusion: BIOREASON_PRO_MM_BUILD=1.
         # (trl is imported lazily in the text branch below so this assembly smoke doesn't require it.)
-        if os.environ.get("SENPAI_MM_BUILD") == "1":
+        if os.environ.get("BIOREASON_PRO_MM_BUILD") == "1":
             return _multimodal_build_smoke(args, wandb_run_id)
         # Multimodal GRPO: TRL's GRPOTrainer rollout+logprob path can't thread a custom protein modality
         # (it only knows text/images), so use the self-contained DR-GRPO loop over the fused decode.
@@ -1870,7 +1872,7 @@ def run_rl(
     _save_data_manifest(args, cfg.output_dir)
 
     # Log the RL improvement signal (final mean reward), then score a REAL val_primary/weighted_fmax
-    # by generating over the val split (text path supports generation) and emit the SENPAI-RESULT.
+    # by generating over the val split (text path supports generation) and emit the BIOREASON_PRO-RESULT.
     final_reward = _last_logged(trainer, "reward", _last_logged(trainer, "train/reward"))
     if wandb_run_id:
         try:
@@ -1890,7 +1892,7 @@ def emit_result(wandb_run_id: str, val_fmax: float, test_fmax: float) -> None:
         "primary_metric": {"name": "val_primary/weighted_fmax", "value": val_fmax},
         "test_metric": {"name": "test_primary/weighted_fmax", "value": test_fmax},
     }
-    print("SENPAI-RESULT: " + json.dumps(marker, separators=(",", ":")))
+    print("BIOREASON_PRO-RESULT: " + json.dumps(marker, separators=(",", ":")))
 
 
 def _seed_everything(seed: int) -> None:

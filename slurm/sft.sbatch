@@ -99,7 +99,7 @@ scontrol show job "$SLURM_JOB_ID" | sed -n '1,80p'
 SFT_IMAGE="${SFT_IMAGE:-docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1}"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
-container_mounts="${SENPAI_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
+container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
 
 unset TMPDIR
 srun --container-image="$SFT_IMAGE" \

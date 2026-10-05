@@ -73,8 +73,13 @@ export BIOREASON_JOB_TMP="$runtime_root/tmp/eval-full-holdout-$SLURM_JOB_ID"
 export EVAL_OUTPUT="${EVAL_OUTPUT:-$runtime_root/artifacts/eval-full-holdout-$SLURM_JOB_ID}"
 export EVAL_WORLD_SIZE="${EVAL_WORLD_SIZE:-${SLURM_GPUS_ON_NODE:-8}}"
 export EVAL_SUBSET_SIZE="${EVAL_SUBSET_SIZE:-}"
-export EVAL_MAX_COMPLETION_LENGTH="${EVAL_MAX_COMPLETION_LENGTH:-1024}"
-# Defaults reproduce the sealed-holdout behavior byte-for-byte. plan.md Phase 3 overrides both to
+# Matches the 3072 that SFT and RL train/roll out at (ADR-036/037: the corpus's own traces run to
+# p99~1900 tok / max~2860 tok). The previous 1024 default was inherited from a fix for a 256-token
+# default that emptied predictions, and never followed training up to 3072 — so the sealed holdout
+# scored both checkpoints under a budget neither was optimised for: ~99% of generations hit the cap
+# and ~60% were cut off before reaching the GO-term section.
+export EVAL_MAX_COMPLETION_LENGTH="${EVAL_MAX_COMPLETION_LENGTH:-3072}"
+# plan.md Phase 3 overrides both to
 # re-measure the same two checkpoints on cafa_no_knowledge instead (a different eval_targets/ target,
 # 1,496 proteins rather than 8,630) — compare_full_holdout.py has taken --target/
 # --expected-full-size all along, this is just wiring the sbatch layer through to it.
@@ -88,7 +93,7 @@ export EVAL_LABELS="${EVAL_LABELS:-sft,sft_to_grpo}"
 image="docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
-container_mounts="${SENPAI_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
+container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
 
 mkdir -p "$HF_DATASETS_CACHE" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$TRITON_CACHE_DIR" \
   "$TORCHINDUCTOR_CACHE_DIR" "$WANDB_DIR" "$WEAVE_SERVER_CACHE_DIR" \

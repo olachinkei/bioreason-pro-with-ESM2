@@ -7,9 +7,8 @@ pass needed for the baseline layer.
 
 This is one half of the vocabulary in docs/WANDB_TAGS.md. The other half — judgements
 (recommended/superseded/null-result/...) and repairs of a condition the config never recorded — still
-needs a human to add a table entry in `scripts/apply_run_tags.py`, because nothing in the config can
-tell you "this is the run we recommend." What CAN be read from the config is handled here, once, so
-it is never duplicated or drifts between the live path and the backfill script.
+needs human judgement when assigning tags in W&B. What can be read from the config is handled
+here so initialization call sites share one implementation.
 """
 
 from __future__ import annotations

@@ -27,12 +27,12 @@ ALL_TRUE = {"GO:0000101", "GO:0000201", "GO:0000301"}
 
 
 def test_default_variant_is_the_shipped_union(monkeypatch):
-    monkeypatch.delenv("SENPAI_REWARD_VARIANT", raising=False)
+    monkeypatch.delenv("BIOREASON_PRO_REWARD_VARIANT", raising=False)
     assert R.active_reward_variant() == "union"
 
 
 def test_unknown_variant_fails_closed(monkeypatch):
-    monkeypatch.setenv("SENPAI_REWARD_VARIANT", "make_it_better")
+    monkeypatch.setenv("BIOREASON_PRO_REWARD_VARIANT", "make_it_better")
     with pytest.raises(ValueError, match="not a known reward variant"):
         R.active_reward_variant()
 

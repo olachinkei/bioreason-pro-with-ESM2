@@ -8,13 +8,13 @@ from eval_targets import base
 
 
 def test_default_is_byte_identical_to_the_training_instruction(monkeypatch):
-    monkeypatch.delenv("SENPAI_EVAL_PROMPT_VARIANT", raising=False)
+    monkeypatch.delenv("BIOREASON_PRO_EVAL_PROMPT_VARIANT", raising=False)
     assert base.active_prompt_variant() == "baseline"
     assert base.user_instruction() == base.USER_INSTRUCTION
 
 
 def test_specific_only_appends_guidance_without_altering_the_original_text(monkeypatch):
-    monkeypatch.setenv("SENPAI_EVAL_PROMPT_VARIANT", "specific_only")
+    monkeypatch.setenv("BIOREASON_PRO_EVAL_PROMPT_VARIANT", "specific_only")
     text = base.user_instruction()
     assert text.startswith(base.USER_INSTRUCTION)
     assert "most specific GO terms" in text
@@ -22,7 +22,7 @@ def test_specific_only_appends_guidance_without_altering_the_original_text(monke
 
 
 def test_unknown_variant_fails_closed_rather_than_silently_using_the_baseline(monkeypatch):
-    monkeypatch.setenv("SENPAI_EVAL_PROMPT_VARIANT", "make_it_better")
+    monkeypatch.setenv("BIOREASON_PRO_EVAL_PROMPT_VARIANT", "make_it_better")
     with pytest.raises(ValueError, match="not a known prompt variant"):
         base.active_prompt_variant()
     with pytest.raises(ValueError, match="unknown prompt variant"):
@@ -30,12 +30,12 @@ def test_unknown_variant_fails_closed_rather_than_silently_using_the_baseline(mo
 
 
 def test_explicit_argument_overrides_the_environment(monkeypatch):
-    monkeypatch.setenv("SENPAI_EVAL_PROMPT_VARIANT", "specific_only")
+    monkeypatch.setenv("BIOREASON_PRO_EVAL_PROMPT_VARIANT", "specific_only")
     assert base.user_instruction("baseline") == base.USER_INSTRUCTION
 
 
 def test_adapt_row_uses_the_selected_variant(monkeypatch):
-    monkeypatch.setenv("SENPAI_EVAL_PROMPT_VARIANT", "specific_only")
+    monkeypatch.setenv("BIOREASON_PRO_EVAL_PROMPT_VARIANT", "specific_only")
     target = base.EvalTarget(
         name="unit_target",
         hf_repo="unit/repo",
@@ -48,7 +48,7 @@ def test_adapt_row_uses_the_selected_variant(monkeypatch):
 
 
 def test_adapt_row_default_carries_no_variant_text(monkeypatch):
-    monkeypatch.delenv("SENPAI_EVAL_PROMPT_VARIANT", raising=False)
+    monkeypatch.delenv("BIOREASON_PRO_EVAL_PROMPT_VARIANT", raising=False)
     target = base.EvalTarget(
         name="unit_target",
         hf_repo="unit/repo",

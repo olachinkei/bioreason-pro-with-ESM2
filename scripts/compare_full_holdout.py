@@ -129,7 +129,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--target", default="bioreason_pro_test")
     parser.add_argument("--subset-size", type=int, default=None)
     parser.add_argument("--expected-full-size", type=int, default=FULL_HOLDOUT_SIZE)
-    parser.add_argument("--max-completion-length", type=int, default=1024)
+    parser.add_argument("--max-completion-length", type=int, default=3072)
     parser.add_argument("--coordination-timeout-seconds", type=int, default=3600)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--wandb-name", default="")
@@ -211,7 +211,7 @@ def main() -> int:
             # target_variant isn't in run_args.json (data_contract reads it from an env var, never a
             # checkpoint field), only in the producing run's own W&B config -- check it there. Missed
             # once already: this whole sweep ran on the wrong (context-free) prompt template for a
-            # reasoned checkpoint because nothing caught SENPAI_TARGET_VARIANT being left unset
+            # reasoned checkpoint because nothing caught BIOREASON_PRO_TARGET_VARIANT being left unset
             # (plan.md ADR-031's retracted first Phase 3 read).
             sft_variant = wandb.Api().artifact(args.sft_artifact).logged_by().config.get("target_variant")
             rl_variant = wandb.Api().artifact(args.rl_artifact).logged_by().config.get("target_variant")

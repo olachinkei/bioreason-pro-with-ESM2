@@ -58,7 +58,7 @@ FILESYSTEM_ONLY_PATTERNS: dict[str, re.Pattern[str]] = {
 POLICY_PATHS = (
     "bioreason_pro/license_policy.py",
     "bioreason_pro/approved_assets.json",
-    # This scanner's own committed output. It names every incompatible asset by construction; left
+    # This scanner's own generated output. It names every incompatible asset by construction; left
     # unlisted, each run would flag the previous run's report and never converge.
     "data/incompatible_asset_inventory.json",
     "agent_policy.yaml",
@@ -66,7 +66,6 @@ POLICY_PATHS = (
     "program.md",
     "plan.md",
     "README.md",
-    "RUNBOOK.md",
     "scripts/inventory_incompatible_assets.py",
 )
 POLICY_PREFIXES = ("tests/", "instructions/", "agent_iterations/")

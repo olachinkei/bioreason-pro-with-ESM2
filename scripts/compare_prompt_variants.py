@@ -122,7 +122,7 @@ def main() -> int:
             else [(v, v, args.max_completion_length) for v in variants]
         )
         for label, variant, length in arms:
-            os.environ["SENPAI_EVAL_PROMPT_VARIANT"] = variant
+            os.environ["BIOREASON_PRO_EVAL_PROMPT_VARIANT"] = variant
             run_args.max_completion_length = length
             metrics = train._generation_eval(
                 model, tokenizer, run_args, multimodal=True, split="val",
@@ -138,7 +138,7 @@ def main() -> int:
                         f"model predicted nothing for the missing one(s)")
             print(f"[{label}] max_completion_length={length} "
                   f"weighted_fmax={metrics.get('weighted_fmax')}{warn}", flush=True)
-        os.environ.pop("SENPAI_EVAL_PROMPT_VARIANT", None)
+        os.environ.pop("BIOREASON_PRO_EVAL_PROMPT_VARIANT", None)
 
         baseline = next(iter(results))
         for variant in list(results)[1:]:

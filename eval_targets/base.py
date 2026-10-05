@@ -33,7 +33,7 @@ USER_INSTRUCTION = (
     "Reason step by step, then give the final answer.\n\n"
 )
 
-# Optional decode-time prompt variants, selected by SENPAI_EVAL_PROMPT_VARIANT. The default is
+# Optional decode-time prompt variants, selected by BIOREASON_PRO_EVAL_PROMPT_VARIANT. The default is
 # "baseline", which reproduces USER_INSTRUCTION byte-for-byte — any other value is an explicit
 # experiment and is recorded alongside the metric, because prompt drift silently moves F_max.
 #
@@ -56,10 +56,10 @@ def active_prompt_variant() -> str:
     """Read the requested variant, failing closed on an unknown name."""
     import os
 
-    name = os.environ.get("SENPAI_EVAL_PROMPT_VARIANT", DEFAULT_PROMPT_VARIANT).strip()
+    name = os.environ.get("BIOREASON_PRO_EVAL_PROMPT_VARIANT", DEFAULT_PROMPT_VARIANT).strip()
     if name not in PROMPT_VARIANTS:
         raise ValueError(
-            f"SENPAI_EVAL_PROMPT_VARIANT={name!r} is not a known prompt variant; "
+            f"BIOREASON_PRO_EVAL_PROMPT_VARIANT={name!r} is not a known prompt variant; "
             f"expected one of {sorted(PROMPT_VARIANTS)}"
         )
     return name

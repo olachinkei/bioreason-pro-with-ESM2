@@ -29,7 +29,7 @@ def _tracked_files():
 
 
 # These name the wrong host in order to forbid it.
-ALLOWED_TO_MENTION = {"tests/test_cluster_login_host.py", "RUNBOOK.md"}
+ALLOWED_TO_MENTION = {"tests/test_cluster_login_host.py"}
 
 
 def test_no_file_points_at_the_nodeless_cluster():
@@ -46,24 +46,17 @@ def test_no_file_points_at_the_nodeless_cluster():
     )
 
 
-def test_runbook_documents_the_correct_host_and_the_trap():
-    runbook = (ROOT / "RUNBOOK.md").read_text(encoding="utf-8")
-    assert CORRECT_HOST in runbook
-    assert "note the `sss`" in runbook.lower() or "note the sss" in runbook.lower()
-    assert "PartitionConfig" in runbook
-
-
-def test_runbook_documents_the_best_known_configuration():
+def test_readme_documents_the_best_known_configuration():
     """The winning combination is entirely opt-in, so defaults reproduce the original recipe.
 
-    Without this section a reader following the RUNBOOK gets ~0.112, not ~0.310, and nothing tells
-    them which flags they are missing.
+    The README must document the explicit flags required for reproduction.
     """
-    runbook = (ROOT / "RUNBOOK.md").read_text(encoding="utf-8")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for flag in (
-        "SENPAI_TARGET_VARIANT=leaf_only",
-        "SENPAI_REWARD_VARIANT=aspect_mean",
-        "RL_NUM_GENERATIONS=16",
+        "BIOREASON_PRO_TARGET_VARIANT=leaf_only",
+        "BIOREASON_PRO_REWARD_VARIANT=aspect_mean",
+        "RL_NUM_GENERATIONS=8",
+        "RL_BETA=0",
         "RL_MAX_COMPLETION_LENGTH=64",
     ):
-        assert flag in runbook, f"RUNBOOK must document {flag}"
+        assert flag in readme, f"README must document {flag}"

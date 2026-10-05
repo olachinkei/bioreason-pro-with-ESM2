@@ -6,7 +6,7 @@ Streams the protein_id column of both approved training datasets (SFT and RL rea
 scripts/build_cafa_no_knowledge_dev_set.py because it downloads ~600MB across two HF datasets — slow,
 network-heavy, and not needed every time the dev set itself is rebuilt.
 
-Writes data/cafa_no_knowledge_corpus_disjointness.json (committed): the checked dataset revisions,
+Writes data/cafa_no_knowledge_corpus_disjointness.json (local output): the checked dataset revisions,
 corpus size, overlap count, and the date checked — the audit record method rule 6/12 asks for, rather
 than an unverified comment asserting the two are disjoint by construction.
 """

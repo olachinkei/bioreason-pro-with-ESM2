@@ -107,11 +107,11 @@ export RL_TRAIN_SEED="${RL_TRAIN_SEED:--1}"
 # 9360min (156h) leaves a ~12h buffer before the 7-day (168h) SLURM hard limit above for the
 # post-training checkpoint-verify/comparison-eval/artifact-upload steps, which cost roughly the same
 # wall time regardless of how many RL steps ran (eval subset size is fixed).
-export SENPAI_TIMEOUT_MINUTES="${SENPAI_TIMEOUT_MINUTES:-9360}"
+export BIOREASON_PRO_TIMEOUT_MINUTES="${BIOREASON_PRO_TIMEOUT_MINUTES:-9360}"
 image="docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
-container_mounts="${SENPAI_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
+container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
 
 mkdir -p "$HF_DATASETS_CACHE" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$TRITON_CACHE_DIR" \
   "$TORCHINDUCTOR_CACHE_DIR" "$WANDB_DIR" "$WEAVE_SERVER_CACHE_DIR" \

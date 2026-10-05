@@ -8,31 +8,31 @@
 # login node, and only then submits.
 #
 # Usage:
-#   SENPAI_CLUSTER_HOST=user@login.example.com SENPAI_REMOTE_ROOT=/mnt/data/user/BioReason-Pro \
-#     scripts/submit_slurm.sh slurm/sft.sbatch SENPAI_TARGET_VARIANT=leaf_only
+#   BIOREASON_PRO_CLUSTER_HOST=user@login.example.com BIOREASON_PRO_REMOTE_ROOT=/mnt/data/user/BioReason-Pro \
+#     scripts/submit_slurm.sh slurm/sft.sbatch BIOREASON_PRO_TARGET_VARIANT=leaf_only
 #   scripts/submit_slurm.sh slurm/prompt_variant_val.sbatch \
 #       MODEL_ARTIFACT=entity/project/name:v4 PROMPT_COMPLETION_LENGTHS=32,64
 #
 # Values may contain commas: they are exported in the submitting shell and carried by
 # `--export=ALL`, never passed through `sbatch --export=K=V` where commas separate assignments.
 #
-# SENPAI_CLUSTER_HOST and SENPAI_REMOTE_ROOT are required and have no default: every sbatch script
+# BIOREASON_PRO_CLUSTER_HOST and BIOREASON_PRO_REMOTE_ROOT are required and have no default: every sbatch script
 # in this repo was written for one specific CoreWeave SUNK account, and silently reusing that
 # account's login host/shared-storage path on a different cluster fails in a way that looks like a
 # transient network issue rather than a config problem. Point these at your own login host and a
 # writable directory on your own cluster's shared filesystem.
 #
-# SENPAI_SBATCH_ARGS optionally overrides sbatch directives baked into the launcher files (e.g.
+# BIOREASON_PRO_SBATCH_ARGS optionally overrides sbatch directives baked into the launcher files (e.g.
 # `--partition=h100 --gres=gpu:h100:8`) that assume this project's own CoreWeave partition/GPU-type
 # names -- command-line sbatch flags take precedence over a script's own `#SBATCH` lines, so this
-# works without editing the launcher itself: SENPAI_SBATCH_ARGS="--partition=a100 --gres=gpu:a100:8".
+# works without editing the launcher itself: BIOREASON_PRO_SBATCH_ARGS="--partition=a100 --gres=gpu:a100:8".
 set -euo pipefail
 
-: "${SENPAI_CLUSTER_HOST:?set SENPAI_CLUSTER_HOST to your own cluster's login host, e.g. user@login.example.com}"
-: "${SENPAI_REMOTE_ROOT:?set SENPAI_REMOTE_ROOT to a writable directory on your own cluster's shared filesystem}"
-HOST="$SENPAI_CLUSTER_HOST"
-REMOTE_ROOT="$SENPAI_REMOTE_ROOT"
-SBATCH_ARGS="${SENPAI_SBATCH_ARGS:-}"
+: "${BIOREASON_PRO_CLUSTER_HOST:?set BIOREASON_PRO_CLUSTER_HOST to your own cluster's login host, e.g. user@login.example.com}"
+: "${BIOREASON_PRO_REMOTE_ROOT:?set BIOREASON_PRO_REMOTE_ROOT to a writable directory on your own cluster's shared filesystem}"
+HOST="$BIOREASON_PRO_CLUSTER_HOST"
+REMOTE_ROOT="$BIOREASON_PRO_REMOTE_ROOT"
+SBATCH_ARGS="${BIOREASON_PRO_SBATCH_ARGS:-}"
 SSH_OPTS=(-o IdentitiesOnly=yes -o BatchMode=yes)
 
 if [[ $# -lt 1 ]]; then
