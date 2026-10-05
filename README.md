@@ -11,29 +11,32 @@ protein sequence, structure, domains, and interaction context to predict protein
 generating biological reasoning. Its ability to make the reasoning behind a prediction inspectable
 motivated this project.
 
-I built this training workflow to better understand biological reasoning models and provide a
-practical starting point for others exploring SFT and reinforcement learning in this setting.
-At the time I began, the upstream material I worked from focused on inference, so I implemented
-the SFT → GRPO workflow independently. The [official repository](https://github.com/bowang-lab/BioReason-Pro)
-now also includes training code.
+This repository provides an independently implemented SFT → GRPO training workflow for
+exploring biological reasoning models. The upstream
+[`train_protein_llm.py`](https://github.com/bowang-lab/BioReason-Pro/blob/main/train_protein_llm.py)
+contains supervised training code; this repository implements its own training and RL pipeline.
 
-## Why ESM2?
+## Implementation
 
-I chose [ESM2-650M](https://huggingface.co/facebook/esm2_t33_650M_UR50D) for its MIT license,
-which permits commercial use subject to its terms. The ESM3 release considered when this project
-started was covered by the
-[Cambrian Non-Commercial License](https://www.evolutionaryscale.ai/policies/cambrian-non-commercial-license-agreement),
-which motivated using a permissively licensed protein encoder. This describes the original design
-decision; the [current ESM3 model card](https://huggingface.co/biohub/esm3-sm-open-v1) lists MIT.
-
-ESM2 encodes amino-acid sequences and does not consume the explicit structure inputs used by the
-paper's ESM3 encoder. Together with differences in training and evaluation, this makes the repository
-an independent adaptation of BioReason-Pro, rather than an exact reproduction of its results.
-
-| Component | Model |
+| Component | Configuration used here |
 |---|---|
-| Protein encoder | `facebook/esm2_t33_650M_UR50D` (MIT) |
+| Protein encoder | `facebook/esm2_t33_650M_UR50D` (MIT); amino-acid sequence input |
 | Text backbone | `Qwen/Qwen3-4B-Thinking-2507` (Apache-2.0) |
+| Supervised training | LoRA fine-tuning with learned modality projections |
+| Reinforcement learning | GRPO-style on-policy updates with group-relative rewards; GSPO is not used in the multimodal pipeline |
+| Configuration below | Leaf-only GO targets, aspect-aware reward, 8 rollouts per prompt, 50 RL steps, no KL penalty |
+| Tracking | W&B model artifacts and metrics; Weave rollout traces |
+
+[ESM2-650M](https://huggingface.co/facebook/esm2_t33_650M_UR50D) was selected for its MIT license,
+which permits commercial use subject to its terms. This choice was motivated by the
+[Cambrian Non-Commercial License](https://www.evolutionaryscale.ai/policies/cambrian-non-commercial-license-agreement)
+covering the ESM3 release considered at the start of the project. The
+[current ESM3 model card](https://huggingface.co/biohub/esm3-sm-open-v1) now lists MIT.
+
+The implementation uses sequence embeddings without the explicit structure inputs of the paper's
+ESM3 encoder. Its multimodal RL loop generates fresh rollouts for each update and does not implement
+GSPO's sequence-level importance sampling. These architectural and training differences make this
+an adaptation of BioReason-Pro, not an exact reproduction of the paper's training recipe or results.
 
 Model and dataset revisions, licenses, and approved uses are pinned in
 [`approved_assets.json`](bioreason_pro/approved_assets.json).
@@ -52,7 +55,9 @@ uv run pytest -q
 
 Configure credentials using [`.env.example`](.env.example). Keep `.env` private.
 
-## Train
+## How to use
+
+### Train
 
 Run the one-GPU smoke test first:
 
@@ -84,7 +89,7 @@ For an RL smoke test, use `slurm/rl_grpo_smoke.sbatch` with the SFT smoke receip
 Full training launchers use eight H100 GPUs. Each stage saves and reload-verifies a complete
 checkpoint, then publishes a versioned W&B Artifact: **SFT artifact → RL run → RL artifact**.
 
-## Evaluate
+### Evaluate
 
 Compare immutable SFT and RL artifact versions at the same 64-token generation budget.
 Replace `vN` with each artifact's actual version:
@@ -100,7 +105,7 @@ The launcher scores all 8,630 public holdout proteins and publishes a W&B evalua
 For a small pipeline check, add `EVAL_SUBSET_SIZE=4`.
 Use validation data for model selection; keep the holdout out of training and hyperparameter tuning.
 
-## Monitor
+### Monitor
 
 Run on the cluster login node:
 
