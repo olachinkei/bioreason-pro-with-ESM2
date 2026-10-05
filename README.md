@@ -1,8 +1,9 @@
 # bioreason-pro-with-ESM2
 
-Protein-function prediction with **ESM2 + Qwen3**, trained through
-**SFT → GRPO → holdout evaluation**. W&B tracks experiments and model artifacts;
-Weave records rollout traces.
+An independent implementation of **BioReason-Pro** for exploring how to train a model that
+reasons about protein function. It pairs **ESM2 with Qwen3** and includes supervised fine-tuning
+(SFT), reinforcement learning (GRPO), and evaluation, with experiment tracking in W&B and
+rollout tracing in Weave.
 
 ## Background
 
@@ -11,10 +12,12 @@ protein sequence, structure, domains, and interaction context to predict protein
 generating biological reasoning. Its ability to make the reasoning behind a prediction inspectable
 motivated this project.
 
-This repository provides an independently implemented SFT → GRPO training workflow for
-exploring biological reasoning models. The upstream
+The official
 [`train_protein_llm.py`](https://github.com/bowang-lab/BioReason-Pro/blob/main/train_protein_llm.py)
-contains supervised training code; this repository implements its own training and RL pipeline.
+provides supervised training, but an end-to-end implementation extending through reinforcement
+learning was not available in the upstream materials reviewed for this project. This repository
+therefore implements an SFT → GRPO → evaluation workflow to explore how reinforcement learning
+can be applied to protein-function reasoning.
 
 ## Implementation
 
@@ -42,8 +45,7 @@ Model and dataset revisions, licenses, and approved uses are pinned in
 [`approved_assets.json`](bioreason_pro/approved_assets.json).
 
 Corrections to license interpretation, implementation, or differences from the paper are welcome
-via [GitHub Issues](https://github.com/olachinkei/bioreason-pro-with-ESM2/issues),
-[X](https://x.com/olachinkei), or [LinkedIn](https://www.linkedin.com/in/keisuke-kamata-aa2703119/).
+via [GitHub Issues](https://github.com/olachinkei/bioreason-pro-with-ESM2/issues).
 
 ## Setup
 
