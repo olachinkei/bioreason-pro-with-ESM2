@@ -4,8 +4,31 @@ Protein-function prediction with **ESM2 + Qwen3**, trained through
 **SFT → GRPO → holdout evaluation**. W&B tracks experiments and model artifacts;
 Weave records rollout traces.
 
-Based on [BioReason-Pro](https://www.biorxiv.org/content/10.64898/2026.03.19.712954v1)
-([upstream code](https://github.com/bowang-lab/BioReason-Pro)), with ESM2 replacing ESM3.
+## Background
+
+[BioReason-Pro](https://www.biorxiv.org/content/10.64898/2026.03.19.712954v1) integrates
+protein sequence, structure, domains, and interaction context to predict protein function while
+generating biological reasoning. Its ability to make the reasoning behind a prediction inspectable
+motivated this project.
+
+I built this training workflow to better understand biological reasoning models and provide a
+practical starting point for others exploring SFT and reinforcement learning in this setting.
+At the time I began, the upstream material I worked from focused on inference, so I implemented
+the SFT → GRPO workflow independently. The [official repository](https://github.com/bowang-lab/BioReason-Pro)
+now also includes training code.
+
+## Why ESM2?
+
+I chose [ESM2-650M](https://huggingface.co/facebook/esm2_t33_650M_UR50D) for its MIT license,
+which permits commercial use subject to its terms. The ESM3 release considered when this project
+started was covered by the
+[Cambrian Non-Commercial License](https://www.evolutionaryscale.ai/policies/cambrian-non-commercial-license-agreement),
+which motivated using a permissively licensed protein encoder. This describes the original design
+decision; the [current ESM3 model card](https://huggingface.co/biohub/esm3-sm-open-v1) lists MIT.
+
+ESM2 encodes amino-acid sequences and does not consume the explicit structure inputs used by the
+paper's ESM3 encoder. Together with differences in training and evaluation, this makes the repository
+an independent adaptation of BioReason-Pro, rather than an exact reproduction of its results.
 
 | Component | Model |
 |---|---|
@@ -14,6 +37,10 @@ Based on [BioReason-Pro](https://www.biorxiv.org/content/10.64898/2026.03.19.712
 
 Model and dataset revisions, licenses, and approved uses are pinned in
 [`approved_assets.json`](bioreason_pro/approved_assets.json).
+
+Corrections to license interpretation, implementation, or differences from the paper are welcome
+via [GitHub Issues](https://github.com/olachinkei/bioreason-pro-with-ESM2/issues),
+[X](https://x.com/olachinkei), or [LinkedIn](https://www.linkedin.com/in/keisuke-kamata-aa2703119/).
 
 ## Setup
 
