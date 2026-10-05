@@ -1,0 +1,9 @@
+{
+  "url": "https://wandb.ai/wandb-healthcare/bioreasonpro-senpai/reports/AI-Drug-Discovery-in-Early-2026:-Reasoning-About-Protein-Function-with-BioReason-Pro--VmlldzoxODA1ODIyNQ==",
+  "id": "VmlldzoxODA1ODIyNQ==",
+  "artifact_version": "v0",
+  "artifact_name": "bioreason-pro-english-report-evidence",
+  "evidence_run": "https://wandb.ai/wandb-healthcare/bioreasonpro-senpai/runs/8p7h73hb",
+  "blocks": 109,
+  "status": "draft"
+}
