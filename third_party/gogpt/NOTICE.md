@@ -1,6 +1,6 @@
 # Vendored: GO-GPT (from `bowang-lab/BioReason-Pro`)
 
-plan.md Phase 5 (ADR-028): GO-GPT is the paper's own open-sourced GO-term-prediction model,
+ (baseline provenance review): GO-GPT is the paper's own open-sourced GO-term-prediction model,
 used here as a zero-LLM baseline to check what BioReason-Pro's reasoning layer adds over a
 much cheaper discrete annotator.
 
@@ -21,7 +21,7 @@ much cheaper discrete annotator.
 
 Every other upstream reference used in this project (InterPro fetching, prompt templates) was
 read for understanding and reimplemented fresh, calling the same public data sources rather than
-copying code — see plan.md ADR-028's own framing for `interpro_api.py`. GO-GPT is treated
+copying code. GO-GPT is treated
 differently on purpose: its architecture (`PrefixCausalAttention`'s dual protein/GO streams,
 per-aspect start/end tokens, gated attention, beam-search decoding tied to a specific checkpoint's
 trained weights) is custom, non-trivial model code, not a REST client. Reimplementing it from a

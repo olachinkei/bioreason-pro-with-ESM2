@@ -44,7 +44,7 @@ def make_traced_reward_fn(obo_ancestors: dict[str, set[str]], ia: dict[str, floa
     trace tree on top. obo_ancestors/ia/weights are closed over (not logged).
 
     The trace carries the reasoning text and its scores as first-class indexed inputs, because the
-    point of ADR-014 is that a reviewer can go and read the reasoning behind any prediction. A score
+    point of reasoning-reward validation is that a reviewer can go and read the reasoning behind any prediction. A score
     nobody can trace back to an argument is not what this project is trying to produce.
     """
     w = weights or R.RewardWeights()

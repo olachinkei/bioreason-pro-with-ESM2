@@ -39,7 +39,7 @@ def main() -> int:
     parser.add_argument("--target", default="bioreason_pro_test")
     parser.add_argument("--subset-size", type=int, default=8)
     # Defaults to val. This comparison runs on EVERY GRPO invocation, so a "test" default means an
-    # iterative search consumes the sealed holdout once per iteration — which plan.md forbids
+    # iterative search consumes the sealed holdout once per iteration — which would leak test information into model selection
     # ("Test data is never used for training, checkpoint selection, or hyperparameter selection").
     # Reading the sealed split is now an explicit, auditable choice for a one-off publication run.
     parser.add_argument("--split", choices=("val", "test"), default="val")

@@ -1,4 +1,4 @@
-"""Unit tests for bioreason_pro.baselines — plan.md Phase 2's zero-parameter reference baselines
+"""Unit tests for bioreason_pro.baselines — 's zero-parameter reference baselines
 (pure, no network)."""
 
 from collections import Counter

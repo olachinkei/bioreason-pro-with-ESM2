@@ -1,9 +1,9 @@
-"""ADR-036/037: batching multiple proteins per RL step, with pooled-std advantage normalization.
+"""rollout-budget analysis: batching multiple proteins per RL step, with pooled-std advantage normalization.
 
 Two things must hold at once:
 
 1. The defaults (`proteins_per_step=1`, `rl_advantage_normalization="group_mean"`) reproduce the
-   pre-ADR-037 Dr.GRPO baseline bit-for-bit — this is a strict superset, not a behaviour change for
+   pre-batched RL configuration Dr.GRPO baseline bit-for-bit — this is a strict superset, not a behaviour change for
    anyone who doesn't touch the new flags.
 2. The paper's own formula (Eq. 4.19-4.20) — per-protein group mean, pooled batch std — is correct,
    including the degenerate all-rewards-identical case, which must not raise or produce a NaN.

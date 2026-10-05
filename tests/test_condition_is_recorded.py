@@ -1,6 +1,6 @@
 """Every condition the search varies must be recoverable from the W&B config.
 
-plan.md states the principle: "a condition search whose runs do not record their condition is not
+The reproducibility requirement is: "a condition search whose runs do not record their condition is not
 auditable." `_init_tracking` recorded `target_variant` and `prompt_variant` but NOT `reward_variant`,
 so the aspect_mean-versus-union arms — the ledger's largest single RL claim — were distinguishable
 only from each job's stdout. Runs 9ygnae6t and 2tlj7noq carry no reward_variant key at all.

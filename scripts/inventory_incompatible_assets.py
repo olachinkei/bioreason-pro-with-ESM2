@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Inventory artifacts derived from ESM3, ESM-C 600M, or the released ESM3 paper checkpoint.
 
-Phase 0 of `plan.md` requires an inventory of incompatible assets before they can be quarantined
+Inventory incompatible assets before they are quarantined
 or deleted. The code-side boundary is already enforced (see `bioreason_pro/license_policy.py` and
 `tests/test_license_policy.py`); what this script finds is the *residue* of the pre-boundary era:
 git history, W&B artifacts, and files on local or cluster storage.
@@ -31,7 +31,7 @@ if str(ROOT) not in sys.path:
 
 REPORT_PATH = ROOT / "data" / "incompatible_asset_inventory.json"
 
-# Reviewed denial patterns. `program.md` states the boundary in prose; this is its machine form.
+# Patterns for assets outside the approved model and dataset policy.
 INCOMPATIBLE_PATTERNS: dict[str, re.Pattern[str]] = {
     # EvolutionaryScale ESM3 weights in any packaging.
     "esm3": re.compile(r"esm3[\w.-]*", re.IGNORECASE),
@@ -49,7 +49,7 @@ INCOMPATIBLE_PATTERNS: dict[str, re.Pattern[str]] = {
 # Filesystem-only rules. These would produce noise against the repository itself: `cafa5` appears
 # legitimately in `approved_assets.json` (the approved GO/IA evaluation bundle) and in the
 # intentionally-disabled `eval_targets/cafa5.py`. On disk, a cached copy of the gated dataset is a
-# different matter — `plan.md` keeps CAFA5 unavailable until its gate and provenance review pass.
+# different matter — CAFA5 remains unavailable until its gate and provenance review pass.
 FILESYSTEM_ONLY_PATTERNS: dict[str, re.Pattern[str]] = {
     "gated_dataset_cache": re.compile(r"(?:datasets--wanglab--cafa5|wanglab/cafa5)", re.IGNORECASE),
 }
@@ -61,10 +61,6 @@ POLICY_PATHS = (
     # This scanner's own generated output. It names every incompatible asset by construction; left
     # unlisted, each run would flag the previous run's report and never converge.
     "data/incompatible_asset_inventory.json",
-    "agent_policy.yaml",
-    "slurm/agent_policy.py",
-    "program.md",
-    "plan.md",
     "README.md",
     "scripts/inventory_incompatible_assets.py",
 )

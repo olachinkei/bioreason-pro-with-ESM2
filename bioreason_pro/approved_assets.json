@@ -50,7 +50,7 @@
         "license": "MIT",
         "source": "https://huggingface.co/facebook/esm2_t36_3B_UR50D",
         "revision": "476b639933c8baad5ad09a60ac1a87f987b656fc",
-        "provenance": "Official Meta Hugging Face repository; gated=false confirmed via the HF REST API. NOT this project's own fusion encoder (that stays facebook/esm2_t33_650M_UR50D) — this is GO-GPT's own frozen encoder, a separate, larger checkpoint the wanglab/gogpt weights were trained against (plan.md Phase 5 GO-GPT baseline). scripts/run_gogpt_baseline.py checks this NAME is approved before loading (fails closed if a future gogpt config.yaml ever points at a different, unapproved encoder) — but the vendored, unmodified GOGPT/GOGPTPredictor code calls AutoModel/AutoTokenizer.from_pretrained on it with no revision argument at all, so the revision below is recorded provenance, not an enforced pin, for this one entry specifically.",
+        "provenance": "Official Meta Hugging Face repository; gated=false confirmed via the HF REST API. NOT this project's own fusion encoder (that stays facebook/esm2_t33_650M_UR50D) — this is GO-GPT's own frozen encoder, a separate, larger checkpoint the wanglab/gogpt weights were trained against (GO-GPT baseline). scripts/run_gogpt_baseline.py checks this NAME is approved before loading (fails closed if a future gogpt config.yaml ever points at a different, unapproved encoder) — but the vendored, unmodified GOGPT/GOGPTPredictor code calls AutoModel/AutoTokenizer.from_pretrained on it with no revision argument at all, so the revision below is recorded provenance, not an enforced pin, for this one entry specifically.",
         "local_cache_policy": "Name-checked before loading; revision recorded for provenance but not enforced (see provenance note) — do not commit weights or embeddings.",
         "approved_uses": [
           "baseline-evaluation"
@@ -62,7 +62,7 @@
         "license": "Apache-2.0",
         "source": "https://huggingface.co/wanglab/gogpt",
         "revision": "56dc8801f62c0bbd8092c9c0718afd129d2be6bc",
-        "provenance": "plan.md Phase 5 / ADR-028: GO-GPT is the paper's own fully open-sourced GO-term-prediction model (frozen ESM2-3B encoder + 12-layer autoregressive GO decoder, per-organism conditioning). gated=false confirmed via the HF REST API. Model code vendored from bowang-lab/BioReason-Pro (MIT) at third_party/gogpt/ — see third_party/gogpt/NOTICE.md for the full provenance record. OWNER RULING (2026-08-23): baseline measurement only, GO-GPT's own predictions not yet adopted as a prompt field. SUPERSEDED (ADR-037, this session): GO-GPT's `go_pred` column is now adopted as a BioReason-Pro prompt field — see `column_provenance.go_pred` below.",
+        "provenance": "baseline provenance review: GO-GPT is the paper's own fully open-sourced GO-term-prediction model (frozen ESM2-3B encoder + 12-layer autoregressive GO decoder, per-organism conditioning). gated=false confirmed via the HF REST API. Model code vendored from bowang-lab/BioReason-Pro (MIT) at third_party/gogpt/ — see third_party/gogpt/NOTICE.md for the full provenance record. GO-GPT is approved for baseline evaluation and its `go_pred` column is approved as a BioReason-Pro prompt field — see `column_provenance.go_pred` below.",
         "local_cache_policy": "Cache only by pinned revision; do not commit weights.",
         "approved_uses": [
           "baseline-evaluation"
@@ -75,7 +75,7 @@
       "license": "Apache-2.0",
       "source": "https://huggingface.co/datasets/wanglab/bioreason-pro-test-data",
       "revision": "90e2fcbf2ad5c2e3da1753de140a627419f90fdb",
-      "provenance": "Official WangLab dataset repository; dataset-card license reviewed. go_pred is adopted as prompt context for reasoned target variants (ADR-037; see column_provenance.go_pred).",
+      "provenance": "Official WangLab dataset repository; dataset-card license reviewed. go_pred is adopted as prompt context for reasoned target variants (batched RL configuration; see column_provenance.go_pred).",
       "local_cache_policy": "Cache only by pinned revision; sealed holdout only.",
       "approved": true,
       "approved_uses": [
@@ -119,7 +119,7 @@
         "go_cc"
       ],
       "baseline_evaluation_fields": {
-        "note": "plan.md Phase 2: the interpro2go lookup and label-prior baselines are computed directly from raw corpus rows (not through adapt_approved_training_row's model-prompt contract), so this use reads interpro_formatted in addition to the approved label fields. Never enters a model prompt or a training run under this use.",
+        "note": "the interpro2go lookup and label-prior baselines are computed directly from raw corpus rows (not through adapt_approved_training_row's model-prompt contract), so this use reads interpro_formatted in addition to the approved label fields. Never enters a model prompt or a training run under this use.",
         "fields": ["interpro_formatted"]
       },
       "hf_split": "train",
@@ -166,7 +166,7 @@
       "license": "Apache-2.0",
       "source": "https://huggingface.co/datasets/wanglab/bioreason-pro-rl-reasoning-data",
       "revision": "4afefce8a57f1c4af696bd3c02f8a7cf911d6626",
-      "provenance": "wanglab HF org (linked from bowang-lab/BioReason-Pro's own README as its release org), Apache-2.0 as distributed at the pinned revision. NOT independently confirmed: this specific repo name is absent from upstream's own published dataset table (2026-08-21 audit), and its schema has no `reasoning` column at all. OWNER RULING (2026-08-21, plan.md ADR-026): approved for RL-training use on that basis, with the schema gap known rather than discovered later \u2014 the reasoned target variant does not require a reasoning column at RL time regardless (ADR-017).",
+      "provenance": "wanglab HF org (linked from bowang-lab/BioReason-Pro's own README as its release org), Apache-2.0 as distributed at the pinned revision. NOT independently confirmed: this specific repo name is absent from upstream's own published dataset table (2026-08-21 audit), and its schema has no `reasoning` column at all. Project policy (2026-08-21, RL dataset review): approved for RL-training use on that basis, with the schema gap known rather than discovered later \u2014 the reasoned target variant does not require a reasoning column at RL time regardless (reasoning supervision).",
       "local_cache_policy": "Cache only the pinned revision. Do not persist unapproved columns into run artifacts.",
       "approved": true,
       "approved_uses": [
@@ -240,13 +240,13 @@
     },
     "interpro_formatted": {
       "source": "InterPro (EMBL-EBI) domain annotations, pre-formatted by WangLab",
-      "license": "Apache-2.0 as distributed by WangLab at the pinned revision. OWNER RULING (ADR-017): this redistributor grant is the operative licence for what this project consumes. Upstream InterPro (EMBL-EBI) has no resource-specific grant located in review; EMBL-EBI publishes a policy of Terms-of-Use or CC0, which is a policy and not a grant.",
+      "license": "Apache-2.0 as distributed by WangLab at the pinned revision. Project policy (reasoning supervision): this redistributor grant is the operative licence for what this project consumes. Upstream InterPro (EMBL-EBI) has no resource-specific grant located in review; EMBL-EBI publishes a policy of Terms-of-Use or CC0, which is a policy and not a grant.",
       "evidence": "https://www.ebi.ac.uk/licencing/",
-      "approved_use": "Prompt context for reasoned target variants only; and, read raw (not injected into any prompt), the plan.md Phase 2 zero-parameter interpro2go baseline"
+      "approved_use": "Prompt context for reasoned target variants only; and, read raw (not injected into any prompt), the  zero-parameter interpro2go baseline"
     },
     "ppi_formatted": {
       "source": "STRING interaction partners, pre-formatted by WangLab",
-      "license": "Apache-2.0 as distributed by WangLab at the pinned revision. OWNER RULING (ADR-017): redistributor grant is the operative licence. Upstream STRING licence not verified in review.",
+      "license": "Apache-2.0 as distributed by WangLab at the pinned revision. Project policy (reasoning supervision): redistributor grant is the operative licence. Upstream STRING licence not verified in review.",
       "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
       "approved_use": "Prompt context for reasoned target variants only"
     },
@@ -260,25 +260,25 @@
       "source": "UniProtKB organism_name field (verbatim; the corpus's own values match a direct UniProt REST query byte-for-byte)",
       "license": "CC-BY-4.0",
       "evidence": "https://www.uniprot.org/help/license",
-      "approved_use": "plan.md Phase 5 (no gate needed — factual UniProt metadata, not a model-generated field): prompt context for reasoned target variants only, rendered via bioreason_pro.data_contract.ORGANISM_COLUMN. Not coupled to the SFT reasoning-evidence requirement (CONTEXT_COLUMNS) — a 60-trace spot check found no reasoning trace names its own protein's organism, so this is a supplementary prediction input, not evidence a trace could fabricate."
+      "approved_use": " (no gate needed — factual UniProt metadata, not a model-generated field): prompt context for reasoned target variants only, rendered via bioreason_pro.data_contract.ORGANISM_COLUMN. Not coupled to the SFT reasoning-evidence requirement (CONTEXT_COLUMNS) — a 60-trace spot check found no reasoning trace names its own protein's organism, so this is a supplementary prediction input, not evidence a trace could fabricate."
     },
     "final_answer": {
       "source": "Synthetic prose summary distributed in the same datasets",
       "license": "Apache-2.0 as distributed at the pinned revision",
       "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
-      "approved_use": "OWNER RULING (plan.md Phase 4 gate R3, 2026-08-23): adopted for paper parity. Spliced ahead of the GO-term answer for the leaf_only_reasoned target variant only (bioreason_pro.data_contract.compose_functional_summary), mirroring upstream's own _add_uniprot_summary. Adopted WITHOUT a scoring metric this phase \u2014 emitted and inspectable, not yet judged."
+      "approved_use": "Project policy: adopted for paper parity. Spliced ahead of the GO-term answer for the leaf_only_reasoned target variant only (bioreason_pro.data_contract.compose_functional_summary), mirroring upstream's own _add_uniprot_summary. Adopted WITHOUT a scoring metric this phase \u2014 emitted and inspectable, not yet judged."
     },
     "protein_function": {
       "source": "UniProtKB Function annotation (CC line), redistributed verbatim as this column by WangLab",
       "license": "CC-BY-4.0 at the UniProtKB source; Apache-2.0 as redistributed by WangLab at the pinned revision",
       "evidence": "https://www.uniprot.org/help/license",
-      "approved_use": "OWNER RULING (plan.md Phase 4, 2026-08-23): adopted alongside final_answer, matching upstream's exact _add_uniprot_summary mechanism \u2014 spliced verbatim into the functional-summary line for the leaf_only_reasoned target variant only (bioreason_pro.data_contract.compose_functional_summary). Also gates functional_summary_instruction's conditional instruction text (reads literally \"Not known\" for a large share of rows; asking for a summary there would train a contradiction)."
+      "approved_use": "Project policy: adopted alongside final_answer, matching upstream's exact _add_uniprot_summary mechanism \u2014 spliced verbatim into the functional-summary line for the leaf_only_reasoned target variant only (bioreason_pro.data_contract.compose_functional_summary). Also gates functional_summary_instruction's conditional instruction text (reads literally \"Not known\" for a large share of rows; asking for a summary there would train a contradiction)."
     },
     "go_pred": {
       "source": "GO-GPT's own greedy predictions (models.go_decoder.wanglab/gogpt), full ancestor closure, per-aspect text, precomputed and redistributed as this column by WangLab",
-      "license": "Apache-2.0 as redistributed by WangLab at the pinned revision; the underlying go_decoder (wanglab/gogpt) is itself Apache-2.0, gated=false, confirmed via the HF REST API this session",
+      "license": "Apache-2.0 as redistributed by WangLab at the pinned revision; the underlying go_decoder (wanglab/gogpt) is itself Apache-2.0, gated=false, confirmed via the HF REST API the provenance review",
       "evidence": "https://huggingface.co/datasets/wanglab/bioreason-pro-sft-reasoning-data",
-      "approved_use": "OWNER RULING (ADR-037, this session): adopted as a BioReason-Pro prompt field, superseding the 2026-08-23 baseline-only ruling now that (a) the GO-GPT baseline number exists (ADR-033: 0.50059) and (b) a licence check found no blocker (code MIT, weights and encoder Apache-2.0/MIT, none gated). Rendered via bioreason_pro.data_contract.CONTEXT_COLUMNS (not ORGANISM_COLUMN's ungated pattern) \u2014 a 60-trace spot check found 56/60 reasoning traces cite a GO id verbatim from this column, so its absence also gates SFT supervision closed (MissingReasoningEvidence), unlike organism. Present and non-empty in 500-row samples of the SFT, RL, and sealed-test datasets alike (go_pred_leaf, by contrast, is SFT-only and stays excluded)."
+      "approved_use": "Project policy (batched RL configuration, the provenance review): adopted as a BioReason-Pro prompt field, superseding the 2026-08-23 baseline-only ruling now that (a) the GO-GPT baseline number exists (GO-GPT baseline evaluation: 0.50059) and (b) a licence check found no blocker (code MIT, weights and encoder Apache-2.0/MIT, none gated). Rendered via bioreason_pro.data_contract.CONTEXT_COLUMNS (not ORGANISM_COLUMN's ungated pattern) \u2014 a 60-trace spot check found 56/60 reasoning traces cite a GO id verbatim from this column, so its absence also gates SFT supervision closed (MissingReasoningEvidence), unlike organism. Present and non-empty in 500-row samples of the SFT, RL, and sealed-test datasets alike (go_pred_leaf, by contrast, is SFT-only and stays excluded)."
     }
   },
   "data_contract": {
@@ -324,7 +324,7 @@
       "count": 1496,
       "sha256": "9d1d14ee97d438022147953dbbd4088dc7839f3eab72d3da05d10fcf34d41760",
       "source": "CAFA5 evaluation bundle (Zenodo 20186533), eval_terms_no_knowledge_2025_03.tsv: 1,717 unique EntryIDs, minus 213 present in data/public_holdout_ids.txt, minus 8 present in the training corpus despite being CAFA-no-knowledge at t0 (owner-confirmed 2026-08-21; see bioreason_pro.dev_set.KNOWN_TRAINING_CORPUS_OVERLAP_IDS)",
-      "derivation": "plan.md Phase 1 (ADR-024): the paper's temporal development set, since the corpus's own val/test hash partitions are ~99.7% pre-annotated and the sealed set cannot be used for steering",
+      "derivation": "(temporal dev-set construction): the paper's temporal development set, since the corpus's own val/test hash partitions are ~99.7% pre-annotated and the sealed set cannot be used for steering",
       "disjoint_from": [
         "data/public_holdout_ids.txt",
         "wanglab/bioreason-pro-sft-reasoning-data (train split, all rows)",
@@ -390,7 +390,7 @@
     "cafa_no_knowledge": {
       "approved": true,
       "approved_uses": ["dev-evaluation"],
-      "description": "plan.md Phase 1: a temporal development set disjoint from both the training corpus and the sealed holdout, built from CAFA's no-knowledge targets minus the pinned public holdout ids.",
+      "description": ": a temporal development set disjoint from both the training corpus and the sealed holdout, built from CAFA's no-knowledge targets minus the pinned public holdout ids.",
       "id_list": "data_contract.public_holdout_ids-style manifest entry at data_contract.cafa_no_knowledge_ids",
       "materialized_file": {
         "path": "data/cafa_no_knowledge_dev_set.jsonl",
@@ -411,7 +411,7 @@
         },
         "interpro_formatted": {
           "source": "EBI InterProScan REST API (www.ebi.ac.uk/Tools/services/rest/iprscan5), run directly by this project (not via a WangLab redistribution)",
-          "license": "no resource-specific restriction found in EBI's public API terms as reviewed (ADR-028); EMBL-EBI publishes a Terms-of-Use/CC0 policy rather than a per-resource grant",
+          "license": "no resource-specific restriction found in EBI's public API terms as reviewed (baseline provenance review); EMBL-EBI publishes a Terms-of-Use/CC0 policy rather than a per-resource grant",
           "evidence": "https://www.ebi.ac.uk/licencing/",
           "status": "complete (2026-08-22): 1,496/1,496 proteins scanned, 1,464 with at least one InterPro domain found, 32 with none; 0 job failures. See scripts/fetch_interpro_annotations.py."
         }
@@ -438,7 +438,7 @@
       "source": "https://github.com/bowang-lab/BioReason-Pro (gogpt/src/gogpt/ subdirectory)",
       "revision": "a93ac2a96387103c100c4d6a6674d6fe1dfaf9e8",
       "license": "MIT (root LICENSE of the source repo; gogpt/ is an ordinary tracked subdirectory, not a submodule, and carries no separate license of its own)",
-      "provenance": "plan.md Phase 5 / ADR-028. Vendored verbatim rather than reimplemented: GO-GPT's architecture (dual protein/GO attention streams, per-aspect tokens, gated attention, beam search tied to a specific trained checkpoint) is custom model code, not a REST client — a from-scratch reimplementation risks a subtle, silent divergence from the real model. See third_party/gogpt/NOTICE.md for the full record, including which files were vendored and why.",
+      "provenance": "baseline provenance review. Vendored verbatim rather than reimplemented: GO-GPT's architecture (dual protein/GO attention streams, per-aspect tokens, gated attention, beam search tied to a specific trained checkpoint) is custom model code, not a REST client — a from-scratch reimplementation risks a subtle, silent divergence from the real model. See third_party/gogpt/NOTICE.md for the full record, including which files were vendored and why.",
       "approved_uses": [
         "baseline-evaluation"
       ]

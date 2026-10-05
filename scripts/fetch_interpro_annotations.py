@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Fetch InterPro domain annotations for the Phase 1 temporal dev set via EBI's public InterProScan5
 REST API (https://www.ebi.ac.uk/Tools/services/rest/iprscan5) — the same service upstream's
-`interpro_api.py` calls (ADR-028: no resource-specific licensing restriction found in that client).
+`interpro_api.py` calls (baseline provenance review: no resource-specific licensing restriction found in that client).
 
 This is a long-running external batch job by construction: EBI's public dispatcher queues jobs behind
 other users' work, and per-job wait times upstream observed varied from ~90s to ~600s even for jobs
 submitted together. For ~1,500 proteins this is many hours regardless of how politely it is run.
-plan.md Phase 1 explicitly permits shipping the dev set sequence-only while this runs in the
+ explicitly permits shipping the dev set sequence-only while this runs in the
 background — do not block on it finishing.
 
 Resumable: writes each completed protein's result to --out immediately (append + flush) and skips ids
@@ -186,7 +186,7 @@ def main() -> int:
                 # column alignment (found in practice: a 1,496-row run produced 5,362 "unique ids"
                 # once multi-domain rows fragmented). Escape before writing, unescape on read
                 # (escape_newlines/unescape_newlines below) — Python 3.10 disallows a backslash
-                # inside an f-string expression, hence the helper rather than inline .replace.
+                # inside an f-string expression, hence the helper rather than inline.replace.
                 out_handle.write(f"{pid}\t{escape_newlines(formatted)}\n")
                 out_handle.flush()
             print(f"[interpro] {pid}: {formatted.count(chr(10)) + 1 if formatted else 0} domain(s)",

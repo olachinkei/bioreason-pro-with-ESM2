@@ -94,7 +94,7 @@ def approved_dataset_spec(repo_id: str, use: str) -> dict[str, Any]:
 def require_approved_local_eval_target(name: str, use: str) -> dict[str, Any]:
     """Return a locally-built (non-HF) eval target's manifest entry, only when approved for `use`.
 
-    Mirrors `require_approved_dataset`, but for targets like `cafa_no_knowledge` (plan.md Phase 1)
+    Mirrors `require_approved_dataset`, but for targets like `cafa_no_knowledge`
     that are materialized from external APIs rather than pulled from a pinned HF dataset revision —
     so there is no single `revision` to return, only the recorded provenance for each source that
     went into the materialized file.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# GO-GPT baseline (plan.md Phase 5 / ADR-028): score the paper's own zero-LLM GO-term predictor on
+# GO-GPT baseline (baseline provenance review): score the paper's own zero-LLM GO-term predictor on
 # the Phase 1 cafa_no_knowledge dev set. Single GPU, inference only, no training.
 #
 # Smoke (a handful of proteins, ~minutes):
@@ -53,7 +53,7 @@ fi
 
 export HF_HOME="$runtime_root/cache/huggingface"
 export XDG_CACHE_HOME="$runtime_root/cache/xdg"
-# ADR-036/037 incident: wandb's artifact-staging path follows XDG_DATA_HOME (default ~/.local/share,
+# rollout-budget analysis incident: wandb's artifact-staging path follows XDG_DATA_HOME (default ~/.local/share,
 # on the container's small local root filesystem) independently of XDG_CACHE_HOME/WANDB_DIR -- job 1692
 # completed training and val, then failed only at artifact upload with "disk quota exceeded" writing
 # to /root/.local/share/wandb/artifacts/staging. Redirect it to the same ample shared storage.
@@ -61,7 +61,7 @@ export XDG_DATA_HOME="$runtime_root/cache/xdg-data"
 export BIOREASON_JOB_TMP="$runtime_root/tmp/gogpt-baseline-$SLURM_JOB_ID"
 export GOGPT_OUTPUT="${GOGPT_OUTPUT:-$runtime_root/artifacts/gogpt-baseline-$SLURM_JOB_ID}"
 export GOGPT_LIMIT="${GOGPT_LIMIT:-}"
-image="docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1"
+image="${BIOREASON_PRO_CONTAINER_IMAGE:-docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1}"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
 container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
@@ -86,15 +86,11 @@ srun --container-image="$image" \
     # gogpt/src/gogpt/__init__.py eagerly imports its (unused here) training wrapper, which needs
     # pytorch-lightning -- not part of texttrain (deliberately kept light, no vllm/unsloth
     # co-resolution). This one package is the whole cost of avoiding the much heavier `train` extra.
-    # `uv pip install` (not `uv run ... pip install`) so it lands directly in the synced venv without
+    # `uv pip install` (not `uv run... pip install`) so it lands directly in the synced venv without
     # going through another project-sync pass -- job 1296 showed `uv run --extra texttrain pip
     # install X` followed by a later separate `uv run --extra texttrain` re-syncing X back out again.
     uv pip install "pytorch-lightning>=2.3"
-    # Reference-data cache (ADR-042): only 2 of the 4 bundle files were ever read from
-    # $BIOREASON_REFERENCE_DATA_ROOT, so every job fell through to a live Zenodo download of the
-    # whole archive regardless -- a flaky external endpoint (two 504 errors in a row blocked the
-    # ADR-041 follow-up sealed-holdout jobs). Now reads/writes all 4 named files, so the cache is
-    # complete after the first successful job and every later job (any script) can skip Zenodo entirely.
+    # Cache all four reference files so subsequent jobs can avoid another archive download.
     REFDATA_FILES=(go-basic.obo IA.txt eval_terms_no_knowledge_2025_03.tsv known_t0.tsv)
     mkdir -p data
     for f in "${REFDATA_FILES[@]}"; do

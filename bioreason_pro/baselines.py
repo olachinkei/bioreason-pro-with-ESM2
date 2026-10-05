@@ -1,7 +1,7 @@
-"""bioreason_pro.baselines — pure helpers for plan.md Phase 2's zero-parameter reference baselines.
+"""bioreason_pro.baselines — pure helpers for 's zero-parameter reference baselines.
 
 Rule 13: this project ran eleven phases before measuring a free baseline, and when one was finally
-computed (ADR-022) it beat the trained model on the split then in use. Both baselines here score
+computed (validation-split analysis) it beat the trained model on the split then in use. Both baselines here score
 through the same `eval.score_generations` path every model arm uses, not a reward-style proxy — they
 just need a synthetic "generated_response" string containing the predicted GO ids, since
 `extract_go_terms` only regex-scans text for `GO:#######` patterns and does not care where they came
@@ -19,7 +19,7 @@ _INTERPRO2GO_LINE_RE = re.compile(r"^InterPro:(IPR\d{6})\b.*?;\s*(GO:\d{7})\s*$"
 
 
 def parse_interpro2go_mapping(lines) -> dict[str, set[str]]:
-    """Parse the GO Consortium `interpro2go` file into `{IPR_id: {GO_id, ...}}`.
+    """Parse the GO Consortium `interpro2go` file into `{IPR_id: {GO_id,...}}`.
 
     `lines`: an iterable of raw text lines (e.g. an open file handle). `!`-prefixed and blank lines
     are the file's own header/comment convention and are skipped; anything else that doesn't match
@@ -57,7 +57,7 @@ def interpro2go_predict(interpro_ids: set[str], mapping: dict[str, set[str]]) ->
 def label_prior_terms(term_counts: dict[str, Counter], top_n: dict[str, int]) -> dict[str, set[str]]:
     """The `top_n[aspect]` most frequent GO terms per aspect, ignoring any specific protein.
 
-    `term_counts`: `{"go_mf": Counter({GO_id: count, ...}), "go_bp": ..., "go_cc": ...}` over the
+    `term_counts`: `{"go_mf": Counter({GO_id: count,...}), "go_bp":..., "go_cc":...}` over the
     training corpus. Returns the SAME fixed set for every protein regardless of `top_n` — that is the
     point of this baseline: it isolates a score that reflects the label distribution alone, with zero
     protein-specific signal, so a model beating it is doing more than reciting the prior.

@@ -1,4 +1,4 @@
-"""Unit tests for bioreason_pro.dev_set — plan.md Phase 1's temporal dev-set construction (pure, no
+"""Unit tests for bioreason_pro.dev_set — 's temporal dev-set construction (pure, no
 network). Covers the disjointness assertions method rule 1/R1 requires to be in code, not eyeballed.
 """
 
@@ -43,7 +43,7 @@ def test_build_dev_ids_subtracts_holdout():
 
 
 def test_build_dev_ids_matches_plan_scale_before_corpus_exclusion():
-    """Holdout-only subtraction reaches the plan's stated 1,717 -> 1,504 (ADR-024)."""
+    """Holdout-only subtraction reaches the plan's stated 1,717 -> 1,504 (temporal dev-set construction)."""
     no_knowledge = {f"P{i}" for i in range(1717)}
     holdout = {f"P{i}" for i in range(213)}
     dev = build_dev_ids(no_knowledge, holdout, corpus_overlap_ids=frozenset(), expected_count=1504)

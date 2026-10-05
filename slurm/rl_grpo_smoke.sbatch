@@ -51,7 +51,7 @@ fi
 export HF_HOME="$runtime_root/cache/huggingface"
 export HF_DATASETS_CACHE="$HF_HOME/datasets"
 export XDG_CACHE_HOME="$runtime_root/cache/xdg"
-# ADR-036/037 incident: wandb's artifact-staging path follows XDG_DATA_HOME (default ~/.local/share,
+# rollout-budget analysis incident: wandb's artifact-staging path follows XDG_DATA_HOME (default ~/.local/share,
 # on the container's small local root filesystem) independently of XDG_CACHE_HOME/WANDB_DIR -- job 1692
 # completed training and val, then failed only at artifact upload with "disk quota exceeded" writing
 # to /root/.local/share/wandb/artifacts/staging. Redirect it to the same ample shared storage.
@@ -65,7 +65,7 @@ export BIOREASON_ARTIFACT_ROOT="$runtime_root/artifact_inputs/rl-grpo-smoke-$SLU
 export BIOREASON_JOB_TMP="$runtime_root/tmp/rl-grpo-smoke-$SLURM_JOB_ID"
 export RL_OUTPUT="${RL_OUTPUT:-$runtime_root/artifacts/rl-grpo-smoke-$SLURM_JOB_ID}"
 export RL_MODEL_NAME="${RL_MODEL_NAME:-Qwen/Qwen3-4B-Thinking-2507}"
-image="docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1"
+image="${BIOREASON_PRO_CONTAINER_IMAGE:-docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1}"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
 container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
@@ -90,11 +90,7 @@ srun --container-image="$image" \
     export TMPDIR="$BIOREASON_JOB_TMP"
     nvidia-smi
     uv sync --extra texttrain
-    # Reference-data cache (ADR-042): only 2 of the 4 bundle files were ever read from
-    # $BIOREASON_REFERENCE_DATA_ROOT, so every job fell through to a live Zenodo download of the
-    # whole archive regardless -- a flaky external endpoint (two 504 errors in a row blocked the
-    # ADR-041 follow-up sealed-holdout jobs). Now reads/writes all 4 named files, so the cache is
-    # complete after the first successful job and every later job (any script) can skip Zenodo entirely.
+    # Cache all four reference files so subsequent jobs can avoid another archive download.
     REFDATA_FILES=(go-basic.obo IA.txt eval_terms_no_knowledge_2025_03.tsv known_t0.tsv)
     mkdir -p data
     for f in "${REFDATA_FILES[@]}"; do

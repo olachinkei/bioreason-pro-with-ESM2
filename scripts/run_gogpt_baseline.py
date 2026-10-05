@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""GO-GPT baseline (plan.md Phase 5 / ADR-028): score the paper's own zero-LLM GO-term predictor on
+"""GO-GPT baseline (baseline provenance review): score the paper's own zero-LLM GO-term predictor on
 the Phase 1 `cafa_no_knowledge` dev set, using the same real `cafaeval` scorer
-(`eval.score_generations`) every other arm in this ledger is scored by (ADR-030: never the reward's
+(`eval.score_generations`) every other arm in this ledger is scored by (evaluation consistency: never the reward's
 F1 proxy). This measures what BioReason-Pro's reasoning layer adds over a much cheaper discrete
 annotator -- the paper's own results say that margin is thin.
 
@@ -10,7 +10,7 @@ reimplemented -- see third_party/gogpt/NOTICE.md for why. Not adopted as a BioRe
 field: owner ruling 2026-08-23, baseline measurement only for now.
 
 This is NOT a reproduction of the paper's own reported 0.65/0.70: that number is measured on the
-paper's own 8,630-protein set with an unconfirmed decoding protocol (plan.md ADR-028 / PAPER.md).
+paper's own 8,630-protein set with an unconfirmed decoding protocol.
 This measures the same released checkpoint on THIS project's 1,496-protein temporal dev set, using
 GOGPTPredictor.predict()'s own default beam search (beam_size=5) -- a comparable, honestly-labelled
 number, not an attempted exact match.
@@ -58,7 +58,7 @@ def union_predicted_terms(predictions: dict[str, list[str]]) -> set[str]:
     """Flatten GOGPTPredictor.predict()'s {"MF": [...], "BP": [...], "CC": [...]} into one term set.
 
     eval.score_generations does its own per-aspect scoring and ancestor propagation from the raw
-    GO ids in generated_response (ADR-030's discipline: the real scorer, not a hand-rolled one), so
+    GO ids in generated_response (evaluation consistency's discipline: the real scorer, not a hand-rolled one), so
     this just needs to hand it every id GO-GPT predicted, aspect-tagging is not this function's job.
     """
     terms: set[str] = set()

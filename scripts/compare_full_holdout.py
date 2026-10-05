@@ -39,8 +39,8 @@ def _wait_for_files(paths: list[Path], timeout_seconds: int) -> None:
 
 def _job_type_for_target(target: str) -> str:
     """'full-holdout-evaluation' means the sealed holdout specifically. Any other target (e.g.
-    plan.md Phase 3's cafa_no_knowledge dev set) gets its own job_type, so bioreason_pro.wandb_meta's
-    note never claims "sealed holdout" for a run that never touched it (docs/WANDB_TAGS.md: a
+    's cafa_no_knowledge dev set) gets its own job_type, so bioreason_pro.wandb_meta's
+    note never claims "sealed holdout" for a run that never touched it (a
     `sealed` label appearing where it isn't warranted is an incident, not a curiosity)."""
     return "full-holdout-evaluation" if target == "bioreason_pro_test" else "dev-set-evaluation"
 
@@ -212,7 +212,7 @@ def main() -> int:
             # checkpoint field), only in the producing run's own W&B config -- check it there. Missed
             # once already: this whole sweep ran on the wrong (context-free) prompt template for a
             # reasoned checkpoint because nothing caught BIOREASON_PRO_TARGET_VARIANT being left unset
-            # (plan.md ADR-031's retracted first Phase 3 read).
+            # (a retracted evaluation with mismatched prompts).
             sft_variant = wandb.Api().artifact(args.sft_artifact).logged_by().config.get("target_variant")
             rl_variant = wandb.Api().artifact(args.rl_artifact).logged_by().config.get("target_variant")
             if sft_variant is not None and rl_variant is not None and sft_variant != rl_variant:
@@ -288,7 +288,7 @@ def main() -> int:
         # Per-protein inspection in Weave: score_generations above already computed the metric of
         # record (attached as attributes, never recomputed here). This mirrors train._generation_eval's
         # publish_weave_eval=True path -- this script previously did not call it at all, so the sealed
-        # holdout's own per-protein generations were never traced anywhere (plan.md ADR-041/042).
+        # holdout's own per-protein generations were never traced anywhere during the earlier holdout evaluation.
         from bioreason_pro import go_obo, weave_eval
 
         obo_ancestors = go_obo.load_go_ancestors(evaluator.OBO)

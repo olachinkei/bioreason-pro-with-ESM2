@@ -2,13 +2,11 @@
 
 Every `wandb.init()` call in this project should pass `tags=derived_tags(...)` and
 `notes=build_note(...)` computed from this module, so a run is orientable from the W&B run list the
-moment it starts — no cross-referencing plan.md or a Slurm log required, and no separate backfill
+moment it starts — no separate experiment notes or Slurm logs required, and no separate backfill
 pass needed for the baseline layer.
 
-This is one half of the vocabulary in docs/WANDB_TAGS.md. The other half — judgements
-(recommended/superseded/null-result/...) and repairs of a condition the config never recorded — still
-needs human judgement when assigning tags in W&B. What can be read from the config is handled
-here so initialization call sites share one implementation.
+Judgement tags (recommended/superseded/null-result) and repairs of missing configuration
+require human review. Tags derived from configuration are computed here for all call sites.
 """
 
 from __future__ import annotations
@@ -37,10 +35,7 @@ JOB_TYPE_LABEL = {
     "prompt-variant-val-eval": "val sweep",
     "model-evaluation": "eval",
     "full-holdout-evaluation": "sealed holdout",
-    # Distinct from "full-holdout-evaluation": plan.md Phase 3 re-measures existing checkpoints on
-    # cafa_no_knowledge (1,496 proteins), which is not the sealed holdout. Sharing one label between
-    # the two would put the literal text "sealed holdout" on a run that never touched it — exactly
-    # what docs/WANDB_TAGS.md calls "an incident, not a curiosity" for the `sealed` tag itself.
+    # Evaluation on the 1,496-protein development set must not be labelled as sealed holdout.
     "dev-set-evaluation": "dev-set eval",
     "agent-iteration": "agent iteration",
     "agent-iteration-finalize": "agent iteration (finalize)",

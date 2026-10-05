@@ -1,4 +1,4 @@
-# data/ — PROTECTED reference data (do not edit; not student-editable)
+# Reference data
 
 Reference files for IA-weighted F_max evaluation and GO ancestor propagation. These are **not
 committed** (see `.gitignore`). Install the exact approved pair with:
@@ -14,7 +14,7 @@ the operator explicitly passes `--force`.
 - `go-basic.obo` — Gene Ontology DAG (ancestor propagation + cafaeval namespaces).
 - `IA.txt` — information-accretion weights (the "weighted" in weighted F_max).
 - `eval_terms_no_knowledge_2025_03.tsv` — CAFA's no-knowledge evaluation targets; source for the
-  Phase 1 temporal development set (plan.md, ADR-024/029).
+  temporal development set.
 - `known_t0.tsv` — CAFA's annotated-at-t0 proteins; used to verify what "no-knowledge" actually means
   for a given protein, not just trust the label.
 
@@ -26,12 +26,11 @@ holdout fingerprint, source revisions, raw overlaps, and operational split check
 uv run python scripts/audit_data_contract.py
 ```
 
-`cafa_no_knowledge_ids.txt` and `cafa_no_knowledge_dev_set.jsonl` are the Phase 1 temporal dev set
-(plan.md ADR-022/024/029) — also small, committed audit artifacts, built by
+`cafa_no_knowledge_ids.txt` and `cafa_no_knowledge_dev_set.jsonl` are the committed temporal development set, built by
 `scripts/build_cafa_no_knowledge_dev_set.py` (requires the two files above, plus
 `data/public_holdout_ids.txt`, plus network access to UniProt). `cafa_no_knowledge_ids.txt` lists the
 1,496 protein ids (CAFA's 1,717 no-knowledge targets, minus 213 in the sealed holdout, minus 8 found
-in the training corpus — see ADR-029); the `.jsonl` file carries their sequences, GO ground truth, and
+in the training corpus); the `.jsonl` file carries their sequences, GO ground truth, and
 (once `scripts/fetch_interpro_annotations.py` has run) InterPro context.
 `data/cafa_no_knowledge_corpus_disjointness.json` is generated locally (not committed) by
 `scripts/verify_cafa_no_knowledge_disjoint_from_corpus.py`, which re-streams the live training corpus

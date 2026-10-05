@@ -1,10 +1,10 @@
-"""bioreason_pro.dev_set — pure helpers for the Phase 1 temporal development set (ADR-022/024).
+"""bioreason_pro.dev_set — pure helpers for the Phase 1 temporal development set (validation-split analysis).
 
 Building the actual `data/cafa_no_knowledge_dev_set.jsonl` needs network access (UniProt, optionally
 EBI InterProScan) and lives in `scripts/build_cafa_no_knowledge_dev_set.py`. The logic that decides
 *which* protein ids belong in the dev set, and that asserts it is disjoint from the sealed holdout and
 the training corpus, is pure and lives here so it can be unit-tested without either network call —
-method rule 1 (R1 in plan.md): disjointness must be asserted in code, not eyeballed.
+The split contract: disjointness must be asserted in code, not eyeballed.
 """
 
 from __future__ import annotations
@@ -20,11 +20,11 @@ class DevSetError(AssertionError):
     """Raised when the temporal dev set fails a disjointness or size invariant."""
 
 
-# Found 2026-08-21 while building this dev set (plan.md Phase 1, gate R1): streaming the full
+# Found 2026-08-21 while building this dev set (gate R1): streaming the full
 # training corpus (wanglab/bioreason-pro-sft-reasoning-data, 117,002 unique proteins, +
 # wanglab/bioreason-pro-rl-reasoning-data, 9,154) turned up 8 proteins that are CAFA-no-knowledge at
 # t0 (zero rows in known_t0.tsv — CAFA's own file agrees they were unannotated) yet are also present
-# in the training corpus. This does not contradict ADR-023/024's own "~0.3% residue" observation about
+# in the training corpus. This does not contradict overlap analysis's own "~0.3% residue" observation about
 # the corpus; it is a concrete instance of it landing inside this specific 1,717-protein universe.
 # Excluded for the same reason the 213 sealed-holdout overlaps are excluded: the non-negotiable
 # train/val/test disjointness constraint means a "held-out" dev set cannot contain proteins the model
@@ -61,14 +61,14 @@ def build_dev_ids(
     expected_count: int = 1496,
 ) -> set[str]:
     """CAFA's no-knowledge targets, minus the pinned sealed holdout and the known training-corpus
-    overlap — plan.md Phase 1's dev set.
+    overlap — 's dev set.
 
     The ~213 ids CAFA's no-knowledge list shares with the sealed holdout, and the 8 it shares with the
     training corpus, are *expected* and are what this function removes — that overlap is not itself an
     error. What fails closed is anything left over afterwards: a residual holdout or corpus overlap in
     the returned set, or a count that doesn't match what was verified against the full holdout/corpus
     id lists, either of which would mean checkpoint-selection could quietly touch sealed-test or
-    trained-on proteins (ADR-002, and the non-negotiable train/val/test disjointness constraint).
+    trained-on proteins (holdout isolation, and the non-negotiable train/val/test disjointness constraint).
     """
     dev_ids = no_knowledge_ids - holdout_ids - corpus_overlap_ids
     residual_holdout = dev_ids & holdout_ids
@@ -92,7 +92,7 @@ def build_dev_ids(
 def assert_disjoint_from_corpus(dev_ids: set[str], corpus_ids: set[str]) -> None:
     """Assert the dev set shares no protein with the training corpus (either SFT or RL reasoning data).
 
-    Not a formality: this is exactly the check that found ADR-029's 8-protein overlap. CAFA's
+    Not a formality: this is exactly the check that found training-overlap checks's 8-protein overlap. CAFA's
     no-knowledge targets having no experimental annotation as of t0 turned out not to structurally
     guarantee absence from the training corpus, which method rule 6/12 already warns against assuming
     without checking — call this after excluding `KNOWN_TRAINING_CORPUS_OVERLAP_IDS` (`build_dev_ids`

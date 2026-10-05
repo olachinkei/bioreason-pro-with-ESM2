@@ -1,6 +1,6 @@
 """An RL algorithm the code cannot implement must fail, not run as its baseline.
 
-`--rl_algo gspo` was reachable-looking from every angle: RunArgs accepted it, plan.md listed it as an
+`--rl_algo gspo` was reachable-looking from every angle: RunArgs accepted it, the configuration exposed it as an
 optional follow-up, and `RL_ALGO` now forwards it. But the multimodal loop
 (`_run_multimodal_grpo`) is strictly on-policy — rollouts are generated fresh each step and consumed
 by one update — so the importance-sampling ratio is identically 1 and never appears in the loss

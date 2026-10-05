@@ -1,4 +1,4 @@
-"""ADR-017: reasoning supervision, and the coupling that keeps it honest.
+"""reasoning supervision: reasoning supervision, and the coupling that keeps it honest.
 
 The dataset ships `reasoning` traces, but sampled 20/20 of them cite InterPro domain ids with
 residue ranges and STRING interaction partners. Supervising those against the shipped sequence-only
@@ -35,7 +35,7 @@ def _adapt(row, variant, monkeypatch):
 
 
 def test_the_shipped_variants_are_untouched(monkeypatch):
-    """No context, no reasoning, no summary — byte-identical to what every SFT in plan.md trained on."""
+    """No context, no reasoning, no summary — byte-identical to what the original SFT configuration trained on."""
     for variant in ("full_closure", "leaf_only", "leaf_mf_only"):
         out = _adapt(ROW, variant, monkeypatch)
         assert out["prompt"]["assistant_reasoning"] == ""
@@ -78,7 +78,7 @@ def test_the_go_answer_is_still_authored_from_go_labels_the_summary_only_leads_i
     """Phase 4 / gate R3: `final_answer` is now adopted, spliced ahead of the GO lines — but the
     GO lines themselves stay authored from the label columns, not from prose. Adopting the summary
     must not let prose stand in for the scored GO answer."""
-    out = _adapt({**ROW, "final_answer": "A nuclear histone demethylase that ..."},
+    out = _adapt({**ROW, "final_answer": "A nuclear histone demethylase that..."},
                  "leaf_only_reasoned", monkeypatch)
     assert "nuclear histone demethylase" in out["prompt"]["assistant_answer"]  # the summary, adopted
     assert "GO:" in out["prompt"]["assistant_answer"]  # the GO lines, still authored from labels
@@ -87,7 +87,7 @@ def test_the_go_answer_is_still_authored_from_go_labels_the_summary_only_leads_i
 
 def test_missing_final_answer_is_refused_for_sft(monkeypatch):
     """SFT now supervises the spliced summary, so its target must actually be present — the same
-    fail-closed treatment as a missing `reasoning` trace, for the same reason (ADR-015 lineage)."""
+    fail-closed treatment as a missing `reasoning` trace, for the same reason (empty-reasoning masking lineage)."""
     no_summary = {k: v for k, v in ROW.items() if k != "final_answer"}
     with pytest.raises(ValueError, match="functional"):
         _adapt(no_summary, "leaf_only_reasoned", monkeypatch)
@@ -144,7 +144,7 @@ def test_the_reasoned_prompt_carries_the_conditional_summary_instruction(monkeyp
     assert "not known" in unknown["prompt"]["user"].lower()
 
 
-# --- organism (plan.md Phase 5) -------------------------------------------------------------------
+# --- organism -------------------------------------------------------------------
 
 def test_organism_renders_when_present(monkeypatch):
     out = _adapt({**ROW, "organism": "Rattus norvegicus (Rat)"}, "leaf_only_reasoned", monkeypatch)
@@ -178,7 +178,7 @@ def test_organism_does_not_gate_the_sft_reasoning_evidence_requirement(monkeypat
         _adapt({**stripped, "organism": "Rattus norvegicus (Rat)"}, "leaf_only_reasoned", monkeypatch)
 
 
-# --- GO-GPT predictions (ADR-037) ------------------------------------------------------------------
+# --- GO-GPT predictions (batched RL configuration) ------------------------------------------------------------------
 #
 # Unlike organism, a 60-trace spot check found 56/60 reasoning traces cite a GO id verbatim from
 # go_pred — real evidence a trace builds on, not a supplementary signal. So this column is folded
@@ -233,10 +233,10 @@ def test_unknown_variant_still_fails_closed(monkeypatch):
 
 # --------------------------------------------------------------- require_active_variant_matches
 #
-# plan.md ADR-031: a Phase 3 GPU sweep evaluated leaf_only_reasoned checkpoints with
+# Prompt-contract validation: a Phase 3 GPU sweep evaluated leaf_only_reasoned checkpoints with
 # BIOREASON_PRO_TARGET_VARIANT left unset, which silently defaults to full_closure -- a prompt with NO
 # InterPro/PPI/subcellular-location context at all. The model still reasoned (that behaviour is
-# trained in) but fabricated domain claims instead of leaving them out, since ADR-017's coupling
+# trained in) but fabricated domain claims instead of leaving them out, since reasoning supervision's coupling
 # between reasoning supervision and evidence-in-prompt only holds when the evidence is actually
 # there. These tests pin the guard that catches this before it silently produces a meaningless run.
 
@@ -280,7 +280,7 @@ def test_every_fixture_row_can_drive_the_reasoned_variant(monkeypatch):
         assert out["prompt"]["assistant_reasoning"], f"row {i} produced an empty trace"
 
 
-# --- stage awareness (ADR-017 revision after job 970) -------------------------------------------
+# --- stage awareness (reasoning supervision revision after job 970) -------------------------------------------
 
 def test_rl_and_eval_do_not_require_a_reasoning_column(monkeypatch):
     """The RL corpus ships NO `reasoning` at all (100% empty when sampled).
@@ -363,7 +363,7 @@ def test_the_real_sft_stream_skips_unsupervisable_rows(monkeypatch):
 
     I added skip-and-count to `data.load_sft_dataset`, but `run_sft` streams through
     `train._stream_real_examples`. The guard was real, tested, and on the wrong call site — the
-    ADR-008 lesson (grep for the destination, not the declaration) applied to a fix rather than a
+    configuration reachability lesson (grep for the destination, not the declaration) applied to a fix rather than a
     flag. This test drives the actual generator.
     """
     import data

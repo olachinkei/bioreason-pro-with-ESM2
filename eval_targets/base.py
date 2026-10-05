@@ -105,7 +105,7 @@ class EvalTarget:
     hf_config: str | None = None          # HF `datasets` config name (None = default config)
     hf_split: str = "test"                # the HF split to stream (test-data ships only a `test` split)
     split_mode: str = "all"               # "all" = the whole hf_split IS the eval set (sealed test);
-                                          # "hash" = additionally filter by data.in_split(pid, ...)
+                                          # "hash" = additionally filter by data.in_split(pid,...)
     logical_split: str = "test"           # used only when split_mode == "hash"
     gated: bool = False                   # HF access-gated repo
     available: bool = True                # False -> get_target() refuses (access/schema not confirmed)
@@ -224,7 +224,7 @@ def _open_target_stream(target: EvalTarget):
     """Resolve the row source for a target, enforcing the target's own provenance/licence gate.
 
     `source="hf"` (the sealed HF-hosted targets) requires a pinned, approved dataset revision.
-    `source="local"` (e.g. `cafa_no_knowledge`, plan.md Phase 1) is materialized by a repository
+    `source="local"` (e.g. `cafa_no_knowledge`, ) is materialized by a repository
     script from externally-fetched, individually-provenanced sources rather than one pinned HF
     revision, so it is gated by `require_approved_local_eval_target` instead.
     """

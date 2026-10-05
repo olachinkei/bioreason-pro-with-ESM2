@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute plan.md Phase 2's two free baselines — a zero-parameter `interpro2go` lookup and a
+"""Compute 's two free baselines — a zero-parameter `interpro2go` lookup and a
 label-prior — scored by the same `eval.score_generations` path every model arm uses, on both the old
 val-256 subset and the Phase 1 `cafa_no_knowledge` dev set.
 
@@ -8,7 +8,7 @@ Prerequisites:
     python scripts/fetch_interpro2go_mapping.py
     python scripts/build_cafa_no_knowledge_dev_set.py   # already run for Phase 1
 
-Shared-dependency note (plan.md Phase 2): the interpro2go lookup needs `interpro_formatted`, and so
+Shared-dependency note: the interpro2go lookup needs `interpro_formatted`, and so
 does the reasoned model arm's prompt. `cafa_no_knowledge` has neither until Phase 1's InterProScan job
 completes. This script does NOT fall back to scoring interpro2go on the old split while labelling it
 as the new one's number — it reports the interpro2go row as unavailable on `cafa_no_knowledge` rather

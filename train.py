@@ -29,11 +29,11 @@ class RunArgs:
     # Stochastic training only: LoRA init, dropout, rollout sampling. -1 = follow `seed`, which
     # is the shipped behaviour. Kept separate because `seed` also decides which proteins land in
     # val, so varying it would repartition the eval set and make the number incomparable with
-    # every measurement in plan.md instead of measuring training variance.
+    # earlier measurements instead of measuring training variance.
     train_seed: int = -1
-    # ADR-015. False reproduces every SFT in plan.md exactly. True drops the manufactured empty
+    # empty-reasoning masking. False reproduces the original SFT configuration exactly. True drops the manufactured empty
     # `<think></think>` from the loss so the backbone's own reasoning survives supervision, which is
-    # the precondition for the reasoning reward (ADR-014) having anything to shape.
+    # the precondition for the reasoning reward (reasoning-reward validation) having anything to shape.
     mask_empty_think: bool = False
     epochs: int = 10
     data_subset_frac: float = 1.0
@@ -73,7 +73,7 @@ class RunArgs:
     lora_alpha: int = 32
     lora_dropout: float = 0.05
     beta: float = 0.0
-    # ADR-036/037: the paper batches B=8 proteins x G=24 rollouts/step (192 total), pooling advantage
+    # rollout-budget analysis: the paper batches B=8 proteins x G=24 rollouts/step (192 total), pooling advantage
     # normalization across the whole batch — this project's loop drew exactly 1 protein/step with no
     # cross-protein pooling at all. proteins_per_step=1 (default) reproduces today's exact behaviour.
     proteins_per_step: int = 1
@@ -222,7 +222,7 @@ EMPTY_THINK_SPAN = "<think>\n\n</think>"
 def _mask_empty_think_labels(ids: list[int], labels: list[int], tok) -> tuple[list[int], int]:
     """Drop the manufactured empty `<think></think>` from the SFT loss. Returns (labels, n_masked).
 
-    ADR-015. `format_go_answer` writes no reasoning, and the chat template's final-assistant branch
+    empty-reasoning masking. `format_go_answer` writes no reasoning, and the chat template's final-assistant branch
     renders any target without `</think>` as `<think>\\n\\n</think>\\n\\n` + the answer. So every
     supervised example was explicitly teaching the model to open and immediately close its reasoning
     block — and it learned it exactly: 472 of 472 stored rollouts, and 16 of 16 in the Phase 11
@@ -348,7 +348,7 @@ def _stream_real_examples(args: RunArgs, repo: str, split: str, rank: int = 0, w
             # A reasoned variant cannot supervise this row: no trace, or no evidence for its trace.
             # Skip and count. Job 971 died 12 minutes in on one such row, and the identical guard in
             # data.load_sft_dataset did not help because THIS is the path the SFT run actually uses
-            # — the ADR-008 lesson (grep for the destination, not the declaration) applied to my own
+            # — the configuration reachability lesson (grep for the destination, not the declaration) applied to my own
             # fix. A run that skips everything is a broken variant, so the rate is reported below.
             skipped += 1
             if skipped in (1, 10, 100) or skipped % 1000 == 0:
@@ -401,7 +401,7 @@ def _group_sd(values: list[float]) -> float:
     """Population sd of one rollout group — 0.0 means the component cannot teach anything.
 
     GRPO centres advantages within the group, so only a component that DISAGREES across the group
-    reaches the gradient. See ADR-013: `r_format` scored an identical 1.0 in all 472 stored
+    reaches the gradient. See constant-reward analysis: `r_format` scored an identical 1.0 in all 472 stored
     rollouts, so its 0.1 weight bought nothing for eight phases.
     """
     if len(values) < 2:
@@ -415,11 +415,11 @@ ADV_STD_EPS = 1e-6
 
 
 def _pooled_advantages(group_rewards, normalization: str, eps: float = ADV_STD_EPS):
-    """Per-protein group-mean-centred advantages, optionally pooled-std-normalized (ADR-036/037,
+    """Per-protein group-mean-centred advantages, optionally pooled-std-normalized (rollout-budget analysis,
     paper Eq. 4.19-4.20). `group_rewards` is a list of 1-D reward tensors, one per protein in the
     step's batch (each of length `num_generations`).
 
-    "group_mean" (default): reproduces the pre-ADR-037 Dr.GRPO baseline exactly — subtract each
+    "group_mean" (default): reproduces the pre-batched RL configuration Dr.GRPO baseline exactly — subtract each
     protein's own group mean, divide by 1.0 (no std normalization at all).
     "group_mean_global_std": same per-protein numerator, but divide by ONE population std pooled
     across every reward in the whole batch (all proteins' rollouts together), matching the paper's
@@ -608,7 +608,7 @@ def _generation_eval(model, tok, args: RunArgs, multimodal: bool, split: str = "
         print(f"[eval] score_generations failed ({type(e).__name__}: {e}); reporting 0.0", flush=True)
         return {"weighted_fmax": 0.0}
 
-    # ADR-014: a score with no readable reasoning behind it is not the deliverable. These travel
+    # reasoning-reward validation: a score with no readable reasoning behind it is not the deliverable. These travel
     # with weighted_fmax so an arm that wins on F_max while emitting empty traces is visible as
     # such rather than looking like an unqualified win. Reporting only — never fed to training.
     metrics = {**dict(metrics), **_reasoning_diagnostics(records)}
@@ -659,10 +659,10 @@ def _dist_setup():
     """Init torch.distributed from torchrun/SLURM env (nccl). Returns (rank, world_size, local_rank,
     is_main). Single-process when WORLD_SIZE<=1 (no-op).
 
-    Explicit generous timeout (ADR-036/037 incident): PyTorch's NCCL default is 10 minutes. Multimodal
+    Explicit generous timeout (rollout-budget analysis incident): PyTorch's NCCL default is 10 minutes. Multimodal
     RL's per-step collective (the manual grad all-reduce) only runs after EVERY rank sequentially
     generates proteins_per_step*num_generations rollouts, each up to max_completion_length tokens — at
-    the post-ADR-037 recommended scale (4*8*3072) a slower rank (an unlucky long-generating protein,
+    the post-batched RL configuration recommended scale (4*8*3072) a slower rank (an unlucky long-generating protein,
     or an atypically low-EOS-rate step) can genuinely exceed 10 minutes before reaching its own
     all_reduce call, which two real jobs (1681, 1682) hit: the watchdog's timeout-triggered "corrupted
     data" state then surfaced as a FloatingPointError several calls later, masking the real cause. A
@@ -1281,7 +1281,7 @@ def run_sealed_eval(checkpoint_dir: str, target: str = "bioreason_pro_test", spl
     `split` is accepted for CLI parity; the actual row selection is the target's split_mode (the
     `bioreason_pro_test` target = the whole sealed `test` split). HF greedy fused decode only — there
     is no vLLM path for the fusion. `max_completion_length` defaults to the 3072 that SFT and RL
-    train/roll out at (ADR-036/037), so eval scores the budget the checkpoints were optimised for;
+    train/roll out at (rollout-budget analysis), so eval scores the budget the checkpoints were optimised for;
     below ~1024 the GO answer after </think> is cut off entirely (the RunArgs default of 256 empties
     predictions), and at 1024 ~60% of holdout generations never reach the GO-term section."""
     import torch
@@ -1464,11 +1464,11 @@ def _reward_weights_for_variant(reward_variant: str):
     of the RL wiring (one source of truth, per rewards.py's own REASONED_VARIANTS comment), pulled
     into a named function so this exact configuration can be pinned by a test.
 
-    aspect_mean_reasoned zeroes lambda_fmt/lambda_len (ADR-027, plan.md Phase 6): the paper's own RL
+    aspect_mean_reasoned zeroes lambda_fmt/lambda_len (reward alignment, ): the paper's own RL
     reward is a single weighted-F_max term scored only against the final answer, with no format or
     conciseness counterpart in the paper or in upstream's code (upstream ships no RL script at all)
     — carrying them here was a local invention against an unresolved "pin from paper" TODO, and
-    ADR-027 found there is no paper value to pin. ADR-013 separately found r_format measurably inert
+    reward alignment found there is no paper value to pin. constant-reward analysis separately found r_format measurably inert
     under GRPO's per-group advantage centering (identical 1.0 on all 472 sampled rollouts), so this
     also drops a term already known to contribute nothing to the gradient it was meant to shape.
     Every other variant (union, aspect_mean, aspect_mean_specific) keeps its exact historical
@@ -1496,7 +1496,7 @@ def _run_multimodal_grpo(
     (TRL's rollout+logprob path can't thread a custom protein modality): per step, draw
     proteins_per_step proteins, sample num_generations rollouts of each via the fused decode, score
     with the composite reward, form per-protein group-mean baseline advantages — optionally
-    normalized by ONE std pooled across the whole step's batch (ADR-036/037, paper Eq. 4.19-4.20;
+    normalized by ONE std pooled across the whole step's batch (rollout-budget analysis, paper Eq. 4.19-4.20;
     default stays Dr.GRPO's no-std baseline) — and take a policy-gradient step through the fused
     completion log-prob. ESM2 frozen; LoRA (RL r=16/α=32) + projections train. Ends with the
     multimodal val eval + BIOREASON_PRO-RESULT."""
@@ -1685,7 +1685,7 @@ def _run_multimodal_grpo(
                 if cid.shape[1] == 0:
                     continue
                 # A degenerate protein group (all G rollouts scored identically — expected and
-                # already tolerated, ADR-013) gives every rollout in it advantage exactly 0. At
+                # already tolerated, constant-reward analysis) gives every rollout in it advantage exactly 0. At
                 # B>1 that 0 can meet an unrelated, real 0-probability token elsewhere in a long
                 # (up to max_completion_length) generation and produce 0 * -inf = NaN, which the
                 # grad_norm check below would otherwise turn into a full 8-GPU job crash over one
@@ -1696,7 +1696,7 @@ def _run_multimodal_grpo(
                     n_skipped_nonfinite += 1
                     continue
                 # Backward per completion so only ONE fused forward-graph is alive at a time (grads
-                # accumulate in .grad) — avoids holding B*G graphs → the OOM at 16-GPU scale.
+                # accumulate in.grad) — avoids holding B*G graphs → the OOM at 16-GPU scale.
                 pol = _fused_completion_logps(model, tok, g["prompt_text"], g["seq"], cid, args)
                 if not torch.isfinite(pol).all():
                     n_skipped_nonfinite += 1
@@ -1764,11 +1764,11 @@ def _run_multimodal_grpo(
                 # Logged unconditionally: it is 0.0 under the shipped weights, so the curve shows
                 # whether the specificity variant actually changed what the rollouts emit.
                 "rl/reward_redundancy": sum(item.redundancy for item in all_components) / total_n,
-                # ADR-014 reasoning terms, always measured so an unreasoned arm has a baseline.
+                # reasoning-reward validation reasoning terms, always measured so an unreasoned arm has a baseline.
                 "rl/reward_substance": sum(item.substance for item in all_components) / total_n,
                 "rl/reward_faithfulness": sum(item.faithfulness for item in all_components) / total_n,
                 "rl/reward_truncated": sum(item.truncation for item in all_components) / total_n,
-                # ADR-013: a component with no WITHIN-GROUP variance contributes exactly nothing to a
+                # constant-reward analysis: a component with no WITHIN-GROUP variance contributes exactly nothing to a
                 # GRPO advantage, because advantages are centred inside the group. Scoped PER PROTEIN
                 # and averaged across B (not pooled across proteins) so this keeps measuring
                 # within-group variance, not cross-protein variance, at B>1.

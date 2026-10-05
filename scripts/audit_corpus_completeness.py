@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-"""Full-corpus completeness audit (plan.md Phase 4): training-data completeness has never been
-checked directly before, only sampled. Streams the FULL SFT and RL reasoning corpora (not a subset)
-and counts:
+"""Audit completeness of the full SFT and RL reasoning corpora. Streams all rows and counts:
 
   - rows with a non-empty `reasoning` trace
   - rows with each reasoned-context column present (interpro_formatted, ppi_formatted,
     subcellular_location)
   - rows whose ground truth is EMPTY per aspect (go_mf / go_bp / go_cc)
-  - rows with a non-empty `final_answer` and a "known" `protein_function` (plan.md Phase 4 / gate
+  - rows with a non-empty `final_answer` and a "known" `protein_function` (gate
     R3: the functional summary that `bioreason_pro.data_contract.compose_functional_summary` now
     splices into the SFT answer for `leaf_only_reasoned` -- this measures what fraction of SFT rows
     can actually supervise it, now that a missing `final_answer` skips the row (MissingReasoningEvidence)
-  - confirms the RL corpus's `reasoning` column is absent from the schema entirely (ADR-026), not
+  - confirms the RL corpus's `reasoning` column is absent from the schema entirely (RL dataset review), not
     merely empty -- a schema fact, checked directly rather than re-sampled
 
 Read-only, no training, no licence-status change: this only counts columns already approved for

@@ -36,10 +36,9 @@ which permits commercial use subject to its terms. This choice was motivated by 
 covering the ESM3 release considered at the start of the project. The
 [current ESM3 model card](https://huggingface.co/biohub/esm3-sm-open-v1) now lists MIT.
 
-The implementation uses sequence embeddings without the explicit structure inputs of the paper's
-ESM3 encoder. Its multimodal RL loop generates fresh rollouts for each update and does not implement
-GSPO's sequence-level importance sampling. These architectural and training differences make this
-an adaptation of BioReason-Pro, not an exact reproduction of the paper's training recipe or results.
+This implementation uses ESM2 instead of ESM3 to address the licensing constraints considered
+at the start of the project, and uses GRPO instead of GSPO to keep the RL implementation simple.
+These choices make it an adaptation of BioReason-Pro rather than an exact reproduction of the paper.
 
 Model and dataset revisions, licenses, and approved uses are pinned in
 [`approved_assets.json`](bioreason_pro/approved_assets.json).

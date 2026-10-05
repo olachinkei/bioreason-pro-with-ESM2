@@ -30,7 +30,7 @@ _GT_COLUMNS = ("go_mf", "go_bp", "go_cc")
 
 @dataclass
 class RewardWeights:
-    # Local invention, not paper-derived (ADR-027): the paper's RL reward is a single weighted-F_max
+    # Local invention, not paper-derived (reward alignment): the paper's RL reward is a single weighted-F_max
     # term with no format/conciseness counterpart, and upstream ships no RL script to have pinned
     # these against anyway. Kept non-zero here only for union/aspect_mean/aspect_mean_specific's own
     # historical reproducibility; train.py's aspect_mean_reasoned (Phase 6) zeroes both explicitly.
@@ -41,7 +41,7 @@ class RewardWeights:
     # Penalty on GO ids the completion names when another named id already implies them. 0.0 keeps
     # the shipped reward exactly; the aspect_mean_specific variant raises it.
     lambda_spec: float = 0.0
-    # --- reasoning-quality terms (ADR-014) -------------------------------------------------------
+    # --- reasoning-quality terms (reasoning-reward validation) -------------------------------------------------------
     # All default to 0.0, so every pre-existing variant keeps its exact arithmetic. The
     # `aspect_mean_reasoned` variant raises them.
     lambda_reason: float = 0.0      # weight on substance x faithfulness

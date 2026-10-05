@@ -209,7 +209,7 @@ def test_stream_skips_rows_missing_id_or_sequence(monkeypatch):
     assert [r["protein_id"] for r in recs] == ["P1", "P3"]
 
 
-# --------------------------------------------------------------- cafa_no_knowledge (plan.md Phase 1)
+# --------------------------------------------------------------- cafa_no_knowledge
 
 def test_cafa_no_knowledge_registered_local_and_available():
     tgt = et.get_target("cafa_no_knowledge")

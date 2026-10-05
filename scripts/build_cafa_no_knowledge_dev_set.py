@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build plan.md Phase 1's temporal development set: CAFA's no-knowledge targets minus the sealed
+"""Build 's temporal development set: CAFA's no-knowledge targets minus the sealed
 holdout, with UniProt sequences and (once available) InterPro context.
 
 Prerequisite: `python scripts/fetch_approved_reference_data.py` (pulls
@@ -111,7 +111,7 @@ def _fetch_sequences(ids: list[str]) -> dict[str, str]:
 
 
 def _fetch_organisms(ids: list[str]) -> dict[str, str]:
-    """UniProtKB REST `stream` endpoint, TSV `organism_name` field (plan.md Phase 5).
+    """UniProtKB REST `stream` endpoint, TSV `organism_name` field.
 
     Verified against the training corpus's own `organism` column before writing this: querying this
     same endpoint for Q5RK27/P37592 returns 'Rattus norvegicus (Rat)'/'Salmonella typhimurium (strain
@@ -214,7 +214,7 @@ def main() -> int:
     print(f"[dev-set] InterPro context present for {len(interpro)}/{len(sorted_ids)} proteins "
           f"({'none — sequence-only, as declared in eval_targets/cafa_no_knowledge.py' if not interpro else 'partial/full'})")
     print(f"[dev-set] organism present for {len(organisms)}/{len(sorted_ids)} proteins "
-          f"(plan.md Phase 5)")
+          f"")
     return 0
 
 

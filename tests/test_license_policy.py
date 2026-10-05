@@ -108,7 +108,7 @@ def test_unapproved_go_embeddings_fail_before_model_loading():
         build_model(cfg)
 
 
-# --- require_approved_model (plan.md Phase 5: gogpt-baseline's own fail-closed gate) -------------
+# --- require_approved_model (: gogpt-baseline's own fail-closed gate) -------------
 
 def test_require_approved_model_accepts_a_listed_name():
     from bioreason_pro.license_policy import require_approved_model

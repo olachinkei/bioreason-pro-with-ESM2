@@ -51,7 +51,7 @@ export BIOREASON_CACHE_ROOT="$BIOREASON_RUNTIME_ROOT/cache"
 export HF_HOME="$BIOREASON_CACHE_ROOT/huggingface"
 export HF_DATASETS_CACHE="$HF_HOME/datasets"
 export XDG_CACHE_HOME="$BIOREASON_CACHE_ROOT/xdg"
-# ADR-036/037 incident: wandb's artifact-staging path follows XDG_DATA_HOME (default ~/.local/share,
+# rollout-budget analysis incident: wandb's artifact-staging path follows XDG_DATA_HOME (default ~/.local/share,
 # on the container's small local root filesystem) independently of XDG_CACHE_HOME/WANDB_DIR — job 1692
 # completed training and val, then failed only at artifact upload with "disk quota exceeded" writing
 # to /root/.local/share/wandb/artifacts/staging. Redirect it to the same ample shared storage.
@@ -72,10 +72,10 @@ export SFT_ESM_LAYER="${SFT_ESM_LAYER:-33}"
 # proteins. -1 = follow --seed, which is the shipped behaviour. Without this, the leaf_only
 # supervision claim (+0.0715, the largest in the ledger) could not be replicated at all.
 export SFT_TRAIN_SEED="${SFT_TRAIN_SEED:--1}"
-# ADR-015. false reproduces every SFT in plan.md exactly. true stops supervising the manufactured
+# empty-reasoning masking. false reproduces the original SFT configuration exactly. true stops supervising the manufactured
 # empty <think></think>, which is what made the reasoning axis unreachable from RL.
 export SFT_MASK_EMPTY_THINK="${SFT_MASK_EMPTY_THINK:-false}"
-# ADR-036/037: unlike every other phase's sbatch script, this one never overrode the shared 256-token
+# rollout-budget analysis: unlike every other phase's sbatch script, this one never overrode the shared 256-token
 # default, so SFT's own internal val step could never reach a closing </think> tag for the reasoned
 # variant's own (measured p95≈1600 tok) reasoning traces — reasoning_nonempty=0 and a near-zero
 # weighted_fmax at every SFT seed, a measurement artifact, not a real absence of reasoning. 3072 covers
@@ -96,7 +96,7 @@ cd "$REPO_DIR"
 
 hostname
 scontrol show job "$SLURM_JOB_ID" | sed -n '1,80p'
-SFT_IMAGE="${SFT_IMAGE:-docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1}"
+SFT_IMAGE="${SFT_IMAGE:-${BIOREASON_PRO_CONTAINER_IMAGE:-docker://ghcr.io/wandb/senpai@sha256:b72da91555753cf52c4e05fcf53e1d343995d28c5d0a13a1e08f4fb3fdbae5b1}}"
 # Overridable for a non-CoreWeave SLURM cluster whose Pyxis/Enroot mount syntax or shared-storage
 # paths differ from this project's own CoreWeave SUNK setup.
 container_mounts="${BIOREASON_PRO_CONTAINER_MOUNTS:-/mnt/data:/mnt/data,/mnt/home:/mnt/home}"
@@ -111,11 +111,7 @@ srun --container-image="$SFT_IMAGE" \
     export TMPDIR="$BIOREASON_JOB_TMP"
     nvidia-smi
     uv sync --extra texttrain
-    # Reference-data cache (ADR-042): only 2 of the 4 bundle files were ever read from
-    # $BIOREASON_REFERENCE_DATA_ROOT, so every job fell through to a live Zenodo download of the
-    # whole archive regardless -- a flaky external endpoint (two 504 errors in a row blocked the
-    # ADR-041 follow-up sealed-holdout jobs). Now reads/writes all 4 named files, so the cache is
-    # complete after the first successful job and every later job (any script) can skip Zenodo entirely.
+    # Cache all four reference files so subsequent jobs can avoid another archive download.
     REFDATA_FILES=(go-basic.obo IA.txt eval_terms_no_knowledge_2025_03.tsv known_t0.tsv)
     mkdir -p data
     for f in "${REFDATA_FILES[@]}"; do

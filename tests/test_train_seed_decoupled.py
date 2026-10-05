@@ -1,15 +1,8 @@
 """Varying the training seed must not repartition the data.
 
-`RunArgs.seed` does two unrelated jobs: it seeds stochastic training (LoRA init, dropout, rollout
-sampling) AND it partitions proteins into splits via `data.in_split` -> `protein_split(id, seed)`.
-So `--seed 1` would change which proteins are in val, and a "seed replication" run would measure
-training variance and split variance at once — its val number would not be comparable with any figure
-in plan.md.
-
-This matters because every "Nx the noise floor" claim in the plan.md ledger divides a
-training-induced delta by a floor measured from RE-EVALUATING ONE CHECKPOINT, i.e. by evaluation
-noise. Training-seed variance was never measured. `train_seed` makes it measurable while the split
-stays frozen.
+The partition seed fixes train/validation membership. A separate training seed varies LoRA
+initialization, dropout, and rollout sampling so replicate runs measure training variance
+on the same split.
 """
 
 from __future__ import annotations

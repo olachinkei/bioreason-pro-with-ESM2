@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-"""Audit whether reasoning traces INVENT the evidence they cite (ADR-021).
+"""Audit whether reasoning traces INVENT the evidence they cite (evidence-grounding checks).
 
 The traces read as authoritative — `IPR005140 (eRF1/Pelota-like, N-terminal domain), residues 1-130`.
 That is exactly what makes them dangerous if fabricated: a drug-discovery reviewer has no way to tell
-an invented domain assignment from a real one. ADR-017 coupled supervision to the evidence in the
+an invented domain assignment from a real one. reasoning supervision coupled supervision to the evidence in the
 prompt on the theory that this prevents fabrication; this script tests the theory on real rollouts.
 
 It pulls rollouts from Weave, which logs the prompt AND the trace for the same call, and checks every

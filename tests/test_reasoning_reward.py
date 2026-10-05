@@ -1,10 +1,10 @@
-"""Contract tests for the ADR-014 reasoning reward.
+"""Contract tests for the reasoning-reward validation reasoning reward.
 
 Two things must hold at once:
 
 1. Every pre-existing variant keeps its EXACT arithmetic, so the recorded numbers for union,
    aspect_mean and aspect_mean_specific stay comparable to their published values.
-2. The new terms are actually live — they vary across plausible rollouts. ADR-013 is the cautionary
+2. The new terms are actually live — they vary across plausible rollouts. constant-reward analysis is the cautionary
    tale: `r_format` carried a 0.1 weight for eight phases while scoring an identical 1.0 in all 472
    stored rollouts, contributing exactly nothing to a GRPO advantage that is centred within-group.
    A reward term that cannot vary is decoration, so these tests assert variance, not just presence.
@@ -37,7 +37,7 @@ LONG_BUT_UNFAITHFUL = (
 )
 # Shaped like the real thing: 466 of 472 stored rollouts carried complete ids and then ran out of
 # budget partway through one more. A fragment-only completion would make `r_format` vary and quietly
-# invalidate the ADR-013 assertion below.
+# invalidate the constant-reward analysis assertion below.
 TRUNCATED = (
     "<think>\nSome reasoning about the sequence and its likely localisation.\n</think>\n\n"
     "MF: GO:0042803\nBP: GO:0000002\nCC: GO:00"
@@ -127,7 +127,7 @@ def test_substance_and_faithfulness_multiply_rather_than_add():
 
 
 def test_the_reasoned_reward_is_not_degenerate_across_a_plausible_group():
-    """The ADR-013 check, as a test: this group must not collapse to one value.
+    """The constant-reward analysis check, as a test: this group must not collapse to one value.
 
     `r_format` would return 1.0 for every member of this group, which is exactly why it taught
     nothing. The reasoning terms must do better on the same input.
@@ -137,11 +137,11 @@ def test_the_reasoned_reward_is_not_degenerate_across_a_plausible_group():
     totals = [R.reward_components(c, {"GO:0042803"}, OBO, IA, w, go_names=NAMES).total
               for c in group]
     R.validate_reward_group(totals, require_non_degenerate=True)
-    assert len({R.r_format(c) for c in group}) == 1, "r_format is still constant — the ADR-013 fact"
+    assert len({R.r_format(c) for c in group}) == 1, "r_format is still constant — the constant-reward analysis fact"
     assert len(set(totals)) > 1, "the reasoned reward must separate these rollouts"
 
 
-# --- ADR-027 / plan.md Phase 6: aspect_mean_reasoned trains with the corrected reward -------------
+# --- reward alignment / : aspect_mean_reasoned trains with the corrected reward -------------
 
 def test_aspect_mean_reasoned_zeroes_the_unpinned_format_and_length_terms():
     """train.py's own per-variant weight selection, pinned by a test rather than only readable

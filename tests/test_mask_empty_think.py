@@ -1,4 +1,4 @@
-"""ADR-015: the SFT loss must stop supervising the manufactured empty <think></think>.
+"""empty-reasoning masking: the SFT loss must stop supervising the manufactured empty <think></think>.
 
 The chat template renders any assistant target without `</think>` as
 `<think>\\n\\n</think>\\n\\n` + the answer, so every supervised example was teaching the model to

@@ -32,9 +32,9 @@ def _raw_rows():
 def test_adapter_uses_only_sequence_and_go_labels():
     """The DEFAULT contract: sequence in, GO labels out, nothing else.
 
-    ADR-017 admits `reasoning` and the InterPro/STRING/location context under
+    reasoning supervision admits `reasoning` and the InterPro/STRING/location context under
     BIOREASON_PRO_TARGET_VARIANT=leaf_only_reasoned, and only there. This test pins the default, which is
-    what every SFT recorded in plan.md trained on — including the three context columns, so a future
+    the original SFT inputs — including the three context columns, so a future
     change cannot leak them into the shipped prompt without failing here.
     """
     raw = _raw_rows()[0]

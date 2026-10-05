@@ -15,8 +15,8 @@ requires-python = ">=3.10"
 # install on macOS (dev box) and Linux (cluster). The heavy CUDA/serving training stack is the
 # opt-in `train` extra below (installed in the Linux container), because vllm has no macOS wheel.
 dependencies = [
-    "simple-parsing>=0.1",          # launch_slurm.py RunArgs / config
-    "pyyaml>=6",                    # merge senpai.yaml + slurm/senpai_slurm.yaml
+    "simple-parsing>=0.1",          # RunArgs command-line parsing
+    "pyyaml>=6",                    # YAML configuration parsing
     "wandb>=0.17",                  # W&B Models
     "weave>=0.51",                  # searchable rollout tracing
     "datasets>=2.20",               # streaming gated wanglab/* sets
@@ -30,10 +30,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Text-only training stack for the runnable Stage 0/1 (GRPO on Qwen text, no ESM/GAT/vLLM).
-# Light + reliable on the container's Python 3.10; NONE of the esm/vllm co-resolution pain.
-# The senpai image already ships torch/torch_geometric/wandb/weave, so in-container the student
-# only needs: `uv pip install --system -e '.[texttrain]'`.
+# Core training dependencies; multimodal jobs also need the `train` extra.
 texttrain = [
     "torch>=2.4",
     "transformers>=4.56",           # Qwen3-4B-Thinking tokenizer/model
@@ -41,9 +38,8 @@ texttrain = [
     "trl>=0.20",                    # GRPO/GSPO trainer
 ]
 
-# Heavy multimodal training/serving stack (Stage 2/3) — install in the Linux/CUDA container:
-# `uv pip install --system -e '.[train]'`. ESM2 is loaded by transformers.EsmModel, so the
-# non-commercial EvolutionaryScale `esm` package is intentionally absent. vllm is linux-only.
+# Multimodal training and serving dependencies for Linux/CUDA.
+# ESM2 is loaded through transformers.EsmModel.
 train = [
     "torch>=2.4",
     "transformers>=4.56",
@@ -64,11 +60,7 @@ dev = ["pytest>=8", "ruff>=0.6", "torch>=2.4", "duckdb>=1.4"]
 pythonpath = ["."]                  # import top-level train/eval/data + bioreason_pro in tests
 testpaths = ["tests"]
 
-# Explicit package layout — without this, setuptools flat-layout auto-discovery finds multiple
-# top-level dirs (bioreason_pro, configs, data, slurm, instructions, ...) and refuses to build,
-# so the student entrypoint's `uv pip install --system -e .` fails. Package bioreason_pro + eval_targets
-# (the sealed-eval dataset registry) plus the three top-level entrypoint modules; everything else is
-# data/config/infra, not importable code.
+# Package the model/evaluation modules and the three top-level entrypoints.
 [tool.setuptools]
 py-modules = ["train", "eval", "data"]
 
@@ -81,4 +73,4 @@ bioreason_pro = ["approved_assets.json"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-extend-exclude = ["senpai", "third_party"]   # pinned submodule + vendored deps — not our code to lint
+extend-exclude = ["third_party"]   # Vendored dependencies.

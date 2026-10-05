@@ -62,13 +62,13 @@ def go_labels(row: dict[str, Any]) -> dict[str, list[str]]:
 # is free for shallow MF annotations, but in the deep BP and CC hierarchies leaf-only supervision
 # trains the model never to emit the mid-level term it could actually be confident about, and a
 # missed leaf then earns nothing where a hedge would have earned partial credit.
-# "leaf_only_reasoned" (ADR-017) additionally supervises the <think> block from the dataset's
+# "leaf_only_reasoned" (reasoning supervision) additionally supervises the <think> block from the dataset's
 # `reasoning` column, and — inseparably — puts the evidence that reasoning cites into the prompt.
 # The coupling is the safety property, not a convenience: sampled 20/20, those traces cite InterPro
 # domain ids with residue ranges and STRING interaction partners. Supervising them against the
 # sequence-only prompt would train the model to INVENT `IPR051630 (residues 9-1410)` from an amino
 # acid string — confident, specific, and unknowable. A reviewer in drug discovery would have no way
-# to tell that apart from a real finding, which is the precise failure ADR-014 exists to avoid. So
+# to tell that apart from a real finding, which is the precise failure reasoning-reward validation exists to avoid. So
 # the variant cannot be configured into the dangerous half.
 TARGET_VARIANTS = ("full_closure", "leaf_only", "leaf_mf_only", "leaf_only_reasoned")
 DEFAULT_TARGET_VARIANT = "full_closure"
@@ -97,14 +97,9 @@ class MissingReasoningEvidence(ValueError):
 # Columns admitted to the prompt only for a reasoned variant, in the order they are rendered.
 # Every one of these is cited by the traces; without them the supervision is unlearnable.
 #
-# `go_pred` (ADR-037): GO-GPT's own greedy predictions, full ancestor closure, per-aspect text. Paper
-# parity — upstream's own BioReason-Pro takes these as a prompt input (refining a strong prior, not
-# generating from scratch). Deferred from Phase 5 (plan.md, gate R3, 2026-08-23 "baseline only for
-# now") pending the GO-GPT baseline measurement (ADR-033: 0.50059) and a license check (this session:
-# `wanglab/gogpt` weights Apache-2.0, not gated; vendored code MIT — no licence blocker). A 60-trace
-# spot check found 56/60 reasoning traces cite a GO id that also appears in `go_pred` verbatim — unlike
-# organism (never cited, see ORGANISM_COLUMN below), this is real evidence traces build on, so it is
-# gated like the rest of CONTEXT_COLUMNS rather than rendered like organism.
+# GO-GPT predictions provide evidence used by the reasoning traces. A 60-trace spot check
+# found 56 traces cited GO IDs from this field, so missing predictions block supervised
+# reasoning just like missing InterPro or STRING evidence. Organism is handled separately.
 CONTEXT_COLUMNS = (
     ("interpro_formatted", "Domain annotations (InterPro)"),
     ("ppi_formatted", "Interaction partners (STRING)"),
@@ -112,7 +107,7 @@ CONTEXT_COLUMNS = (
     ("go_pred", "Predicted GO terms (GO-GPT)"),
 )
 
-# plan.md Phase 5: the paper's prompt carries organism, ours didn't. Rendered the same way as
+# : the paper's prompt carries organism, ours didn't. Rendered the same way as
 # CONTEXT_COLUMNS (a stable "not available" placeholder, reasoned-variant only), but kept out of that
 # tuple deliberately: CONTEXT_COLUMNS is specifically evidence sampled traces are known to CITE, and a
 # missing entry there gates SFT supervision closed (MissingReasoningEvidence). A spot check of 60 real
@@ -142,7 +137,7 @@ def require_active_variant_matches(expected: str | None, *, checkpoint_label: st
     which renders a prompt with NO InterPro/PPI/subcellular-location context at all -- a checkpoint
     trained on `leaf_only_reasoned` evaluated this way still reasons (that behaviour is trained in)
     but with no evidence to reason FROM, so it fabricates domain claims instead of leaving them out.
-    This produced a plausible-looking but meaningless eval run once already (plan.md ADR-031's first,
+    This produced a plausible-looking but meaningless eval run once already (the first prompt-contract validation run,
     retracted Phase 3 sweep) before anyone noticed the traces cited no real evidence. `expected=None`
     (the producing run never recorded a target_variant, e.g. older runs predating this being logged)
     skips the check rather than blocking on missing historical metadata.
@@ -199,7 +194,7 @@ def functional_summary_instruction(protein_function: str | None) -> str:
     """The extra instruction sentence asking for a functional summary, gated on whether one is
     actually knowable for this row.
 
-    `protein_function` reads "Not known" for a large share of rows (plan.md Phase 4 corpus audit).
+    `protein_function` reads "Not known" for a large share of rows (corpus audit).
     Asking the model to summarize a function it is then shown as "not known" trains a contradiction
     -- mirrors upstream's own `force_uniprot_summary` rationale (bowang-lab/BioReason-Pro,
     dataset/cafa5/load.py): ask for a summary only when the target actually has one to give.
@@ -318,7 +313,7 @@ def _adapt_fields(
             blocks.append(f"{label}:\n{value}" if value else f"{label}:\nnot available")
         user = user + "\n\n" + "\n\n".join(blocks)
 
-        # Paper parity (plan.md Phase 4): splice a UniProt functional summary ahead of the GO-term
+        # Paper parity: splice a UniProt functional summary ahead of the GO-term
         # lines, exactly where upstream's own `_add_uniprot_summary` puts it. `final_answer` is
         # model-generated prose (owner-approved for adoption without scoring, R3); `protein_function`
         # is UniProt's own curated Function text, spliced in verbatim the way upstream splices it.
@@ -332,7 +327,7 @@ def _adapt_fields(
         # rl-reasoning dataset's schema has no `reasoning` column at all (not merely empty cells —
         # confirmed absent from the column list itself), so requiring one there would make the
         # reasoned variant unusable for RL. Using this dataset for RL training is an explicit owner
-        # decision (plan.md ADR-026, 2026-08-21) taken with that gap known, not an oversight.
+        # decision (RL dataset review, 2026-08-21) taken with that gap known, not an oversight.
         if use.startswith("sft"):
             if not any(str(row.get(c) or "").strip() for c, _ in CONTEXT_COLUMNS):
                 raise MissingReasoningEvidence(
@@ -346,12 +341,12 @@ def _adapt_fields(
                 raise MissingReasoningEvidence(
                     f"{source_dataset}: target variant {variant!r} requires a non-empty `reasoning` "
                     "column; an empty one would reintroduce the manufactured empty <think> "
-                    "(ADR-015)."
+                    "(empty-reasoning masking)."
                 )
             if not final_answer_text:
                 raise MissingReasoningEvidence(
                     f"{source_dataset}: target variant {variant!r} now supervises a functional "
-                    "summary spliced from `final_answer` (plan.md Phase 4), but this row has none. "
+                    "summary spliced from `final_answer`, but this row has none. "
                     "Training the summary section without a target would teach the model to "
                     "fabricate one."
                 )

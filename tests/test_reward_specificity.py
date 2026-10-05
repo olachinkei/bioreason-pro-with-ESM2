@@ -93,7 +93,7 @@ def test_a_specific_answer_now_outscores_a_redundant_one_of_equal_fmax():
 def test_train_wires_the_variant_and_logs_its_component():
     src = (ROOT / "train.py").read_text(encoding="utf-8")
     # The literal tuple this used to pin moved into rewards.ASPECT_AWARE_VARIANTS when a third
-    # aspect-aware variant arrived (ADR-014); assert the guarantee, not the spelling. Membership is
+    # aspect-aware variant arrived (reasoning-reward validation); assert the guarantee, not the spelling. Membership is
     # checked in tests/test_reasoning_reward.py.
     assert "rewards.ASPECT_AWARE_VARIANTS" in src, "go_aspects must load for every aspect-aware variant"
     assert "aspect_mean_specific" in R.ASPECT_AWARE_VARIANTS
